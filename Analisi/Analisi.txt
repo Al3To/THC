@@ -1,0 +1,11 @@
+CLIENT
+c# - Form
+
+Mostra la schermata principale del casinò (Base Grafica 1) e dopo la selezione la lista dei server (Base Grafica 2)
+Dopo la connessione al server verranno mandate e ricevute stringhe
+
+
+SERVER
+c# - Console
+
+Farà tutte le operazioni
