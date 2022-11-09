@@ -1,0 +1,11 @@
+C:\Users\aleto\OneDrive\Desktop\Scuola\TPS\THC\Client\Client\Client\bin\Debug\Client.exe.config
+C:\Users\aleto\OneDrive\Desktop\Scuola\TPS\THC\Client\Client\Client\bin\Debug\Client.exe
+C:\Users\aleto\OneDrive\Desktop\Scuola\TPS\THC\Client\Client\Client\bin\Debug\Client.pdb
+C:\Users\aleto\OneDrive\Desktop\Scuola\TPS\THC\Client\Client\Client\obj\Debug\Client.csproj.AssemblyReference.cache
+C:\Users\aleto\OneDrive\Desktop\Scuola\TPS\THC\Client\Client\Client\obj\Debug\Client.csproj.SuggestedBindingRedirects.cache
+C:\Users\aleto\OneDrive\Desktop\Scuola\TPS\THC\Client\Client\Client\obj\Debug\Client.Form1.resources
+C:\Users\aleto\OneDrive\Desktop\Scuola\TPS\THC\Client\Client\Client\obj\Debug\Client.Properties.Resources.resources
+C:\Users\aleto\OneDrive\Desktop\Scuola\TPS\THC\Client\Client\Client\obj\Debug\Client.csproj.GenerateResource.cache
+C:\Users\aleto\OneDrive\Desktop\Scuola\TPS\THC\Client\Client\Client\obj\Debug\Client.csproj.CoreCompileInputs.cache
+C:\Users\aleto\OneDrive\Desktop\Scuola\TPS\THC\Client\Client\Client\obj\Debug\Client.exe
+C:\Users\aleto\OneDrive\Desktop\Scuola\TPS\THC\Client\Client\Client\obj\Debug\Client.pdb
