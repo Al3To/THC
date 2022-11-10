@@ -13,6 +13,8 @@ namespace Client.Forms
 {
     public partial class FormLogin : Form
     {
+        string[] username;
+        string[] password;
         public FormLogin()
         {
             InitializeComponent();
@@ -20,13 +22,24 @@ namespace Client.Forms
             this.Text = string.Empty;
             this.ControlBox = false;
         }
+        private void FormLogin_Load(object sender, EventArgs e)
+        {
 
+        }
+        private void buttonLogin_Click(object sender, EventArgs e)
+        {
+
+        }
         private void buttonRegister_Click(object sender, EventArgs e)
         {
             this.DialogResult = DialogResult.Retry;
             this.Close();           
         }
-
+        private void buttonClose_Click(object sender, EventArgs e)
+        {
+            this.DialogResult = DialogResult.No;
+            this.Close();
+        }
         private void textBoxUsername_Enter(object sender, EventArgs e)
         {
             if (textBoxUsername.Text == "Nome Utente")
@@ -64,6 +77,19 @@ namespace Client.Forms
                 textBoxPassword.ForeColor = Color.FromArgb(191, 205, 219);
             }
         }
+        private void showPassword_Click(object sender, EventArgs e)
+        {
+            if (textBoxPassword.PasswordChar == '●')
+            {
+                textBoxPassword.PasswordChar = '\0';
+                showPassword.IconChar = FontAwesome.Sharp.IconChar.EyeSlash;
+            }
+            else
+            {
+                textBoxPassword.PasswordChar = '●';
+                showPassword.IconChar = FontAwesome.Sharp.IconChar.Eye;
+            }
+        }
 
         //Move Form
         [DllImport("user32.DLL", EntryPoint = "ReleaseCapture")]
@@ -74,6 +100,16 @@ namespace Client.Forms
         {
                     ReleaseCapture();
                     SendMessage(this.Handle, 0x112, 0xf012, 0);
+        }
+
+        private void textBoxPassword_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                buttonLogin.PerformClick();
+                e.Handled = true;
+                e.SuppressKeyPress = true;
+            }
         }
     }
 }

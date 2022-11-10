@@ -15,6 +15,21 @@ namespace Client.Forms
         public FormRegister()
         {
             InitializeComponent();
+            StartPosition = FormStartPosition.CenterScreen;
+            this.Text = string.Empty;
+            this.ControlBox = false;
+        }
+
+        private void buttonLogin_Click(object sender, EventArgs e)
+        {
+            this.DialogResult = DialogResult.Retry;
+            this.Close();
+        }
+
+        private void buttonClose_Click(object sender, EventArgs e)
+        {
+            this.DialogResult = DialogResult.No;
+            this.Close();
         }
     }
 }

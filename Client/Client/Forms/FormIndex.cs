@@ -14,7 +14,6 @@ namespace Client
 {
     public partial class Client : Form
     {
-        bool loggedIn = false;
         private Form currentChildForm;
         public Client()
         {
@@ -44,6 +43,16 @@ namespace Client
             childForm.Show();
         }
 
+
+        //Buttons
+        private void buttonHome_Click(object sender, EventArgs e)
+        {
+            if (currentChildForm != null)
+            {
+                currentChildForm.Close();
+                currentChildForm=null;
+            }
+        }
         private void buttonBJ_Click(object sender, EventArgs e)
         {
             OpenChildForm(new FormBlackJack());
@@ -58,7 +67,9 @@ namespace Client
         private void buttonRegister_Click(object sender, EventArgs e)
         {
             FormRegister formRegister = new FormRegister();
-            formRegister.ShowDialog();
+            var result = formRegister.ShowDialog();
+            if (result == DialogResult.Retry)
+                buttonLogin_Click(this, e);
         }
         private void buttonLoginProfile_Click(object sender, EventArgs e)
         {
@@ -159,5 +170,7 @@ namespace Client
         string username;
         string password;
         float balance;
+        bool admin;
+        Image propic;
     }
 }
