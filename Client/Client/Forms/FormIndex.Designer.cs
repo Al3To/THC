@@ -177,9 +177,9 @@
             this.buttonBJ.Dock = System.Windows.Forms.DockStyle.Top;
             this.buttonBJ.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonBJ.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonBJ.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(248)))), ((int)(((byte)(3)))));
+            this.buttonBJ.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(140)))), ((int)(((byte)(140)))), ((int)(((byte)(140)))));
             this.buttonBJ.IconChar = FontAwesome.Sharp.IconChar.SackDollar;
-            this.buttonBJ.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(252)))), ((int)(((byte)(228)))), ((int)(((byte)(3)))));
+            this.buttonBJ.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(252)))), ((int)(((byte)(228)))), ((int)(((byte)(100)))));
             this.buttonBJ.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.buttonBJ.IconSize = 26;
             this.buttonBJ.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -198,9 +198,9 @@
             this.buttonHome.Dock = System.Windows.Forms.DockStyle.Top;
             this.buttonHome.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonHome.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonHome.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(248)))), ((int)(((byte)(3)))));
+            this.buttonHome.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(140)))), ((int)(((byte)(140)))), ((int)(((byte)(140)))));
             this.buttonHome.IconChar = FontAwesome.Sharp.IconChar.Home;
-            this.buttonHome.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(252)))), ((int)(((byte)(228)))), ((int)(((byte)(3)))));
+            this.buttonHome.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(252)))), ((int)(((byte)(228)))), ((int)(((byte)(100)))));
             this.buttonHome.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.buttonHome.IconSize = 26;
             this.buttonHome.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
