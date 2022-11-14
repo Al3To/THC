@@ -1,6 +1,6 @@
 ﻿namespace Client.ServerForms
 {
-    partial class FormBlackjackGame1
+    partial class FormBlackjackGame
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormBlackjackGame1));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormBlackjackGame));
             this.panelTitle = new System.Windows.Forms.Panel();
             this.panelBottom = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();

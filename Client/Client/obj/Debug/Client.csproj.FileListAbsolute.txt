@@ -28,3 +28,9 @@ C:\Users\aleto\OneDrive\Desktop\Scuola\TPS\THC\Client\Client\obj\Debug\Client.cs
 C:\Users\aleto\OneDrive\Desktop\Scuola\TPS\THC\Client\Client\obj\Debug\Client.Forms.FormBlackJack.resources
 C:\Users\aleto\OneDrive\Desktop\Scuola\TPS\THC\Client\Client\obj\Debug\Client.Forms.FormRegister.resources
 C:\Users\aleto\OneDrive\Desktop\Scuola\TPS\THC\Client\Client\obj\Debug\Client.ServerForms.FormBlackjackGame1.resources
+C:\Users\Alessandro\Desktop\Scuola\Quinta\TPS\THC\Client\Client\bin\Debug\FontAwesome.Sharp.dll
+C:\Users\Alessandro\Desktop\Scuola\Quinta\TPS\THC\Client\Client\bin\Debug\FontAwesome.Sharp.Pro.dll
+C:\Users\Alessandro\Desktop\Scuola\Quinta\TPS\THC\Client\Client\obj\Debug\Client.ServerForms.FormBlackjackGame1.resources
+C:\Users\Alessandro\Desktop\Scuola\Quinta\TPS\THC\Client\Client\obj\Debug\Client.Forms.FormBlackJack.resources
+C:\Users\Alessandro\Desktop\Scuola\Quinta\TPS\THC\Client\Client\obj\Debug\Client.Forms.FormRegister.resources
+C:\Users\Alessandro\Desktop\Scuola\Quinta\TPS\THC\Client\Client\obj\Debug\Client.csproj.CopyComplete

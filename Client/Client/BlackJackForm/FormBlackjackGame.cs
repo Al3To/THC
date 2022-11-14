@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace Client.ServerForms
 {
-    public partial class FormBlackjackGame1 : Form
+    public partial class FormBlackjackGame : Form
     {
-        public FormBlackjackGame1()
+        public FormBlackjackGame()
         {
             InitializeComponent();
             this.Text = string.Empty;
