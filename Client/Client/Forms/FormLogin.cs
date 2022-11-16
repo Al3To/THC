@@ -4,17 +4,24 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Net.Sockets;
+using System.Net;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Windows.Markup;
+using System.Threading;
 
 namespace Client.Forms
 {
     public partial class FormLogin : Form
     {
-        string[] username;
-        string[] password;
+        public static string username, role,mail,balance;
+        public static IPAddress ipAddress = IPAddress.Parse("127.0.0.1");
+        IPEndPoint remoteEP = new IPEndPoint(ipAddress, 8888);
+        Socket socket;
+        int trys = 0;
         public FormLogin()
         {
             InitializeComponent();
@@ -28,7 +35,68 @@ namespace Client.Forms
         }
         private void buttonLogin_Click(object sender, EventArgs e)
         {
+            if(textBoxUsername.Text == "" || textBoxPassword.Text == "" || textBoxUsername.Text == "Nome Utente" || textBoxPassword.Text == "Password")
+            {
+                labelResult.ForeColor = Color.Red;
+                labelResult.Text = "Credenziali non valide!";
+                labelResult.Visible = true;
+                textBoxUsername.Focus();
+            }
+            else
+            {
+                string data = null, password;
+                string[] split;
+                byte[] bytes = new byte[1024];
+                byte[] toSend;
 
+                username = textBoxUsername.Text;
+                password = textBoxPassword.Text;
+
+
+                socket = new Socket(ipAddress.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
+                socket.Connect(remoteEP);
+
+                toSend = Encoding.ASCII.GetBytes("login;" + username + ";" + password +"/s/");
+                socket.Send(toSend);
+                int bytesRec = socket.Receive(bytes);
+                data += Encoding.ASCII.GetString(bytes, 0, bytesRec);
+                if (data.EndsWith("/c/"))
+                {
+                    if (data == "none/c/")
+                    {
+                        labelResult.ForeColor = Color.Red;
+                        labelResult.Text = "Credenziali non valide!";
+                        labelResult.Visible = true;
+                        trys++;
+                        textBoxUsername.Focus();
+                        toSend = Encoding.ASCII.GetBytes("Disconnect/s/");
+                        socket.Send(toSend);
+                        socket.Shutdown(SocketShutdown.Both);
+                        socket.Close();
+                    }
+                    else
+                    {
+                        labelResult.ForeColor = Color.Gainsboro;
+                        labelResult.Text = "Accesso Eseguito!";
+                        labelResult.Visible = true;
+                        data = data.Remove(data.Length - 1);
+                        data = data.Remove(data.Length - 1);
+                        data = data.Remove(data.Length - 1);
+                        split = data.Split(';');
+                        role = split[0];
+                        mail = split[1];
+                        balance = split[2];
+                        buttonLogin.Enabled = false;
+                        toSend = Encoding.ASCII.GetBytes("Disconnect/s/");
+                        socket.Send(toSend);
+                        socket.Shutdown(SocketShutdown.Both);
+                        socket.Close();
+                        Thread.Sleep(1000);
+                        this.DialogResult = DialogResult.OK;
+                        this.Close();
+                    }
+                }
+            }
         }
         private void buttonRegister_Click(object sender, EventArgs e)
         {

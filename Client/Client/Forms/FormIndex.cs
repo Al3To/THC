@@ -24,7 +24,10 @@ namespace Client
             this.DoubleBuffered = true;
         }
 
+        private void userAdmin()
+        {
 
+        }
         //Child Forms
         private void OpenChildForm(Form childForm)
         {
@@ -63,6 +66,23 @@ namespace Client
             var result = formLogin.ShowDialog();
             if (result == DialogResult.Retry)
                 buttonRegister_Click(this, e);
+            else if(result == DialogResult.OK)
+            {
+                User user = new User();
+                user.username = FormLogin.username;
+                user.mail = FormLogin.mail;
+                user.balance = float.Parse(FormLogin.balance);
+                if(FormLogin.role == "admin")
+                {
+                    user.admin = true;
+                    userAdmin();
+                }
+                buttonLogin.Visible = false;
+                buttonRegister.Visible = false;
+                buttonLoginProfile.Visible = false;
+                labelUsername.Text = user.username;
+                labelUsername.Visible = true;  
+            }
         }
         private void buttonRegister_Click(object sender, EventArgs e)
         {
@@ -166,11 +186,10 @@ namespace Client
     }
     class User
     {
-        string mail;
-        string username;
-        string password;
-        float balance;
-        bool admin;
+        public string mail;
+        public string username;
+        public float balance;
+        public bool admin;
         Image propic;
     }
 }

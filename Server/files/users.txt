@@ -1,2 +1,2 @@
-Al3To;ciaociao123;admin
-PierGiorgio1;pieroStupendo;user
+Al3To;ciaociao123;admin;aletommy238@gmail.com;200
+PierGiorgio1;pieroStupendo;user;piergiorgio@gmail.com;134,50

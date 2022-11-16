@@ -40,6 +40,7 @@
             this.buttonLogin = new System.Windows.Forms.Button();
             this.textBoxPassword = new System.Windows.Forms.TextBox();
             this.textBoxUsername = new System.Windows.Forms.TextBox();
+            this.labelResult = new System.Windows.Forms.Label();
             this.panelTitle.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -75,6 +76,7 @@
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(23)))), ((int)(((byte)(23)))));
+            this.panel2.Controls.Add(this.labelResult);
             this.panel2.Controls.Add(this.iconPassword);
             this.panel2.Controls.Add(this.iconUsername);
             this.panel2.Controls.Add(this.showPassword);
@@ -153,7 +155,7 @@
             this.buttonRegister.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonRegister.ForeColor = System.Drawing.Color.Black;
             this.buttonRegister.Location = new System.Drawing.Point(148, 60);
-            this.buttonRegister.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.buttonRegister.Margin = new System.Windows.Forms.Padding(2);
             this.buttonRegister.Name = "buttonRegister";
             this.buttonRegister.Size = new System.Drawing.Size(104, 29);
             this.buttonRegister.TabIndex = 8;
@@ -165,7 +167,7 @@
             // 
             this.labelNewUser.AutoSize = true;
             this.labelNewUser.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelNewUser.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(234)))), ((int)(((byte)(252)))), ((int)(((byte)(255)))));
+            this.labelNewUser.ForeColor = System.Drawing.Color.Gainsboro;
             this.labelNewUser.Location = new System.Drawing.Point(150, 6);
             this.labelNewUser.Name = "labelNewUser";
             this.labelNewUser.Size = new System.Drawing.Size(107, 18);
@@ -181,7 +183,7 @@
             this.buttonLogin.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonLogin.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(248)))), ((int)(((byte)(3)))));
             this.buttonLogin.Location = new System.Drawing.Point(166, 173);
-            this.buttonLogin.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.buttonLogin.Margin = new System.Windows.Forms.Padding(2);
             this.buttonLogin.Name = "buttonLogin";
             this.buttonLogin.Size = new System.Drawing.Size(58, 29);
             this.buttonLogin.TabIndex = 4;
@@ -213,6 +215,18 @@
             this.textBoxUsername.Text = "Nome Utente";
             this.textBoxUsername.Enter += new System.EventHandler(this.textBoxUsername_Enter);
             this.textBoxUsername.Leave += new System.EventHandler(this.textBoxUsername_Leave);
+            // 
+            // labelResult
+            // 
+            this.labelResult.AutoSize = true;
+            this.labelResult.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelResult.ForeColor = System.Drawing.Color.Gainsboro;
+            this.labelResult.Location = new System.Drawing.Point(174, 145);
+            this.labelResult.Name = "labelResult";
+            this.labelResult.Size = new System.Drawing.Size(69, 15);
+            this.labelResult.TabIndex = 44;
+            this.labelResult.Text = "Credenziali";
+            this.labelResult.Visible = false;
             // 
             // FormLogin
             // 
@@ -247,5 +261,6 @@
         private FontAwesome.Sharp.IconButton buttonClose;
         private FontAwesome.Sharp.IconButton iconPassword;
         private FontAwesome.Sharp.IconButton iconUsername;
+        private System.Windows.Forms.Label labelResult;
     }
 }
