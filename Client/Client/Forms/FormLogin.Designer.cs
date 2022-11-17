@@ -31,6 +31,7 @@
             this.panelTitle = new System.Windows.Forms.Panel();
             this.buttonClose = new FontAwesome.Sharp.IconButton();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.labelResult = new System.Windows.Forms.Label();
             this.iconPassword = new FontAwesome.Sharp.IconButton();
             this.iconUsername = new FontAwesome.Sharp.IconButton();
             this.showPassword = new FontAwesome.Sharp.IconButton();
@@ -40,7 +41,6 @@
             this.buttonLogin = new System.Windows.Forms.Button();
             this.textBoxPassword = new System.Windows.Forms.TextBox();
             this.textBoxUsername = new System.Windows.Forms.TextBox();
-            this.labelResult = new System.Windows.Forms.Label();
             this.panelTitle.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -66,9 +66,9 @@
             this.buttonClose.IconColor = System.Drawing.Color.Gainsboro;
             this.buttonClose.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.buttonClose.IconSize = 40;
-            this.buttonClose.Location = new System.Drawing.Point(368, 15);
+            this.buttonClose.Location = new System.Drawing.Point(366, 15);
             this.buttonClose.Name = "buttonClose";
-            this.buttonClose.Size = new System.Drawing.Size(32, 29);
+            this.buttonClose.Size = new System.Drawing.Size(34, 40);
             this.buttonClose.TabIndex = 42;
             this.buttonClose.UseVisualStyleBackColor = true;
             this.buttonClose.Click += new System.EventHandler(this.buttonClose_Click);
@@ -89,6 +89,18 @@
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(406, 389);
             this.panel2.TabIndex = 1;
+            // 
+            // labelResult
+            // 
+            this.labelResult.AutoSize = true;
+            this.labelResult.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelResult.ForeColor = System.Drawing.Color.Gainsboro;
+            this.labelResult.Location = new System.Drawing.Point(174, 145);
+            this.labelResult.Name = "labelResult";
+            this.labelResult.Size = new System.Drawing.Size(69, 15);
+            this.labelResult.TabIndex = 44;
+            this.labelResult.Text = "Credenziali";
+            this.labelResult.Visible = false;
             // 
             // iconPassword
             // 
@@ -215,18 +227,6 @@
             this.textBoxUsername.Text = "Nome Utente";
             this.textBoxUsername.Enter += new System.EventHandler(this.textBoxUsername_Enter);
             this.textBoxUsername.Leave += new System.EventHandler(this.textBoxUsername_Leave);
-            // 
-            // labelResult
-            // 
-            this.labelResult.AutoSize = true;
-            this.labelResult.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelResult.ForeColor = System.Drawing.Color.Gainsboro;
-            this.labelResult.Location = new System.Drawing.Point(174, 145);
-            this.labelResult.Name = "labelResult";
-            this.labelResult.Size = new System.Drawing.Size(69, 15);
-            this.labelResult.TabIndex = 44;
-            this.labelResult.Text = "Credenziali";
-            this.labelResult.Visible = false;
             // 
             // FormLogin
             // 

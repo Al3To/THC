@@ -8,12 +8,14 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Forms;
 
 namespace Client
 {
     public partial class Client : Form
     {
+        static public bool loggedIn = false;
         private Form currentChildForm;
         public Client()
         {
@@ -58,7 +60,10 @@ namespace Client
         }
         private void buttonBJ_Click(object sender, EventArgs e)
         {
-            OpenChildForm(new FormBlackJack());
+            if (!loggedIn)
+                System.Windows.MessageBox.Show("Devi creare un account o accedere ad uno esistente prima di poter giocare!","Errore!", MessageBoxButton.OK);
+            else
+                OpenChildForm(new FormBlackJack());
         }
         private void buttonLogin_Click(object sender, EventArgs e)
         {
@@ -81,7 +86,10 @@ namespace Client
                 buttonRegister.Visible = false;
                 buttonLoginProfile.Visible = false;
                 labelUsername.Text = user.username;
-                labelUsername.Visible = true;  
+                labelUsername.Visible = true;
+                labelBalance.Text = "Credito: " + user.balance.ToString();
+                labelBalance.Visible = true;
+                loggedIn = true;
             }
         }
         private void buttonRegister_Click(object sender, EventArgs e)
@@ -90,6 +98,21 @@ namespace Client
             var result = formRegister.ShowDialog();
             if (result == DialogResult.Retry)
                 buttonLogin_Click(this, e);
+            else if(result == DialogResult.OK)
+            {
+                User user = new User();
+                user.username = FormRegister.username;
+                user.mail = FormRegister.email;
+                user.balance = 0;
+                buttonLogin.Visible = false;
+                buttonRegister.Visible = false;
+                buttonLoginProfile.Visible = false;
+                labelUsername.Text = user.username;
+                labelUsername.Visible = true;
+                labelBalance.Text = "Credito: " + user.balance.ToString();
+                labelBalance.Visible = true;
+                loggedIn = true;
+            }
         }
         private void buttonLoginProfile_Click(object sender, EventArgs e)
         {

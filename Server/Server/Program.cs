@@ -26,6 +26,9 @@ while (!temp)
             temp = true;
             StartServer();
             break;
+        case "op":
+            makeUserAdmin();
+            break;
         case "help":
             HelpCommand();
             break;
@@ -34,10 +37,14 @@ while (!temp)
             break;
     }
 }
+void makeUserAdmin()
+{
 
+}
 void HelpCommand()
 {
-    Console.WriteLine("start: Avvia il server");
+    Console.WriteLine("start: Avvia il server\n" +
+        "op: Dai i permessi da amministratore ad un utente");
 }
 
 void StartServer()
@@ -116,11 +123,27 @@ void Game()
                     }
                     else if (data.StartsWith("register"))
                     {
+                        string[] _split;
                         string[] split;
+                        bool alredyUsedEmail = false;
                         split = data.Split(";");
-                        File.AppendAllText(@"../../../../files/users.txt", split[1] + ";" + split[2] + split[3] + ";" + split[4]);
-                        toSend = Encoding.ASCII.GetBytes("ok/c/");
-                        handler.Send(toSend);
+                        foreach (string line in File.ReadLines(@"../../../../files/users.txt"))
+                        {
+                            _split = line.Split(";");
+                            if (_split[3] == split[3])
+                                alredyUsedEmail = true;
+                        }
+                        if (alredyUsedEmail) 
+                        {
+                            toSend = Encoding.ASCII.GetBytes("alredyUsed/c/");
+                            handler.Send(toSend);
+                        }
+                        else
+                        {
+                            File.AppendAllText(@"../../../../files/users.txt", split[1] + ";" + split[2] + ";user;" + split[3] + ";0;" + split[4] + ";" + split[5] + ";" + split[6]);
+                            toSend = Encoding.ASCII.GetBytes("ok/c/");
+                            handler.Send(toSend);
+                        }
                     }
                     else
                         switch (data)

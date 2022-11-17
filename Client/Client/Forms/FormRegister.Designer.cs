@@ -34,29 +34,29 @@
             this.buttonLogin = new System.Windows.Forms.Button();
             this.labelAlredyUser = new System.Windows.Forms.Label();
             this.panelRegister1 = new System.Windows.Forms.Panel();
+            this.labelPage = new System.Windows.Forms.Label();
+            this.labelResult = new System.Windows.Forms.Label();
             this.buttonForward = new System.Windows.Forms.Button();
-            this.iconButton3 = new FontAwesome.Sharp.IconButton();
+            this.iconEmail = new FontAwesome.Sharp.IconButton();
             this.textBoxEmail = new System.Windows.Forms.TextBox();
-            this.iconButton1 = new FontAwesome.Sharp.IconButton();
-            this.iconButton2 = new FontAwesome.Sharp.IconButton();
+            this.iconPasswordConfirm = new FontAwesome.Sharp.IconButton();
+            this.showPasswordConfirm = new FontAwesome.Sharp.IconButton();
             this.textBoxPasswordConfirm = new System.Windows.Forms.TextBox();
             this.iconPassword = new FontAwesome.Sharp.IconButton();
             this.iconUsername = new FontAwesome.Sharp.IconButton();
             this.showPassword = new FontAwesome.Sharp.IconButton();
             this.textBoxPassword = new System.Windows.Forms.TextBox();
             this.textBoxUsername = new System.Windows.Forms.TextBox();
+            this.buttonRegister = new System.Windows.Forms.Button();
             this.panelRegister2 = new System.Windows.Forms.Panel();
-            this.button1 = new System.Windows.Forms.Button();
-            this.iconButton4 = new FontAwesome.Sharp.IconButton();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.iconButton5 = new FontAwesome.Sharp.IconButton();
-            this.iconButton6 = new FontAwesome.Sharp.IconButton();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.iconButton7 = new FontAwesome.Sharp.IconButton();
-            this.iconButton8 = new FontAwesome.Sharp.IconButton();
-            this.iconButton9 = new FontAwesome.Sharp.IconButton();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.textBox4 = new System.Windows.Forms.TextBox();
+            this.iconBirthDate = new FontAwesome.Sharp.IconButton();
+            this.dateBirthDate = new System.Windows.Forms.DateTimePicker();
+            this.labelResult2 = new System.Windows.Forms.Label();
+            this.iconButton1 = new FontAwesome.Sharp.IconButton();
+            this.textBoxName = new System.Windows.Forms.TextBox();
+            this.iconSurname = new FontAwesome.Sharp.IconButton();
+            this.textBoxSurname = new System.Windows.Forms.TextBox();
+            this.buttonBack = new System.Windows.Forms.Button();
             this.panelTitle.SuspendLayout();
             this.panelBottonBar.SuspendLayout();
             this.panelRegister1.SuspendLayout();
@@ -72,6 +72,7 @@
             this.panelTitle.Name = "panelTitle";
             this.panelTitle.Size = new System.Drawing.Size(575, 61);
             this.panelTitle.TabIndex = 1;
+            this.panelTitle.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panelTitle_MouseDown);
             // 
             // buttonClose
             // 
@@ -82,9 +83,9 @@
             this.buttonClose.IconColor = System.Drawing.Color.Gainsboro;
             this.buttonClose.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.buttonClose.IconSize = 40;
-            this.buttonClose.Location = new System.Drawing.Point(534, 11);
+            this.buttonClose.Location = new System.Drawing.Point(533, 11);
             this.buttonClose.Name = "buttonClose";
-            this.buttonClose.Size = new System.Drawing.Size(32, 29);
+            this.buttonClose.Size = new System.Drawing.Size(33, 44);
             this.buttonClose.TabIndex = 42;
             this.buttonClose.UseVisualStyleBackColor = true;
             this.buttonClose.Click += new System.EventHandler(this.buttonClose_Click);
@@ -109,7 +110,7 @@
             this.buttonLogin.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonLogin.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(248)))), ((int)(((byte)(3)))));
             this.buttonLogin.Location = new System.Drawing.Point(229, 62);
-            this.buttonLogin.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.buttonLogin.Margin = new System.Windows.Forms.Padding(2);
             this.buttonLogin.Name = "buttonLogin";
             this.buttonLogin.Size = new System.Drawing.Size(106, 29);
             this.buttonLogin.TabIndex = 10;
@@ -131,11 +132,13 @@
             // panelRegister1
             // 
             this.panelRegister1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(23)))), ((int)(((byte)(23)))));
+            this.panelRegister1.Controls.Add(this.labelPage);
+            this.panelRegister1.Controls.Add(this.labelResult);
             this.panelRegister1.Controls.Add(this.buttonForward);
-            this.panelRegister1.Controls.Add(this.iconButton3);
+            this.panelRegister1.Controls.Add(this.iconEmail);
             this.panelRegister1.Controls.Add(this.textBoxEmail);
-            this.panelRegister1.Controls.Add(this.iconButton1);
-            this.panelRegister1.Controls.Add(this.iconButton2);
+            this.panelRegister1.Controls.Add(this.iconPasswordConfirm);
+            this.panelRegister1.Controls.Add(this.showPasswordConfirm);
             this.panelRegister1.Controls.Add(this.textBoxPasswordConfirm);
             this.panelRegister1.Controls.Add(this.iconPassword);
             this.panelRegister1.Controls.Add(this.iconUsername);
@@ -148,6 +151,29 @@
             this.panelRegister1.Size = new System.Drawing.Size(575, 205);
             this.panelRegister1.TabIndex = 12;
             // 
+            // labelPage
+            // 
+            this.labelPage.AutoSize = true;
+            this.labelPage.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelPage.ForeColor = System.Drawing.Color.White;
+            this.labelPage.Location = new System.Drawing.Point(542, 3);
+            this.labelPage.Name = "labelPage";
+            this.labelPage.Size = new System.Drawing.Size(24, 15);
+            this.labelPage.TabIndex = 53;
+            this.labelPage.Text = "1/2";
+            // 
+            // labelResult
+            // 
+            this.labelResult.AutoSize = true;
+            this.labelResult.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelResult.ForeColor = System.Drawing.Color.Gainsboro;
+            this.labelResult.Location = new System.Drawing.Point(228, 138);
+            this.labelResult.Name = "labelResult";
+            this.labelResult.Size = new System.Drawing.Size(69, 15);
+            this.labelResult.TabIndex = 52;
+            this.labelResult.Text = "Credenziali";
+            this.labelResult.Visible = false;
+            // 
             // buttonForward
             // 
             this.buttonForward.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -157,27 +183,28 @@
             this.buttonForward.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonForward.ForeColor = System.Drawing.Color.Black;
             this.buttonForward.Location = new System.Drawing.Point(462, 171);
-            this.buttonForward.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.buttonForward.Margin = new System.Windows.Forms.Padding(2);
             this.buttonForward.Name = "buttonForward";
             this.buttonForward.Size = new System.Drawing.Size(104, 29);
             this.buttonForward.TabIndex = 51;
             this.buttonForward.Text = "AVANTI";
             this.buttonForward.UseVisualStyleBackColor = false;
+            this.buttonForward.Click += new System.EventHandler(this.buttonForward_Click);
             // 
-            // iconButton3
+            // iconEmail
             // 
-            this.iconButton3.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.iconButton3.FlatAppearance.BorderSize = 0;
-            this.iconButton3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.iconButton3.IconChar = FontAwesome.Sharp.IconChar.Envelope;
-            this.iconButton3.IconColor = System.Drawing.Color.Black;
-            this.iconButton3.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.iconButton3.IconSize = 26;
-            this.iconButton3.Location = new System.Drawing.Point(156, 18);
-            this.iconButton3.Name = "iconButton3";
-            this.iconButton3.Size = new System.Drawing.Size(28, 28);
-            this.iconButton3.TabIndex = 50;
-            this.iconButton3.UseVisualStyleBackColor = true;
+            this.iconEmail.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.iconEmail.FlatAppearance.BorderSize = 0;
+            this.iconEmail.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.iconEmail.IconChar = FontAwesome.Sharp.IconChar.Envelope;
+            this.iconEmail.IconColor = System.Drawing.Color.Black;
+            this.iconEmail.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.iconEmail.IconSize = 26;
+            this.iconEmail.Location = new System.Drawing.Point(156, 18);
+            this.iconEmail.Name = "iconEmail";
+            this.iconEmail.Size = new System.Drawing.Size(28, 28);
+            this.iconEmail.TabIndex = 50;
+            this.iconEmail.UseVisualStyleBackColor = true;
             // 
             // textBoxEmail
             // 
@@ -188,35 +215,38 @@
             this.textBoxEmail.Size = new System.Drawing.Size(167, 20);
             this.textBoxEmail.TabIndex = 49;
             this.textBoxEmail.Text = "Email";
+            this.textBoxEmail.Enter += new System.EventHandler(this.textBoxEmail_Enter);
+            this.textBoxEmail.Leave += new System.EventHandler(this.textBoxEmail_Leave);
             // 
-            // iconButton1
+            // iconPasswordConfirm
             // 
-            this.iconButton1.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.iconButton1.FlatAppearance.BorderSize = 0;
-            this.iconButton1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.iconButton1.IconChar = FontAwesome.Sharp.IconChar.Lock;
-            this.iconButton1.IconColor = System.Drawing.Color.Black;
-            this.iconButton1.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.iconButton1.IconSize = 26;
-            this.iconButton1.Location = new System.Drawing.Point(156, 93);
-            this.iconButton1.Name = "iconButton1";
-            this.iconButton1.Size = new System.Drawing.Size(28, 28);
-            this.iconButton1.TabIndex = 48;
-            this.iconButton1.UseVisualStyleBackColor = true;
+            this.iconPasswordConfirm.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.iconPasswordConfirm.FlatAppearance.BorderSize = 0;
+            this.iconPasswordConfirm.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.iconPasswordConfirm.IconChar = FontAwesome.Sharp.IconChar.Lock;
+            this.iconPasswordConfirm.IconColor = System.Drawing.Color.Black;
+            this.iconPasswordConfirm.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.iconPasswordConfirm.IconSize = 26;
+            this.iconPasswordConfirm.Location = new System.Drawing.Point(156, 93);
+            this.iconPasswordConfirm.Name = "iconPasswordConfirm";
+            this.iconPasswordConfirm.Size = new System.Drawing.Size(28, 28);
+            this.iconPasswordConfirm.TabIndex = 48;
+            this.iconPasswordConfirm.UseVisualStyleBackColor = true;
             // 
-            // iconButton2
+            // showPasswordConfirm
             // 
-            this.iconButton2.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.iconButton2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.iconButton2.IconChar = FontAwesome.Sharp.IconChar.Eye;
-            this.iconButton2.IconColor = System.Drawing.Color.Gainsboro;
-            this.iconButton2.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.iconButton2.IconSize = 18;
-            this.iconButton2.Location = new System.Drawing.Point(356, 98);
-            this.iconButton2.Name = "iconButton2";
-            this.iconButton2.Size = new System.Drawing.Size(23, 20);
-            this.iconButton2.TabIndex = 47;
-            this.iconButton2.UseVisualStyleBackColor = true;
+            this.showPasswordConfirm.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.showPasswordConfirm.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.showPasswordConfirm.IconChar = FontAwesome.Sharp.IconChar.Eye;
+            this.showPasswordConfirm.IconColor = System.Drawing.Color.Gainsboro;
+            this.showPasswordConfirm.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.showPasswordConfirm.IconSize = 18;
+            this.showPasswordConfirm.Location = new System.Drawing.Point(356, 98);
+            this.showPasswordConfirm.Name = "showPasswordConfirm";
+            this.showPasswordConfirm.Size = new System.Drawing.Size(23, 20);
+            this.showPasswordConfirm.TabIndex = 47;
+            this.showPasswordConfirm.UseVisualStyleBackColor = true;
+            this.showPasswordConfirm.Click += new System.EventHandler(this.showPasswordConfirm_Click);
             // 
             // textBoxPasswordConfirm
             // 
@@ -226,7 +256,9 @@
             this.textBoxPasswordConfirm.Name = "textBoxPasswordConfirm";
             this.textBoxPasswordConfirm.Size = new System.Drawing.Size(167, 20);
             this.textBoxPasswordConfirm.TabIndex = 46;
-            this.textBoxPasswordConfirm.Text = "Password";
+            this.textBoxPasswordConfirm.Text = "Conferma Password";
+            this.textBoxPasswordConfirm.Enter += new System.EventHandler(this.textBoxPasswordConfirm_Enter);
+            this.textBoxPasswordConfirm.Leave += new System.EventHandler(this.textBoxPasswordConfirm_Leave);
             // 
             // iconPassword
             // 
@@ -271,6 +303,7 @@
             this.showPassword.Size = new System.Drawing.Size(23, 20);
             this.showPassword.TabIndex = 39;
             this.showPassword.UseVisualStyleBackColor = true;
+            this.showPassword.Click += new System.EventHandler(this.showPassword_Click);
             // 
             // textBoxPassword
             // 
@@ -281,6 +314,8 @@
             this.textBoxPassword.Size = new System.Drawing.Size(167, 20);
             this.textBoxPassword.TabIndex = 3;
             this.textBoxPassword.Text = "Password";
+            this.textBoxPassword.Enter += new System.EventHandler(this.textBoxPassword_Enter);
+            this.textBoxPassword.Leave += new System.EventHandler(this.textBoxPassword_Leave);
             // 
             // textBoxUsername
             // 
@@ -291,170 +326,149 @@
             this.textBoxUsername.Size = new System.Drawing.Size(167, 20);
             this.textBoxUsername.TabIndex = 2;
             this.textBoxUsername.Text = "Nome Utente";
+            this.textBoxUsername.Enter += new System.EventHandler(this.textBoxUsername_Enter);
+            this.textBoxUsername.Leave += new System.EventHandler(this.textBoxUsername_Leave);
+            // 
+            // buttonRegister
+            // 
+            this.buttonRegister.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonRegister.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(252)))), ((int)(((byte)(228)))), ((int)(((byte)(3)))));
+            this.buttonRegister.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.buttonRegister.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonRegister.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonRegister.ForeColor = System.Drawing.Color.Black;
+            this.buttonRegister.Location = new System.Drawing.Point(218, 155);
+            this.buttonRegister.Margin = new System.Windows.Forms.Padding(2);
+            this.buttonRegister.Name = "buttonRegister";
+            this.buttonRegister.Size = new System.Drawing.Size(104, 29);
+            this.buttonRegister.TabIndex = 51;
+            this.buttonRegister.Text = "REGISTRATI";
+            this.buttonRegister.UseVisualStyleBackColor = false;
+            this.buttonRegister.Click += new System.EventHandler(this.buttonRegister_Click);
             // 
             // panelRegister2
             // 
             this.panelRegister2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(23)))), ((int)(((byte)(23)))));
-            this.panelRegister2.Controls.Add(this.button1);
-            this.panelRegister2.Controls.Add(this.iconButton4);
-            this.panelRegister2.Controls.Add(this.textBox1);
-            this.panelRegister2.Controls.Add(this.iconButton5);
-            this.panelRegister2.Controls.Add(this.iconButton6);
-            this.panelRegister2.Controls.Add(this.textBox2);
-            this.panelRegister2.Controls.Add(this.iconButton7);
-            this.panelRegister2.Controls.Add(this.iconButton8);
-            this.panelRegister2.Controls.Add(this.iconButton9);
-            this.panelRegister2.Controls.Add(this.textBox3);
-            this.panelRegister2.Controls.Add(this.textBox4);
+            this.panelRegister2.Controls.Add(this.buttonBack);
+            this.panelRegister2.Controls.Add(this.iconBirthDate);
+            this.panelRegister2.Controls.Add(this.dateBirthDate);
+            this.panelRegister2.Controls.Add(this.labelResult2);
+            this.panelRegister2.Controls.Add(this.iconButton1);
+            this.panelRegister2.Controls.Add(this.textBoxName);
+            this.panelRegister2.Controls.Add(this.iconSurname);
+            this.panelRegister2.Controls.Add(this.textBoxSurname);
+            this.panelRegister2.Controls.Add(this.buttonRegister);
             this.panelRegister2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelRegister2.Location = new System.Drawing.Point(0, 61);
             this.panelRegister2.Name = "panelRegister2";
             this.panelRegister2.Size = new System.Drawing.Size(575, 205);
             this.panelRegister2.TabIndex = 52;
+            this.panelRegister2.Visible = false;
             // 
-            // button1
+            // iconBirthDate
             // 
-            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(252)))), ((int)(((byte)(228)))), ((int)(((byte)(3)))));
-            this.button1.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.ForeColor = System.Drawing.Color.Black;
-            this.button1.Location = new System.Drawing.Point(231, 155);
-            this.button1.Margin = new System.Windows.Forms.Padding(2);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(104, 29);
-            this.button1.TabIndex = 51;
-            this.button1.Text = "REGISTRATI";
-            this.button1.UseVisualStyleBackColor = false;
+            this.iconBirthDate.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.iconBirthDate.FlatAppearance.BorderSize = 0;
+            this.iconBirthDate.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.iconBirthDate.IconChar = FontAwesome.Sharp.IconChar.CakeCandles;
+            this.iconBirthDate.IconColor = System.Drawing.Color.Black;
+            this.iconBirthDate.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.iconBirthDate.IconSize = 26;
+            this.iconBirthDate.Location = new System.Drawing.Point(156, 93);
+            this.iconBirthDate.Name = "iconBirthDate";
+            this.iconBirthDate.Size = new System.Drawing.Size(28, 28);
+            this.iconBirthDate.TabIndex = 65;
+            this.iconBirthDate.UseVisualStyleBackColor = true;
             // 
-            // iconButton4
+            // dateBirthDate
             // 
-            this.iconButton4.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.iconButton4.FlatAppearance.BorderSize = 0;
-            this.iconButton4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.iconButton4.IconChar = FontAwesome.Sharp.IconChar.Envelope;
-            this.iconButton4.IconColor = System.Drawing.Color.Black;
-            this.iconButton4.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.iconButton4.IconSize = 26;
-            this.iconButton4.Location = new System.Drawing.Point(156, 18);
-            this.iconButton4.Name = "iconButton4";
-            this.iconButton4.Size = new System.Drawing.Size(28, 28);
-            this.iconButton4.TabIndex = 50;
-            this.iconButton4.UseVisualStyleBackColor = true;
+            this.dateBirthDate.Location = new System.Drawing.Point(190, 95);
+            this.dateBirthDate.Name = "dateBirthDate";
+            this.dateBirthDate.Size = new System.Drawing.Size(200, 20);
+            this.dateBirthDate.TabIndex = 64;
             // 
-            // textBox1
+            // labelResult2
             // 
-            this.textBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(23)))), ((int)(((byte)(23)))));
-            this.textBox1.ForeColor = System.Drawing.SystemColors.InactiveCaption;
-            this.textBox1.Location = new System.Drawing.Point(190, 23);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(167, 20);
-            this.textBox1.TabIndex = 49;
-            this.textBox1.Text = "Email";
+            this.labelResult2.AutoSize = true;
+            this.labelResult2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelResult2.ForeColor = System.Drawing.Color.Gainsboro;
+            this.labelResult2.Location = new System.Drawing.Point(228, 123);
+            this.labelResult2.Name = "labelResult2";
+            this.labelResult2.Size = new System.Drawing.Size(69, 15);
+            this.labelResult2.TabIndex = 63;
+            this.labelResult2.Text = "Credenziali";
+            this.labelResult2.Visible = false;
             // 
-            // iconButton5
+            // iconButton1
             // 
-            this.iconButton5.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.iconButton5.FlatAppearance.BorderSize = 0;
-            this.iconButton5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.iconButton5.IconChar = FontAwesome.Sharp.IconChar.Lock;
-            this.iconButton5.IconColor = System.Drawing.Color.Black;
-            this.iconButton5.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.iconButton5.IconSize = 26;
-            this.iconButton5.Location = new System.Drawing.Point(156, 93);
-            this.iconButton5.Name = "iconButton5";
-            this.iconButton5.Size = new System.Drawing.Size(28, 28);
-            this.iconButton5.TabIndex = 48;
-            this.iconButton5.UseVisualStyleBackColor = true;
+            this.iconButton1.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.iconButton1.FlatAppearance.BorderSize = 0;
+            this.iconButton1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.iconButton1.IconChar = FontAwesome.Sharp.IconChar.IdBadge;
+            this.iconButton1.IconColor = System.Drawing.Color.Black;
+            this.iconButton1.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.iconButton1.IconSize = 26;
+            this.iconButton1.Location = new System.Drawing.Point(156, 37);
+            this.iconButton1.Name = "iconButton1";
+            this.iconButton1.Size = new System.Drawing.Size(28, 28);
+            this.iconButton1.TabIndex = 62;
+            this.iconButton1.UseVisualStyleBackColor = true;
             // 
-            // iconButton6
+            // textBoxName
             // 
-            this.iconButton6.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.iconButton6.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.iconButton6.IconChar = FontAwesome.Sharp.IconChar.Eye;
-            this.iconButton6.IconColor = System.Drawing.Color.Gainsboro;
-            this.iconButton6.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.iconButton6.IconSize = 18;
-            this.iconButton6.Location = new System.Drawing.Point(355, 98);
-            this.iconButton6.Name = "iconButton6";
-            this.iconButton6.Size = new System.Drawing.Size(23, 20);
-            this.iconButton6.TabIndex = 47;
-            this.iconButton6.UseVisualStyleBackColor = true;
+            this.textBoxName.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(23)))), ((int)(((byte)(23)))));
+            this.textBoxName.ForeColor = System.Drawing.SystemColors.InactiveCaption;
+            this.textBoxName.Location = new System.Drawing.Point(190, 42);
+            this.textBoxName.Name = "textBoxName";
+            this.textBoxName.Size = new System.Drawing.Size(167, 20);
+            this.textBoxName.TabIndex = 61;
+            this.textBoxName.Text = "Nome";
+            this.textBoxName.Enter += new System.EventHandler(this.textBoxName_Enter);
+            this.textBoxName.Leave += new System.EventHandler(this.textBoxName_Leave);
             // 
-            // textBox2
+            // iconSurname
             // 
-            this.textBox2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(23)))), ((int)(((byte)(23)))));
-            this.textBox2.ForeColor = System.Drawing.SystemColors.InactiveCaption;
-            this.textBox2.Location = new System.Drawing.Point(190, 98);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(167, 20);
-            this.textBox2.TabIndex = 46;
-            this.textBox2.Text = "Password";
+            this.iconSurname.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.iconSurname.FlatAppearance.BorderSize = 0;
+            this.iconSurname.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.iconSurname.IconChar = FontAwesome.Sharp.IconChar.IdBadge;
+            this.iconSurname.IconColor = System.Drawing.Color.Black;
+            this.iconSurname.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.iconSurname.IconSize = 26;
+            this.iconSurname.Location = new System.Drawing.Point(156, 64);
+            this.iconSurname.Name = "iconSurname";
+            this.iconSurname.Size = new System.Drawing.Size(28, 28);
+            this.iconSurname.TabIndex = 56;
+            this.iconSurname.UseVisualStyleBackColor = true;
             // 
-            // iconButton7
+            // textBoxSurname
             // 
-            this.iconButton7.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.iconButton7.FlatAppearance.BorderSize = 0;
-            this.iconButton7.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.iconButton7.IconChar = FontAwesome.Sharp.IconChar.Lock;
-            this.iconButton7.IconColor = System.Drawing.Color.Black;
-            this.iconButton7.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.iconButton7.IconSize = 26;
-            this.iconButton7.Location = new System.Drawing.Point(156, 67);
-            this.iconButton7.Name = "iconButton7";
-            this.iconButton7.Size = new System.Drawing.Size(28, 28);
-            this.iconButton7.TabIndex = 45;
-            this.iconButton7.UseVisualStyleBackColor = true;
+            this.textBoxSurname.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(23)))), ((int)(((byte)(23)))));
+            this.textBoxSurname.ForeColor = System.Drawing.SystemColors.InactiveCaption;
+            this.textBoxSurname.Location = new System.Drawing.Point(190, 69);
+            this.textBoxSurname.Name = "textBoxSurname";
+            this.textBoxSurname.Size = new System.Drawing.Size(167, 20);
+            this.textBoxSurname.TabIndex = 53;
+            this.textBoxSurname.Text = "Cognome";
+            this.textBoxSurname.Enter += new System.EventHandler(this.textBoxSurname_Enter);
+            this.textBoxSurname.Leave += new System.EventHandler(this.textBoxSurname_Leave);
             // 
-            // iconButton8
+            // buttonBack
             // 
-            this.iconButton8.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.iconButton8.FlatAppearance.BorderSize = 0;
-            this.iconButton8.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.iconButton8.IconChar = FontAwesome.Sharp.IconChar.User;
-            this.iconButton8.IconColor = System.Drawing.Color.Black;
-            this.iconButton8.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.iconButton8.IconSize = 26;
-            this.iconButton8.Location = new System.Drawing.Point(156, 42);
-            this.iconButton8.Name = "iconButton8";
-            this.iconButton8.Size = new System.Drawing.Size(28, 28);
-            this.iconButton8.TabIndex = 44;
-            this.iconButton8.UseVisualStyleBackColor = true;
-            // 
-            // iconButton9
-            // 
-            this.iconButton9.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.iconButton9.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.iconButton9.IconChar = FontAwesome.Sharp.IconChar.Eye;
-            this.iconButton9.IconColor = System.Drawing.Color.Gainsboro;
-            this.iconButton9.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.iconButton9.IconSize = 18;
-            this.iconButton9.Location = new System.Drawing.Point(355, 72);
-            this.iconButton9.Name = "iconButton9";
-            this.iconButton9.Size = new System.Drawing.Size(23, 20);
-            this.iconButton9.TabIndex = 39;
-            this.iconButton9.UseVisualStyleBackColor = true;
-            // 
-            // textBox3
-            // 
-            this.textBox3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(23)))), ((int)(((byte)(23)))));
-            this.textBox3.ForeColor = System.Drawing.SystemColors.InactiveCaption;
-            this.textBox3.Location = new System.Drawing.Point(190, 72);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(167, 20);
-            this.textBox3.TabIndex = 3;
-            this.textBox3.Text = "Password";
-            // 
-            // textBox4
-            // 
-            this.textBox4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(23)))), ((int)(((byte)(23)))));
-            this.textBox4.ForeColor = System.Drawing.SystemColors.InactiveCaption;
-            this.textBox4.Location = new System.Drawing.Point(190, 47);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(167, 20);
-            this.textBox4.TabIndex = 2;
-            this.textBox4.Text = "Nome Utente";
+            this.buttonBack.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonBack.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(35)))), ((int)(((byte)(35)))));
+            this.buttonBack.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.buttonBack.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonBack.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonBack.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(248)))), ((int)(((byte)(3)))));
+            this.buttonBack.Location = new System.Drawing.Point(2, 155);
+            this.buttonBack.Margin = new System.Windows.Forms.Padding(2);
+            this.buttonBack.Name = "buttonBack";
+            this.buttonBack.Size = new System.Drawing.Size(74, 29);
+            this.buttonBack.TabIndex = 11;
+            this.buttonBack.Text = "INDIETRO";
+            this.buttonBack.UseVisualStyleBackColor = false;
+            this.buttonBack.Click += new System.EventHandler(this.buttonBack_Click);
             // 
             // FormRegister
             // 
@@ -465,7 +479,7 @@
             this.Controls.Add(this.panelRegister1);
             this.Controls.Add(this.panelBottonBar);
             this.Controls.Add(this.panelTitle);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "FormRegister";
             this.Text = "FormRegister";
             this.panelTitle.ResumeLayout(false);
@@ -482,7 +496,6 @@
         #endregion
 
         private System.Windows.Forms.Panel panelTitle;
-        private FontAwesome.Sharp.IconButton buttonClose;
         private System.Windows.Forms.Panel panelBottonBar;
         private System.Windows.Forms.Label labelAlredyUser;
         private System.Windows.Forms.Button buttonLogin;
@@ -490,25 +503,26 @@
         private FontAwesome.Sharp.IconButton showPassword;
         private System.Windows.Forms.TextBox textBoxPassword;
         private System.Windows.Forms.TextBox textBoxUsername;
-        private FontAwesome.Sharp.IconButton iconButton3;
+        private FontAwesome.Sharp.IconButton iconEmail;
         private System.Windows.Forms.TextBox textBoxEmail;
-        private FontAwesome.Sharp.IconButton iconButton1;
-        private FontAwesome.Sharp.IconButton iconButton2;
+        private FontAwesome.Sharp.IconButton iconPasswordConfirm;
+        private FontAwesome.Sharp.IconButton showPasswordConfirm;
         private System.Windows.Forms.TextBox textBoxPasswordConfirm;
         private FontAwesome.Sharp.IconButton iconPassword;
         private FontAwesome.Sharp.IconButton iconUsername;
         private System.Windows.Forms.Button buttonForward;
+        private System.Windows.Forms.Button buttonRegister;
         private System.Windows.Forms.Panel panelRegister2;
-        private System.Windows.Forms.Button button1;
-        private FontAwesome.Sharp.IconButton iconButton4;
-        private System.Windows.Forms.TextBox textBox1;
-        private FontAwesome.Sharp.IconButton iconButton5;
-        private FontAwesome.Sharp.IconButton iconButton6;
-        private System.Windows.Forms.TextBox textBox2;
-        private FontAwesome.Sharp.IconButton iconButton7;
-        private FontAwesome.Sharp.IconButton iconButton8;
-        private FontAwesome.Sharp.IconButton iconButton9;
-        private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.TextBox textBox4;
+        private System.Windows.Forms.Label labelResult;
+        private System.Windows.Forms.Label labelPage;
+        private System.Windows.Forms.Label labelResult2;
+        private FontAwesome.Sharp.IconButton iconButton1;
+        private System.Windows.Forms.TextBox textBoxName;
+        private FontAwesome.Sharp.IconButton iconSurname;
+        private System.Windows.Forms.TextBox textBoxSurname;
+        private FontAwesome.Sharp.IconButton buttonClose;
+        private FontAwesome.Sharp.IconButton iconBirthDate;
+        private System.Windows.Forms.DateTimePicker dateBirthDate;
+        private System.Windows.Forms.Button buttonBack;
     }
 }

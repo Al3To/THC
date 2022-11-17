@@ -40,9 +40,10 @@
             this.buttonBJ = new FontAwesome.Sharp.IconButton();
             this.buttonHome = new FontAwesome.Sharp.IconButton();
             this.panelProfile = new System.Windows.Forms.Panel();
+            this.labelUsername = new System.Windows.Forms.Label();
             this.buttonLoginProfile = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.labelUsername = new System.Windows.Forms.Label();
+            this.labelBalance = new System.Windows.Forms.Label();
             this.panelTitle.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureMinimize)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureMaximize)).BeginInit();
@@ -58,7 +59,7 @@
             this.panelDesktop.Cursor = System.Windows.Forms.Cursors.Default;
             this.panelDesktop.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelDesktop.Location = new System.Drawing.Point(150, 81);
-            this.panelDesktop.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panelDesktop.Margin = new System.Windows.Forms.Padding(2);
             this.panelDesktop.Name = "panelDesktop";
             this.panelDesktop.Size = new System.Drawing.Size(650, 369);
             this.panelDesktop.TabIndex = 5;
@@ -73,7 +74,7 @@
             this.panelTitle.Controls.Add(this.buttonLogin);
             this.panelTitle.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelTitle.Location = new System.Drawing.Point(150, 0);
-            this.panelTitle.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panelTitle.Margin = new System.Windows.Forms.Padding(2);
             this.panelTitle.Name = "panelTitle";
             this.panelTitle.Size = new System.Drawing.Size(650, 81);
             this.panelTitle.TabIndex = 4;
@@ -88,7 +89,7 @@
             this.buttonRegister.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonRegister.ForeColor = System.Drawing.Color.Black;
             this.buttonRegister.Location = new System.Drawing.Point(484, 31);
-            this.buttonRegister.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.buttonRegister.Margin = new System.Windows.Forms.Padding(2);
             this.buttonRegister.Name = "buttonRegister";
             this.buttonRegister.Size = new System.Drawing.Size(104, 29);
             this.buttonRegister.TabIndex = 7;
@@ -104,7 +105,7 @@
             this.pictureMinimize.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pictureMinimize.Image = ((System.Drawing.Image)(resources.GetObject("pictureMinimize.Image")));
             this.pictureMinimize.Location = new System.Drawing.Point(599, 2);
-            this.pictureMinimize.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pictureMinimize.Margin = new System.Windows.Forms.Padding(2);
             this.pictureMinimize.Name = "pictureMinimize";
             this.pictureMinimize.Size = new System.Drawing.Size(16, 15);
             this.pictureMinimize.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -118,7 +119,7 @@
             this.pictureMaximize.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pictureMaximize.Image = ((System.Drawing.Image)(resources.GetObject("pictureMaximize.Image")));
             this.pictureMaximize.Location = new System.Drawing.Point(615, 2);
-            this.pictureMaximize.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pictureMaximize.Margin = new System.Windows.Forms.Padding(2);
             this.pictureMaximize.Name = "pictureMaximize";
             this.pictureMaximize.Size = new System.Drawing.Size(16, 15);
             this.pictureMaximize.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -132,7 +133,7 @@
             this.pictureClose.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pictureClose.Image = ((System.Drawing.Image)(resources.GetObject("pictureClose.Image")));
             this.pictureClose.Location = new System.Drawing.Point(631, 2);
-            this.pictureClose.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pictureClose.Margin = new System.Windows.Forms.Padding(2);
             this.pictureClose.Name = "pictureClose";
             this.pictureClose.Size = new System.Drawing.Size(16, 15);
             this.pictureClose.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -149,7 +150,7 @@
             this.buttonLogin.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonLogin.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(248)))), ((int)(((byte)(3)))));
             this.buttonLogin.Location = new System.Drawing.Point(592, 31);
-            this.buttonLogin.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.buttonLogin.Margin = new System.Windows.Forms.Padding(2);
             this.buttonLogin.Name = "buttonLogin";
             this.buttonLogin.Size = new System.Drawing.Size(58, 29);
             this.buttonLogin.TabIndex = 2;
@@ -167,7 +168,7 @@
             this.panelSideBar.Controls.Add(this.panelProfile);
             this.panelSideBar.Dock = System.Windows.Forms.DockStyle.Left;
             this.panelSideBar.Location = new System.Drawing.Point(0, 0);
-            this.panelSideBar.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panelSideBar.Margin = new System.Windows.Forms.Padding(2);
             this.panelSideBar.Name = "panelSideBar";
             this.panelSideBar.Size = new System.Drawing.Size(150, 450);
             this.panelSideBar.TabIndex = 3;
@@ -185,7 +186,7 @@
             this.buttonBJ.IconSize = 26;
             this.buttonBJ.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.buttonBJ.Location = new System.Drawing.Point(0, 138);
-            this.buttonBJ.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.buttonBJ.Margin = new System.Windows.Forms.Padding(2);
             this.buttonBJ.Name = "buttonBJ";
             this.buttonBJ.Size = new System.Drawing.Size(150, 36);
             this.buttonBJ.TabIndex = 3;
@@ -207,7 +208,7 @@
             this.buttonHome.IconSize = 26;
             this.buttonHome.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.buttonHome.Location = new System.Drawing.Point(0, 102);
-            this.buttonHome.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.buttonHome.Margin = new System.Windows.Forms.Padding(2);
             this.buttonHome.Name = "buttonHome";
             this.buttonHome.Size = new System.Drawing.Size(150, 36);
             this.buttonHome.TabIndex = 4;
@@ -219,15 +220,28 @@
             // panelProfile
             // 
             this.panelProfile.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(23)))), ((int)(((byte)(23)))));
+            this.panelProfile.Controls.Add(this.labelBalance);
             this.panelProfile.Controls.Add(this.labelUsername);
             this.panelProfile.Controls.Add(this.buttonLoginProfile);
             this.panelProfile.Controls.Add(this.pictureBox1);
             this.panelProfile.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelProfile.Location = new System.Drawing.Point(0, 0);
-            this.panelProfile.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panelProfile.Margin = new System.Windows.Forms.Padding(2);
             this.panelProfile.Name = "panelProfile";
             this.panelProfile.Size = new System.Drawing.Size(150, 102);
             this.panelProfile.TabIndex = 0;
+            // 
+            // labelUsername
+            // 
+            this.labelUsername.AutoSize = true;
+            this.labelUsername.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelUsername.ForeColor = System.Drawing.Color.Gainsboro;
+            this.labelUsername.Location = new System.Drawing.Point(41, 55);
+            this.labelUsername.Name = "labelUsername";
+            this.labelUsername.Size = new System.Drawing.Size(63, 15);
+            this.labelUsername.TabIndex = 4;
+            this.labelUsername.Text = "username";
+            this.labelUsername.Visible = false;
             // 
             // buttonLoginProfile
             // 
@@ -237,7 +251,7 @@
             this.buttonLoginProfile.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonLoginProfile.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(248)))), ((int)(((byte)(3)))));
             this.buttonLoginProfile.Location = new System.Drawing.Point(34, 55);
-            this.buttonLoginProfile.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.buttonLoginProfile.Margin = new System.Windows.Forms.Padding(2);
             this.buttonLoginProfile.Name = "buttonLoginProfile";
             this.buttonLoginProfile.Size = new System.Drawing.Size(75, 26);
             this.buttonLoginProfile.TabIndex = 3;
@@ -251,24 +265,24 @@
             // 
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
             this.pictureBox1.Location = new System.Drawing.Point(34, 10);
-            this.pictureBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pictureBox1.Margin = new System.Windows.Forms.Padding(2);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(75, 41);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
             // 
-            // labelUsername
+            // labelBalance
             // 
-            this.labelUsername.AutoSize = true;
-            this.labelUsername.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelUsername.ForeColor = System.Drawing.Color.Gainsboro;
-            this.labelUsername.Location = new System.Drawing.Point(41, 55);
-            this.labelUsername.Name = "labelUsername";
-            this.labelUsername.Size = new System.Drawing.Size(63, 15);
-            this.labelUsername.TabIndex = 4;
-            this.labelUsername.Text = "username";
-            this.labelUsername.Visible = false;
+            this.labelBalance.AutoSize = true;
+            this.labelBalance.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelBalance.ForeColor = System.Drawing.Color.Gainsboro;
+            this.labelBalance.Location = new System.Drawing.Point(41, 76);
+            this.labelBalance.Name = "labelBalance";
+            this.labelBalance.Size = new System.Drawing.Size(49, 15);
+            this.labelBalance.TabIndex = 5;
+            this.labelBalance.Text = "Credito:";
+            this.labelBalance.Visible = false;
             // 
             // Client
             // 
@@ -309,6 +323,7 @@
         private FontAwesome.Sharp.IconButton buttonBJ;
         private FontAwesome.Sharp.IconButton buttonHome;
         private System.Windows.Forms.Label labelUsername;
+        private System.Windows.Forms.Label labelBalance;
     }
 }
 
