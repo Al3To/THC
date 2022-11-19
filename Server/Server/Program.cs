@@ -5,14 +5,15 @@ using System.Net;
 using System.Text;
 using System.Runtime.CompilerServices;
 using System.Security.Principal;
+using System.Linq;
 
 IPAddress ipAddress = System.Net.IPAddress.Parse("127.0.0.1");
 IPEndPoint remoteEP = new IPEndPoint(ipAddress, 8888);
 Socket _socket = new Socket(ipAddress.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
 _socket.Bind(remoteEP);
 List<Socket> sockets = new List<Socket>();
-int players = 0;
-
+List<Card> deck = new List<Card>();
+List<Player> players = new List<Player>();
 
 Console.WriteLine("THC - Tommasi Hall Casino [Versione BETA]\n(c) Tommasi Corporation.\n");
 bool temp = false;
@@ -145,16 +146,31 @@ void Game()
                             handler.Send(toSend);
                         }
                     }
-                    else
-                        switch (data)
-                        {
-                            case "Disconnect":
-                                for (int j = 0; j < sockets.Count; ++j)
-                                    if (handler == sockets[j])
-                                        sockets.RemoveAt(j);
-                                break;
-                        }
+                    else if (data.StartsWith("connectToTableOne"))
+                    {
+                        string[] split;
+                        split = data.Split(";");
+                        Player player = new Player();
+                        player.username = split[1];
+                        player.seatPosition = Convert.ToInt32(split[2]);
+                        players.Add(player);
+                    }
+                    else if (data == "startGame")
+                    {
+                        CreateDeck(4);
+                        ShuffleDeck();
+                        FillTable();
+                    }
+                    else if(data == "update")
+                    {
 
+                    }
+                    else if(data == "Disconnect")
+                    {
+                        for (int j = 0; j < sockets.Count; ++j)
+                            if (handler == sockets[j])
+                                sockets.RemoveAt(j);
+                    }
                 }
 
             }
@@ -171,6 +187,92 @@ void Game()
     }
 
 
+}
+
+
+void FillTable()
+{
+    for (int j = 0; j < 2; ++j) {
+        for (int n = 0; n < players.Count; ++n)
+        {
+            players[n].playerCards.Add(deck[0]);
+            deck.RemoveAt(0);
+        }
+    }
+}
+void ClearTable()
+{
+    for(int n = 0; n<players.Count; ++n)
+    {
+        players[n].playerCards.Clear();
+    }
+}
+void CreateDeck(int nDecks)
+{
+    for (int k = 0; k < nDecks; ++k)
+    {
+        for (int n = 0; n < 4; ++n)
+        {
+            for (int j = 0; j < 13; ++j)
+            {
+                Card card = new Card();
+                switch (n)
+                {
+                    case 0:
+                        card.cardValue = j + 1;
+                        card.cardSymbol = "clubs";
+                        break;
+                    case 1:
+                        card.cardValue = j + 1;
+                        card.cardSymbol = "spades";
+                        break;
+                    case 2:
+                        card.cardValue = j + 1;
+                        card.cardSymbol = "diamonds";
+                        break;
+                    case 3:
+                        card.cardValue = j + 1;
+                        card.cardSymbol = "hearts";
+                        break;
+                }
+                deck.Add(card);
+            }
+        }
+    }
+}
+void ShuffleDeck()
+{
+    Card temp = new Card();
+    Random rand = new Random();
+    int n = deck.Count * 3;
+    while(n > 1)
+    {
+        n--;
+        int k = rand.Next(0, deck.Count-1);
+        int j = rand.Next(0, deck.Count-1);
+        temp = deck[k];
+        deck[k] = deck[j];
+        deck[j] = temp;
+    }
+}
+void SortPlayers()
+{
+    List<Player> SortedList = players.OrderBy(o => o.seatPosition).ToList();
+    players = SortedList;
+}
+class Player
+{
+    public string username;
+    public int seatPosition;
+    public List<Card> playerCards = new List<Card>();
+    public float bet;
+    public float win;
+}
+
+class Card
+{
+    public int cardValue;
+    public string cardSymbol;
 }
 static class SocketExtensions
 {
