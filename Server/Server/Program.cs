@@ -15,6 +15,8 @@ List<Socket> sockets = new List<Socket>();
 List<Card> deck = new List<Card>();
 List<Player> players = new List<Player>();
 
+Encoding asc = Encoding.ASCII;
+
 Console.WriteLine("THC - Tommasi Hall Casino [Versione BETA]\n(c) Tommasi Corporation.\n");
 bool temp = false;
 while (!temp)
@@ -78,7 +80,7 @@ void Game()
             try
             {
                 int bytesRec = handler.Receive(bytes);
-                data += Encoding.ASCII.GetString(bytes, 0, bytesRec);
+                data += asc.GetString(bytes, 0, bytesRec);
                 if (data.EndsWith("/s/"))
                 {
                     data = data.Remove(data.Length - 1);
@@ -111,13 +113,13 @@ void Game()
                         for (int j = 0; j < username.Count; ++j)
                             if (credentials[1] == username[j] && credentials[2] == password[j])
                             {
-                                toSend = Encoding.ASCII.GetBytes(role[j] + ";" + mail[j] + ";" + balance[j] + "/c/");
+                                toSend = asc.GetBytes(role[j] + ";" + mail[j] + ";" + balance[j] + "/c/");
                                 handler.Send(toSend);
                                 exists = true;
                             }
                         if (!exists)
                         {
-                            toSend = Encoding.ASCII.GetBytes("none/c/");
+                            toSend = asc.GetBytes("none/c/");
                             handler.Send(toSend);
                         }
                         
@@ -136,23 +138,43 @@ void Game()
                         }
                         if (alredyUsedEmail) 
                         {
-                            toSend = Encoding.ASCII.GetBytes("alredyUsed/c/");
+                            toSend = asc.GetBytes("alredyUsed/c/");
                             handler.Send(toSend);
                         }
                         else
                         {
                             File.AppendAllText(@"../../../../files/users.txt", split[1] + ";" + split[2] + ";user;" + split[3] + ";0;" + split[4] + ";" + split[5] + ";" + split[6]);
-                            toSend = Encoding.ASCII.GetBytes("ok/c/");
+                            toSend = asc.GetBytes("ok/c/");
                             handler.Send(toSend);
                         }
                     }
                     else if (data.StartsWith("connectToTableOne"))
+                    {
+                        string _toSend = "seats;";
+                        if (players.Count == 0)
+                        {
+                            toSend = asc.GetBytes("noPlayers/c/");
+                            handler.Send(toSend);
+                        }
+                        else
+                        {
+                            for (int n = 0; n < players.Count; ++n)
+                                if (n == players.Count - 1)
+                                    _toSend += players[n].username + ";" + players[n].seatPosition + "/c/";
+                                else
+                                    _toSend += players[n].username + ";" + players[n].seatPosition.ToString() + ";";
+                            toSend = asc.GetBytes(_toSend);
+                            handler.Send(toSend);
+                        }
+                    }
+                    else if (data.StartsWith("seat"))
                     {
                         string[] split;
                         split = data.Split(";");
                         Player player = new Player();
                         player.username = split[1];
                         player.seatPosition = Convert.ToInt32(split[2]);
+                        player.playerSocket = handler;
                         players.Add(player);
                     }
                     else if (data == "startGame")
@@ -164,6 +186,30 @@ void Game()
                     else if(data == "update")
                     {
 
+                    }
+                    else if(data == "disconnectFromTableOne")
+                    {
+                        string seat = null;
+                        for (int j = 0; j < players.Count; ++j)
+                            if (handler == players[j].playerSocket)
+                            {
+                                players.RemoveAt(j);
+                                for (int l = 0; l < sockets.Count; ++l)
+                                    if (handler == sockets[l])
+                                        sockets.RemoveAt(l);
+                                for (int k = 0; k < players.Count; k++)
+                                    if (handler == players[k].playerSocket)
+                                    {
+                                        seat = players[k].seatPosition.ToString();
+                                        players.RemoveAt(k);
+                                    }
+                                for (int m = 0; m < sockets.Count; ++m)
+                                {
+                                    toSend = asc.GetBytes("playerDisconnect;" + seat + "/c/");
+                                    sockets[m].Send(toSend);
+                                    Console.WriteLine(sockets[m].ToString());
+                                }
+                            }   
                     }
                     else if(data == "Disconnect")
                     {
@@ -262,6 +308,7 @@ void SortPlayers()
 }
 class Player
 {
+    public Socket playerSocket;
     public string username;
     public int seatPosition;
     public List<Card> playerCards = new List<Card>();

@@ -36,7 +36,19 @@ namespace Client.Forms
             email = textBoxEmail.Text;
             username = textBoxUsername.Text;
             password = textBoxPassword.Text;
-            if(!IsValidEmail(textBoxEmail.Text) || textBoxUsername.Text == "" || textBoxPassword.Text == "" || textBoxPassword.Text != textBoxPasswordConfirm.Text || textBoxUsername.Text == "Nome Utente" || textBoxPassword.Text == "Password")
+            if (!IsValidEmail(textBoxEmail.Text))
+            {
+                labelResult.Text = "Email non valida";
+                labelResult.ForeColor = Color.Red;
+                labelResult.Visible = true;
+            }
+            else if(textBoxPassword.Text != textBoxPasswordConfirm.Text)
+            {
+                labelResult.Text = "Le password non corrispondono";
+                labelResult.ForeColor = Color.Red;
+                labelResult.Visible = true;
+            }
+            else if(textBoxUsername.Text == "" || textBoxPassword.Text == "" || textBoxUsername.Text == "Nome Utente" || textBoxPassword.Text == "Password")
             {
                 labelResult.Text = "Credenziali non valide";
                 labelResult.ForeColor = Color.Red;
@@ -54,7 +66,14 @@ namespace Client.Forms
             name = textBoxName.Text;
             surname = textBoxSurname.Text;
             DOB = dateBirthDate.Value.ToString("dd-MM-yyyy");
-            if (textBoxName.Text == "" || textBoxSurname.Text == "" || !isAdult(dateBirthDate))
+            if (!isAdult(dateBirthDate))
+            {
+                labelResult2.Text = "Devi essere maggiorenne!";
+                labelResult2.ForeColor = Color.Red;
+                labelResult2.Visible = true;
+                buttonRegister.Enabled = true;
+            }
+            else if (textBoxName.Text == "" || textBoxSurname.Text == "")
             {
                 labelResult2.Text = "Credenziali non valide";
                 labelResult2.ForeColor = Color.Red;
@@ -63,41 +82,47 @@ namespace Client.Forms
             }
             else
             {
-                byte[] bytes = new byte[1024];
-                byte[] toSend;
-                string data = null;
-                socket = new Socket(ipAddress.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
-                socket.Connect(remoteEP);
-                toSend = Encoding.ASCII.GetBytes("\nregister;" + username + ";" + password + ";" + email + ";" + name + ";" + surname + ";" + DOB + "/s/");
-                socket.Send(toSend);
-                int bytesRec = socket.Receive(bytes);
-                data += Encoding.ASCII.GetString(bytes, 0, bytesRec);
-                if (data.EndsWith("/c/"))
+                try
                 {
-                    if (data == "alredyUsed/c/")
+                    byte[] bytes = new byte[1024];
+                    byte[] toSend;
+                    string data = null;
+                    socket = new Socket(ipAddress.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
+                    socket.Connect(remoteEP);
+                    toSend = Encoding.ASCII.GetBytes("\nregister;" + username + ";" + password + ";" + email + ";" + name + ";" + surname + ";" + DOB + "/s/");
+                    socket.Send(toSend);
+                    int bytesRec = socket.Receive(bytes);
+                    data += Encoding.ASCII.GetString(bytes, 0, bytesRec);
+                    if (data.EndsWith("/c/"))
                     {
-                        labelResult2.Text = "Mail già in uso";
-                        labelResult2.ForeColor = Color.Red;
-                        labelResult2.Visible = true;
-                        toSend = Encoding.ASCII.GetBytes("Disconnect/s/");
-                        socket.Send(toSend);
-                        socket.Shutdown(SocketShutdown.Both);
-                        socket.Close();
-                        buttonRegister.Enabled = true;
+                        if (data == "alredyUsed/c/")
+                        {
+                            labelResult2.Text = "Mail già in uso";
+                            labelResult2.ForeColor = Color.Red;
+                            labelResult2.Visible = true;
+                            toSend = Encoding.ASCII.GetBytes("Disconnect/s/");
+                            socket.Send(toSend);
+                            socket.Shutdown(SocketShutdown.Both);
+                            socket.Close();
+                            buttonRegister.Enabled = true;
+                        }
+                        else
+                        {
+                            labelResult.ForeColor = Color.Gainsboro;
+                            labelResult.Text = "Accesso Eseguito!";
+                            labelResult.Visible = true;
+                            toSend = Encoding.ASCII.GetBytes("Disconnect/s/");
+                            socket.Send(toSend);
+                            socket.Shutdown(SocketShutdown.Both);
+                            socket.Close();
+                            Thread.Sleep(1000);
+                            this.DialogResult = DialogResult.OK;
+                            this.Close();
+                        }
                     }
-                    else
-                    {
-                        labelResult.ForeColor = Color.Gainsboro;
-                        labelResult.Text = "Accesso Eseguito!";
-                        labelResult.Visible = true;
-                        toSend = Encoding.ASCII.GetBytes("Disconnect/s/");
-                        socket.Send(toSend);
-                        socket.Shutdown(SocketShutdown.Both);
-                        socket.Close();
-                        Thread.Sleep(1000);
-                        this.DialogResult = DialogResult.OK;
-                        this.Close();
-                    }
+                }catch(Exception ex)
+                {
+                    MessageBox.Show(ex.ToString(), "Errore!", MessageBoxButtons.OK);
                 }
             }
         }

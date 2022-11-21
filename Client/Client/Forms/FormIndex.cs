@@ -60,9 +60,9 @@ namespace Client
         }
         private void buttonBJ_Click(object sender, EventArgs e)
         {
-            if (!loggedIn)
-                System.Windows.MessageBox.Show("Devi creare un account o accedere ad uno esistente prima di poter giocare!","Errore!", MessageBoxButton.OK);
-            else
+           // if (!loggedIn)
+              //  System.Windows.MessageBox.Show("Devi creare un account o accedere ad uno esistente prima di poter giocare!","Errore!", MessageBoxButton.OK);
+            //else
                 OpenChildForm(new FormBlackJack());
         }
         private void buttonLogin_Click(object sender, EventArgs e)

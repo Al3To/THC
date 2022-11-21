@@ -44,57 +44,63 @@ namespace Client.Forms
             }
             else
             {
-                string data = null, password;
-                string[] split;
-                byte[] bytes = new byte[1024];
-                byte[] toSend;
-
-                username = textBoxUsername.Text;
-                password = textBoxPassword.Text;
-
-
-                socket = new Socket(ipAddress.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
-                socket.Connect(remoteEP);
-
-                toSend = Encoding.ASCII.GetBytes("login;" + username + ";" + password +"/s/");
-                socket.Send(toSend);
-                int bytesRec = socket.Receive(bytes);
-                data += Encoding.ASCII.GetString(bytes, 0, bytesRec);
-                if (data.EndsWith("/c/"))
+                try
                 {
-                    if (data == "none/c/")
+                    string data = null, password;
+                    string[] split;
+                    byte[] bytes = new byte[1024];
+                    byte[] toSend;
+
+                    username = textBoxUsername.Text;
+                    password = textBoxPassword.Text;
+
+
+                    socket = new Socket(ipAddress.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
+                    socket.Connect(remoteEP);
+
+                    toSend = Encoding.ASCII.GetBytes("login;" + username + ";" + password + "/s/");
+                    socket.Send(toSend);
+                    int bytesRec = socket.Receive(bytes);
+                    data += Encoding.ASCII.GetString(bytes, 0, bytesRec);
+                    if (data.EndsWith("/c/"))
                     {
-                        labelResult.ForeColor = Color.Red;
-                        labelResult.Text = "Credenziali non valide!";
-                        labelResult.Visible = true;
-                        trys++;
-                        textBoxUsername.Focus();
-                        toSend = Encoding.ASCII.GetBytes("Disconnect/s/");
-                        socket.Send(toSend);
-                        socket.Shutdown(SocketShutdown.Both);
-                        socket.Close();
+                        if (data == "none/c/")
+                        {
+                            labelResult.ForeColor = Color.Red;
+                            labelResult.Text = "Credenziali non valide!";
+                            labelResult.Visible = true;
+                            trys++;
+                            textBoxUsername.Focus();
+                            toSend = Encoding.ASCII.GetBytes("Disconnect/s/");
+                            socket.Send(toSend);
+                            socket.Shutdown(SocketShutdown.Both);
+                            socket.Close();
+                        }
+                        else
+                        {
+                            labelResult.ForeColor = Color.Gainsboro;
+                            labelResult.Text = "Accesso Eseguito!";
+                            labelResult.Visible = true;
+                            data = data.Remove(data.Length - 1);
+                            data = data.Remove(data.Length - 1);
+                            data = data.Remove(data.Length - 1);
+                            split = data.Split(';');
+                            role = split[0];
+                            mail = split[1];
+                            balance = split[2];
+                            buttonLogin.Enabled = false;
+                            toSend = Encoding.ASCII.GetBytes("Disconnect/s/");
+                            socket.Send(toSend);
+                            socket.Shutdown(SocketShutdown.Both);
+                            socket.Close();
+                            Thread.Sleep(1000);
+                            this.DialogResult = DialogResult.OK;
+                            this.Close();
+                        }
                     }
-                    else
-                    {
-                        labelResult.ForeColor = Color.Gainsboro;
-                        labelResult.Text = "Accesso Eseguito!";
-                        labelResult.Visible = true;
-                        data = data.Remove(data.Length - 1);
-                        data = data.Remove(data.Length - 1);
-                        data = data.Remove(data.Length - 1);
-                        split = data.Split(';');
-                        role = split[0];
-                        mail = split[1];
-                        balance = split[2];
-                        buttonLogin.Enabled = false;
-                        toSend = Encoding.ASCII.GetBytes("Disconnect/s/");
-                        socket.Send(toSend);
-                        socket.Shutdown(SocketShutdown.Both);
-                        socket.Close();
-                        Thread.Sleep(1000);
-                        this.DialogResult = DialogResult.OK;
-                        this.Close();
-                    }
+                }catch(Exception ex)
+                {
+                    MessageBox.Show(ex.ToString(), "Errore!", MessageBoxButtons.OK);
                 }
             }
         }
