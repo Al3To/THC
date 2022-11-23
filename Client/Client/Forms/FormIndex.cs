@@ -17,6 +17,7 @@ namespace Client
     {
         static public bool loggedIn = false;
         private Form currentChildForm;
+        User user = new User();
         public Client()
         {
             InitializeComponent();
@@ -60,10 +61,10 @@ namespace Client
         }
         private void buttonBJ_Click(object sender, EventArgs e)
         {
-           // if (!loggedIn)
-              //  System.Windows.MessageBox.Show("Devi creare un account o accedere ad uno esistente prima di poter giocare!","Errore!", MessageBoxButton.OK);
-            //else
-                OpenChildForm(new FormBlackJack());
+            if (!loggedIn)
+                System.Windows.MessageBox.Show("Devi creare un account o accedere ad uno esistente prima di poter giocare!", "Errore!", MessageBoxButton.OK);
+            else
+                OpenChildForm(new FormBlackJack(user.username));
         }
         private void buttonLogin_Click(object sender, EventArgs e)
         {
@@ -73,7 +74,6 @@ namespace Client
                 buttonRegister_Click(this, e);
             else if(result == DialogResult.OK)
             {
-                User user = new User();
                 user.username = FormLogin.username;
                 user.mail = FormLogin.mail;
                 user.balance = float.Parse(FormLogin.balance);

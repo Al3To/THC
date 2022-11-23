@@ -30,9 +30,10 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormBlackjackGame));
             this.panelTitle = new System.Windows.Forms.Panel();
+            this.buttonExit = new System.Windows.Forms.Button();
             this.panelBottom = new System.Windows.Forms.Panel();
-            this.panelFiches = new System.Windows.Forms.Panel();
             this.pictureFiche = new System.Windows.Forms.PictureBox();
+            this.panelFiches = new System.Windows.Forms.Panel();
             this.pictureFiche100 = new System.Windows.Forms.PictureBox();
             this.pictureFiche50 = new System.Windows.Forms.PictureBox();
             this.pictureFiche20 = new System.Windows.Forms.PictureBox();
@@ -43,26 +44,25 @@
             this.labelBet = new System.Windows.Forms.Label();
             this.labelBalance = new System.Windows.Forms.Label();
             this.panelGame = new System.Windows.Forms.Panel();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.buttonExit = new System.Windows.Forms.Button();
-            this.buttonSeat1 = new FontAwesome.Sharp.IconButton();
-            this.buttonSeat2 = new FontAwesome.Sharp.IconButton();
-            this.buttonSeat3 = new FontAwesome.Sharp.IconButton();
-            this.buttonSeat4 = new FontAwesome.Sharp.IconButton();
-            this.buttonSeat5 = new FontAwesome.Sharp.IconButton();
-            this.buttonSeat6 = new FontAwesome.Sharp.IconButton();
-            this.buttonSeat7 = new FontAwesome.Sharp.IconButton();
-            this.labelUsername1 = new System.Windows.Forms.Label();
-            this.labelUsername2 = new System.Windows.Forms.Label();
-            this.labelUsername3 = new System.Windows.Forms.Label();
-            this.labelUsername4 = new System.Windows.Forms.Label();
-            this.labelUsername5 = new System.Windows.Forms.Label();
-            this.labelUsername6 = new System.Windows.Forms.Label();
             this.labelUsername7 = new System.Windows.Forms.Label();
+            this.labelUsername6 = new System.Windows.Forms.Label();
+            this.labelUsername5 = new System.Windows.Forms.Label();
+            this.labelUsername4 = new System.Windows.Forms.Label();
+            this.labelUsername3 = new System.Windows.Forms.Label();
+            this.labelUsername2 = new System.Windows.Forms.Label();
+            this.labelUsername1 = new System.Windows.Forms.Label();
+            this.buttonSeat7 = new FontAwesome.Sharp.IconButton();
+            this.buttonSeat6 = new FontAwesome.Sharp.IconButton();
+            this.buttonSeat5 = new FontAwesome.Sharp.IconButton();
+            this.buttonSeat4 = new FontAwesome.Sharp.IconButton();
+            this.buttonSeat3 = new FontAwesome.Sharp.IconButton();
+            this.buttonSeat2 = new FontAwesome.Sharp.IconButton();
+            this.buttonSeat1 = new FontAwesome.Sharp.IconButton();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.panelTitle.SuspendLayout();
             this.panelBottom.SuspendLayout();
-            this.panelFiches.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureFiche)).BeginInit();
+            this.panelFiches.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureFiche100)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureFiche50)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureFiche20)).BeginInit();
@@ -79,10 +79,27 @@
             this.panelTitle.Controls.Add(this.buttonExit);
             this.panelTitle.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelTitle.Location = new System.Drawing.Point(0, 0);
-            this.panelTitle.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panelTitle.Margin = new System.Windows.Forms.Padding(2);
             this.panelTitle.Name = "panelTitle";
             this.panelTitle.Size = new System.Drawing.Size(770, 44);
             this.panelTitle.TabIndex = 0;
+            // 
+            // buttonExit
+            // 
+            this.buttonExit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonExit.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(23)))), ((int)(((byte)(23)))));
+            this.buttonExit.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.buttonExit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonExit.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonExit.ForeColor = System.Drawing.Color.Gainsboro;
+            this.buttonExit.Location = new System.Drawing.Point(741, 2);
+            this.buttonExit.Margin = new System.Windows.Forms.Padding(2);
+            this.buttonExit.Name = "buttonExit";
+            this.buttonExit.Size = new System.Drawing.Size(27, 26);
+            this.buttonExit.TabIndex = 3;
+            this.buttonExit.Text = "X";
+            this.buttonExit.UseVisualStyleBackColor = false;
+            this.buttonExit.Click += new System.EventHandler(this.buttonExit_Click);
             // 
             // panelBottom
             // 
@@ -94,10 +111,20 @@
             this.panelBottom.Controls.Add(this.labelBalance);
             this.panelBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panelBottom.Location = new System.Drawing.Point(0, 388);
-            this.panelBottom.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panelBottom.Margin = new System.Windows.Forms.Padding(2);
             this.panelBottom.Name = "panelBottom";
             this.panelBottom.Size = new System.Drawing.Size(770, 64);
             this.panelBottom.TabIndex = 1;
+            // 
+            // pictureFiche
+            // 
+            this.pictureFiche.Location = new System.Drawing.Point(244, 17);
+            this.pictureFiche.Margin = new System.Windows.Forms.Padding(2);
+            this.pictureFiche.Name = "pictureFiche";
+            this.pictureFiche.Size = new System.Drawing.Size(44, 41);
+            this.pictureFiche.TabIndex = 6;
+            this.pictureFiche.TabStop = false;
+            this.pictureFiche.Visible = false;
             // 
             // panelFiches
             // 
@@ -108,24 +135,16 @@
             this.panelFiches.Controls.Add(this.pictureFiche5);
             this.panelFiches.Controls.Add(this.pictureFiche1);
             this.panelFiches.Location = new System.Drawing.Point(292, 10);
-            this.panelFiches.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panelFiches.Margin = new System.Windows.Forms.Padding(2);
             this.panelFiches.Name = "panelFiches";
             this.panelFiches.Size = new System.Drawing.Size(355, 52);
             this.panelFiches.TabIndex = 4;
-            // 
-            // pictureFiche
-            // 
-            this.pictureFiche.Location = new System.Drawing.Point(244, 17);
-            this.pictureFiche.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.pictureFiche.Name = "pictureFiche";
-            this.pictureFiche.Size = new System.Drawing.Size(44, 41);
-            this.pictureFiche.TabIndex = 6;
-            this.pictureFiche.TabStop = false;
+            this.panelFiches.Visible = false;
             // 
             // pictureFiche100
             // 
             this.pictureFiche100.Location = new System.Drawing.Point(296, 6);
-            this.pictureFiche100.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pictureFiche100.Margin = new System.Windows.Forms.Padding(2);
             this.pictureFiche100.Name = "pictureFiche100";
             this.pictureFiche100.Size = new System.Drawing.Size(44, 41);
             this.pictureFiche100.TabIndex = 5;
@@ -134,7 +153,7 @@
             // pictureFiche50
             // 
             this.pictureFiche50.Location = new System.Drawing.Point(234, 6);
-            this.pictureFiche50.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pictureFiche50.Margin = new System.Windows.Forms.Padding(2);
             this.pictureFiche50.Name = "pictureFiche50";
             this.pictureFiche50.Size = new System.Drawing.Size(44, 41);
             this.pictureFiche50.TabIndex = 4;
@@ -143,7 +162,7 @@
             // pictureFiche20
             // 
             this.pictureFiche20.Location = new System.Drawing.Point(178, 6);
-            this.pictureFiche20.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pictureFiche20.Margin = new System.Windows.Forms.Padding(2);
             this.pictureFiche20.Name = "pictureFiche20";
             this.pictureFiche20.Size = new System.Drawing.Size(44, 41);
             this.pictureFiche20.TabIndex = 3;
@@ -152,7 +171,7 @@
             // pictureFiche10
             // 
             this.pictureFiche10.Location = new System.Drawing.Point(119, 6);
-            this.pictureFiche10.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pictureFiche10.Margin = new System.Windows.Forms.Padding(2);
             this.pictureFiche10.Name = "pictureFiche10";
             this.pictureFiche10.Size = new System.Drawing.Size(44, 41);
             this.pictureFiche10.TabIndex = 2;
@@ -161,7 +180,7 @@
             // pictureFiche5
             // 
             this.pictureFiche5.Location = new System.Drawing.Point(59, 6);
-            this.pictureFiche5.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pictureFiche5.Margin = new System.Windows.Forms.Padding(2);
             this.pictureFiche5.Name = "pictureFiche5";
             this.pictureFiche5.Size = new System.Drawing.Size(44, 41);
             this.pictureFiche5.TabIndex = 1;
@@ -170,7 +189,7 @@
             // pictureFiche1
             // 
             this.pictureFiche1.Location = new System.Drawing.Point(2, 6);
-            this.pictureFiche1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pictureFiche1.Margin = new System.Windows.Forms.Padding(2);
             this.pictureFiche1.Name = "pictureFiche1";
             this.pictureFiche1.Size = new System.Drawing.Size(44, 41);
             this.pictureFiche1.TabIndex = 0;
@@ -233,166 +252,94 @@
             this.panelGame.Controls.Add(this.pictureBox1);
             this.panelGame.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelGame.Location = new System.Drawing.Point(0, 44);
-            this.panelGame.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panelGame.Margin = new System.Windows.Forms.Padding(2);
             this.panelGame.Name = "panelGame";
             this.panelGame.Size = new System.Drawing.Size(770, 344);
             this.panelGame.TabIndex = 2;
             // 
-            // pictureBox1
+            // labelUsername7
             // 
-            this.pictureBox1.BackColor = System.Drawing.Color.Transparent;
-            this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(0, 0);
-            this.pictureBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(770, 344);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox1.TabIndex = 0;
-            this.pictureBox1.TabStop = false;
+            this.labelUsername7.AutoSize = true;
+            this.labelUsername7.BackColor = System.Drawing.Color.Black;
+            this.labelUsername7.ForeColor = System.Drawing.Color.Gainsboro;
+            this.labelUsername7.Location = new System.Drawing.Point(114, 245);
+            this.labelUsername7.Name = "labelUsername7";
+            this.labelUsername7.Size = new System.Drawing.Size(53, 13);
+            this.labelUsername7.TabIndex = 14;
+            this.labelUsername7.Text = "username";
+            this.labelUsername7.Visible = false;
             // 
-            // buttonExit
+            // labelUsername6
             // 
-            this.buttonExit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonExit.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(23)))), ((int)(((byte)(23)))));
-            this.buttonExit.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.buttonExit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonExit.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonExit.ForeColor = System.Drawing.Color.Gainsboro;
-            this.buttonExit.Location = new System.Drawing.Point(741, 2);
-            this.buttonExit.Margin = new System.Windows.Forms.Padding(2);
-            this.buttonExit.Name = "buttonExit";
-            this.buttonExit.Size = new System.Drawing.Size(27, 26);
-            this.buttonExit.TabIndex = 3;
-            this.buttonExit.Text = "X";
-            this.buttonExit.UseVisualStyleBackColor = false;
-            this.buttonExit.Click += new System.EventHandler(this.buttonExit_Click);
+            this.labelUsername6.AutoSize = true;
+            this.labelUsername6.BackColor = System.Drawing.Color.Black;
+            this.labelUsername6.ForeColor = System.Drawing.Color.Gainsboro;
+            this.labelUsername6.Location = new System.Drawing.Point(189, 283);
+            this.labelUsername6.Name = "labelUsername6";
+            this.labelUsername6.Size = new System.Drawing.Size(53, 13);
+            this.labelUsername6.TabIndex = 13;
+            this.labelUsername6.Text = "username";
+            this.labelUsername6.Visible = false;
             // 
-            // buttonSeat1
+            // labelUsername5
             // 
-            this.buttonSeat1.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.buttonSeat1.AutoSize = true;
-            this.buttonSeat1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(80)))), ((int)(((byte)(26)))));
-            this.buttonSeat1.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.buttonSeat1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonSeat1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(204)))), ((int)(((byte)(80)))));
-            this.buttonSeat1.IconChar = FontAwesome.Sharp.IconChar.Person;
-            this.buttonSeat1.IconColor = System.Drawing.Color.Black;
-            this.buttonSeat1.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.buttonSeat1.IconSize = 20;
-            this.buttonSeat1.Location = new System.Drawing.Point(612, 235);
-            this.buttonSeat1.Name = "buttonSeat1";
-            this.buttonSeat1.Size = new System.Drawing.Size(64, 45);
-            this.buttonSeat1.TabIndex = 1;
-            this.buttonSeat1.Text = "Siediti qui";
-            this.buttonSeat1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.buttonSeat1.UseVisualStyleBackColor = false;
-            this.buttonSeat1.Click += new System.EventHandler(this.buttonSeat1_Click);
+            this.labelUsername5.AutoSize = true;
+            this.labelUsername5.BackColor = System.Drawing.Color.Black;
+            this.labelUsername5.ForeColor = System.Drawing.Color.Gainsboro;
+            this.labelUsername5.Location = new System.Drawing.Point(276, 294);
+            this.labelUsername5.Name = "labelUsername5";
+            this.labelUsername5.Size = new System.Drawing.Size(53, 13);
+            this.labelUsername5.TabIndex = 12;
+            this.labelUsername5.Text = "username";
+            this.labelUsername5.Visible = false;
             // 
-            // buttonSeat2
+            // labelUsername4
             // 
-            this.buttonSeat2.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.buttonSeat2.AutoSize = true;
-            this.buttonSeat2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(80)))), ((int)(((byte)(26)))));
-            this.buttonSeat2.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.buttonSeat2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonSeat2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(204)))), ((int)(((byte)(80)))));
-            this.buttonSeat2.IconChar = FontAwesome.Sharp.IconChar.Person;
-            this.buttonSeat2.IconColor = System.Drawing.Color.Black;
-            this.buttonSeat2.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.buttonSeat2.IconSize = 20;
-            this.buttonSeat2.Location = new System.Drawing.Point(531, 270);
-            this.buttonSeat2.Name = "buttonSeat2";
-            this.buttonSeat2.Size = new System.Drawing.Size(64, 45);
-            this.buttonSeat2.TabIndex = 2;
-            this.buttonSeat2.Text = "Siediti qui";
-            this.buttonSeat2.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.buttonSeat2.UseVisualStyleBackColor = false;
-            this.buttonSeat2.Click += new System.EventHandler(this.buttonSeat2_Click);
+            this.labelUsername4.AutoSize = true;
+            this.labelUsername4.BackColor = System.Drawing.Color.Black;
+            this.labelUsername4.ForeColor = System.Drawing.Color.Gainsboro;
+            this.labelUsername4.Location = new System.Drawing.Point(367, 297);
+            this.labelUsername4.Name = "labelUsername4";
+            this.labelUsername4.Size = new System.Drawing.Size(53, 13);
+            this.labelUsername4.TabIndex = 11;
+            this.labelUsername4.Text = "username";
+            this.labelUsername4.Visible = false;
             // 
-            // buttonSeat3
+            // labelUsername3
             // 
-            this.buttonSeat3.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.buttonSeat3.AutoSize = true;
-            this.buttonSeat3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(80)))), ((int)(((byte)(26)))));
-            this.buttonSeat3.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.buttonSeat3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonSeat3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(204)))), ((int)(((byte)(80)))));
-            this.buttonSeat3.IconChar = FontAwesome.Sharp.IconChar.Person;
-            this.buttonSeat3.IconColor = System.Drawing.Color.Black;
-            this.buttonSeat3.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.buttonSeat3.IconSize = 20;
-            this.buttonSeat3.Location = new System.Drawing.Point(450, 294);
-            this.buttonSeat3.Name = "buttonSeat3";
-            this.buttonSeat3.Size = new System.Drawing.Size(64, 45);
-            this.buttonSeat3.TabIndex = 3;
-            this.buttonSeat3.Text = "Siediti qui";
-            this.buttonSeat3.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.buttonSeat3.UseVisualStyleBackColor = false;
-            this.buttonSeat3.Click += new System.EventHandler(this.buttonSeat3_Click);
+            this.labelUsername3.AutoSize = true;
+            this.labelUsername3.BackColor = System.Drawing.Color.Black;
+            this.labelUsername3.ForeColor = System.Drawing.Color.Gainsboro;
+            this.labelUsername3.Location = new System.Drawing.Point(461, 294);
+            this.labelUsername3.Name = "labelUsername3";
+            this.labelUsername3.Size = new System.Drawing.Size(53, 13);
+            this.labelUsername3.TabIndex = 10;
+            this.labelUsername3.Text = "username";
+            this.labelUsername3.Visible = false;
             // 
-            // buttonSeat4
+            // labelUsername2
             // 
-            this.buttonSeat4.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.buttonSeat4.AutoSize = true;
-            this.buttonSeat4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(80)))), ((int)(((byte)(26)))));
-            this.buttonSeat4.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.buttonSeat4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonSeat4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(204)))), ((int)(((byte)(80)))));
-            this.buttonSeat4.IconChar = FontAwesome.Sharp.IconChar.Person;
-            this.buttonSeat4.IconColor = System.Drawing.Color.Black;
-            this.buttonSeat4.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.buttonSeat4.IconSize = 20;
-            this.buttonSeat4.Location = new System.Drawing.Point(356, 297);
-            this.buttonSeat4.Name = "buttonSeat4";
-            this.buttonSeat4.Size = new System.Drawing.Size(64, 45);
-            this.buttonSeat4.TabIndex = 4;
-            this.buttonSeat4.Text = "Siediti qui";
-            this.buttonSeat4.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.buttonSeat4.UseVisualStyleBackColor = false;
-            this.buttonSeat4.Click += new System.EventHandler(this.buttonSeat4_Click);
+            this.labelUsername2.AutoSize = true;
+            this.labelUsername2.BackColor = System.Drawing.Color.Black;
+            this.labelUsername2.ForeColor = System.Drawing.Color.Gainsboro;
+            this.labelUsername2.Location = new System.Drawing.Point(542, 270);
+            this.labelUsername2.Name = "labelUsername2";
+            this.labelUsername2.Size = new System.Drawing.Size(53, 13);
+            this.labelUsername2.TabIndex = 9;
+            this.labelUsername2.Text = "username";
+            this.labelUsername2.Visible = false;
             // 
-            // buttonSeat5
+            // labelUsername1
             // 
-            this.buttonSeat5.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.buttonSeat5.AutoSize = true;
-            this.buttonSeat5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(80)))), ((int)(((byte)(26)))));
-            this.buttonSeat5.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.buttonSeat5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonSeat5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(204)))), ((int)(((byte)(80)))));
-            this.buttonSeat5.IconChar = FontAwesome.Sharp.IconChar.Person;
-            this.buttonSeat5.IconColor = System.Drawing.Color.Black;
-            this.buttonSeat5.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.buttonSeat5.IconSize = 20;
-            this.buttonSeat5.Location = new System.Drawing.Point(265, 294);
-            this.buttonSeat5.Name = "buttonSeat5";
-            this.buttonSeat5.Size = new System.Drawing.Size(64, 45);
-            this.buttonSeat5.TabIndex = 5;
-            this.buttonSeat5.Text = "Siediti qui";
-            this.buttonSeat5.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.buttonSeat5.UseVisualStyleBackColor = false;
-            this.buttonSeat5.Click += new System.EventHandler(this.buttonSeat5_Click);
-            // 
-            // buttonSeat6
-            // 
-            this.buttonSeat6.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.buttonSeat6.AutoSize = true;
-            this.buttonSeat6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(80)))), ((int)(((byte)(26)))));
-            this.buttonSeat6.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.buttonSeat6.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonSeat6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(204)))), ((int)(((byte)(80)))));
-            this.buttonSeat6.IconChar = FontAwesome.Sharp.IconChar.Person;
-            this.buttonSeat6.IconColor = System.Drawing.Color.Black;
-            this.buttonSeat6.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.buttonSeat6.IconSize = 20;
-            this.buttonSeat6.Location = new System.Drawing.Point(178, 283);
-            this.buttonSeat6.Name = "buttonSeat6";
-            this.buttonSeat6.Size = new System.Drawing.Size(64, 45);
-            this.buttonSeat6.TabIndex = 6;
-            this.buttonSeat6.Text = "Siediti qui";
-            this.buttonSeat6.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.buttonSeat6.UseVisualStyleBackColor = false;
-            this.buttonSeat6.Click += new System.EventHandler(this.buttonSeat6_Click);
+            this.labelUsername1.AutoSize = true;
+            this.labelUsername1.BackColor = System.Drawing.Color.Black;
+            this.labelUsername1.ForeColor = System.Drawing.Color.Gainsboro;
+            this.labelUsername1.Location = new System.Drawing.Point(623, 235);
+            this.labelUsername1.Name = "labelUsername1";
+            this.labelUsername1.Size = new System.Drawing.Size(53, 13);
+            this.labelUsername1.TabIndex = 8;
+            this.labelUsername1.Text = "username";
+            this.labelUsername1.Visible = false;
             // 
             // buttonSeat7
             // 
@@ -415,89 +362,144 @@
             this.buttonSeat7.UseVisualStyleBackColor = false;
             this.buttonSeat7.Click += new System.EventHandler(this.buttonSeat7_Click);
             // 
-            // labelUsername1
+            // buttonSeat6
             // 
-            this.labelUsername1.AutoSize = true;
-            this.labelUsername1.BackColor = System.Drawing.Color.Black;
-            this.labelUsername1.ForeColor = System.Drawing.Color.Gainsboro;
-            this.labelUsername1.Location = new System.Drawing.Point(623, 235);
-            this.labelUsername1.Name = "labelUsername1";
-            this.labelUsername1.Size = new System.Drawing.Size(53, 13);
-            this.labelUsername1.TabIndex = 8;
-            this.labelUsername1.Text = "username";
-            this.labelUsername1.Visible = false;
+            this.buttonSeat6.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.buttonSeat6.AutoSize = true;
+            this.buttonSeat6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(80)))), ((int)(((byte)(26)))));
+            this.buttonSeat6.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.buttonSeat6.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonSeat6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(204)))), ((int)(((byte)(80)))));
+            this.buttonSeat6.IconChar = FontAwesome.Sharp.IconChar.Person;
+            this.buttonSeat6.IconColor = System.Drawing.Color.Black;
+            this.buttonSeat6.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.buttonSeat6.IconSize = 20;
+            this.buttonSeat6.Location = new System.Drawing.Point(178, 283);
+            this.buttonSeat6.Name = "buttonSeat6";
+            this.buttonSeat6.Size = new System.Drawing.Size(64, 45);
+            this.buttonSeat6.TabIndex = 6;
+            this.buttonSeat6.Text = "Siediti qui";
+            this.buttonSeat6.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.buttonSeat6.UseVisualStyleBackColor = false;
+            this.buttonSeat6.Click += new System.EventHandler(this.buttonSeat6_Click);
             // 
-            // labelUsername2
+            // buttonSeat5
             // 
-            this.labelUsername2.AutoSize = true;
-            this.labelUsername2.BackColor = System.Drawing.Color.Black;
-            this.labelUsername2.ForeColor = System.Drawing.Color.Gainsboro;
-            this.labelUsername2.Location = new System.Drawing.Point(542, 270);
-            this.labelUsername2.Name = "labelUsername2";
-            this.labelUsername2.Size = new System.Drawing.Size(53, 13);
-            this.labelUsername2.TabIndex = 9;
-            this.labelUsername2.Text = "username";
-            this.labelUsername2.Visible = false;
+            this.buttonSeat5.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.buttonSeat5.AutoSize = true;
+            this.buttonSeat5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(80)))), ((int)(((byte)(26)))));
+            this.buttonSeat5.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.buttonSeat5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonSeat5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(204)))), ((int)(((byte)(80)))));
+            this.buttonSeat5.IconChar = FontAwesome.Sharp.IconChar.Person;
+            this.buttonSeat5.IconColor = System.Drawing.Color.Black;
+            this.buttonSeat5.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.buttonSeat5.IconSize = 20;
+            this.buttonSeat5.Location = new System.Drawing.Point(265, 294);
+            this.buttonSeat5.Name = "buttonSeat5";
+            this.buttonSeat5.Size = new System.Drawing.Size(64, 45);
+            this.buttonSeat5.TabIndex = 5;
+            this.buttonSeat5.Text = "Siediti qui";
+            this.buttonSeat5.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.buttonSeat5.UseVisualStyleBackColor = false;
+            this.buttonSeat5.Click += new System.EventHandler(this.buttonSeat5_Click);
             // 
-            // labelUsername3
+            // buttonSeat4
             // 
-            this.labelUsername3.AutoSize = true;
-            this.labelUsername3.BackColor = System.Drawing.Color.Black;
-            this.labelUsername3.ForeColor = System.Drawing.Color.Gainsboro;
-            this.labelUsername3.Location = new System.Drawing.Point(461, 294);
-            this.labelUsername3.Name = "labelUsername3";
-            this.labelUsername3.Size = new System.Drawing.Size(53, 13);
-            this.labelUsername3.TabIndex = 10;
-            this.labelUsername3.Text = "username";
-            this.labelUsername3.Visible = false;
+            this.buttonSeat4.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.buttonSeat4.AutoSize = true;
+            this.buttonSeat4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(80)))), ((int)(((byte)(26)))));
+            this.buttonSeat4.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.buttonSeat4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonSeat4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(204)))), ((int)(((byte)(80)))));
+            this.buttonSeat4.IconChar = FontAwesome.Sharp.IconChar.Person;
+            this.buttonSeat4.IconColor = System.Drawing.Color.Black;
+            this.buttonSeat4.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.buttonSeat4.IconSize = 20;
+            this.buttonSeat4.Location = new System.Drawing.Point(356, 297);
+            this.buttonSeat4.Name = "buttonSeat4";
+            this.buttonSeat4.Size = new System.Drawing.Size(64, 45);
+            this.buttonSeat4.TabIndex = 4;
+            this.buttonSeat4.Text = "Siediti qui";
+            this.buttonSeat4.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.buttonSeat4.UseVisualStyleBackColor = false;
+            this.buttonSeat4.Click += new System.EventHandler(this.buttonSeat4_Click);
             // 
-            // labelUsername4
+            // buttonSeat3
             // 
-            this.labelUsername4.AutoSize = true;
-            this.labelUsername4.BackColor = System.Drawing.Color.Black;
-            this.labelUsername4.ForeColor = System.Drawing.Color.Gainsboro;
-            this.labelUsername4.Location = new System.Drawing.Point(367, 297);
-            this.labelUsername4.Name = "labelUsername4";
-            this.labelUsername4.Size = new System.Drawing.Size(53, 13);
-            this.labelUsername4.TabIndex = 11;
-            this.labelUsername4.Text = "username";
-            this.labelUsername4.Visible = false;
+            this.buttonSeat3.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.buttonSeat3.AutoSize = true;
+            this.buttonSeat3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(80)))), ((int)(((byte)(26)))));
+            this.buttonSeat3.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.buttonSeat3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonSeat3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(204)))), ((int)(((byte)(80)))));
+            this.buttonSeat3.IconChar = FontAwesome.Sharp.IconChar.Person;
+            this.buttonSeat3.IconColor = System.Drawing.Color.Black;
+            this.buttonSeat3.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.buttonSeat3.IconSize = 20;
+            this.buttonSeat3.Location = new System.Drawing.Point(450, 294);
+            this.buttonSeat3.Name = "buttonSeat3";
+            this.buttonSeat3.Size = new System.Drawing.Size(64, 45);
+            this.buttonSeat3.TabIndex = 3;
+            this.buttonSeat3.Text = "Siediti qui";
+            this.buttonSeat3.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.buttonSeat3.UseVisualStyleBackColor = false;
+            this.buttonSeat3.Click += new System.EventHandler(this.buttonSeat3_Click);
             // 
-            // labelUsername5
+            // buttonSeat2
             // 
-            this.labelUsername5.AutoSize = true;
-            this.labelUsername5.BackColor = System.Drawing.Color.Black;
-            this.labelUsername5.ForeColor = System.Drawing.Color.Gainsboro;
-            this.labelUsername5.Location = new System.Drawing.Point(276, 294);
-            this.labelUsername5.Name = "labelUsername5";
-            this.labelUsername5.Size = new System.Drawing.Size(53, 13);
-            this.labelUsername5.TabIndex = 12;
-            this.labelUsername5.Text = "username";
-            this.labelUsername5.Visible = false;
+            this.buttonSeat2.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.buttonSeat2.AutoSize = true;
+            this.buttonSeat2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(80)))), ((int)(((byte)(26)))));
+            this.buttonSeat2.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.buttonSeat2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonSeat2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(204)))), ((int)(((byte)(80)))));
+            this.buttonSeat2.IconChar = FontAwesome.Sharp.IconChar.Person;
+            this.buttonSeat2.IconColor = System.Drawing.Color.Black;
+            this.buttonSeat2.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.buttonSeat2.IconSize = 20;
+            this.buttonSeat2.Location = new System.Drawing.Point(531, 270);
+            this.buttonSeat2.Name = "buttonSeat2";
+            this.buttonSeat2.Size = new System.Drawing.Size(64, 45);
+            this.buttonSeat2.TabIndex = 2;
+            this.buttonSeat2.Text = "Siediti qui";
+            this.buttonSeat2.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.buttonSeat2.UseVisualStyleBackColor = false;
+            this.buttonSeat2.Click += new System.EventHandler(this.buttonSeat2_Click);
             // 
-            // labelUsername6
+            // buttonSeat1
             // 
-            this.labelUsername6.AutoSize = true;
-            this.labelUsername6.BackColor = System.Drawing.Color.Black;
-            this.labelUsername6.ForeColor = System.Drawing.Color.Gainsboro;
-            this.labelUsername6.Location = new System.Drawing.Point(189, 283);
-            this.labelUsername6.Name = "labelUsername6";
-            this.labelUsername6.Size = new System.Drawing.Size(53, 13);
-            this.labelUsername6.TabIndex = 13;
-            this.labelUsername6.Text = "username";
-            this.labelUsername6.Visible = false;
+            this.buttonSeat1.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.buttonSeat1.AutoSize = true;
+            this.buttonSeat1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(80)))), ((int)(((byte)(26)))));
+            this.buttonSeat1.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.buttonSeat1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonSeat1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(204)))), ((int)(((byte)(80)))));
+            this.buttonSeat1.IconChar = FontAwesome.Sharp.IconChar.Person;
+            this.buttonSeat1.IconColor = System.Drawing.Color.Black;
+            this.buttonSeat1.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.buttonSeat1.IconSize = 20;
+            this.buttonSeat1.Location = new System.Drawing.Point(612, 235);
+            this.buttonSeat1.Name = "buttonSeat1";
+            this.buttonSeat1.Size = new System.Drawing.Size(64, 45);
+            this.buttonSeat1.TabIndex = 1;
+            this.buttonSeat1.Text = "Siediti qui";
+            this.buttonSeat1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.buttonSeat1.UseVisualStyleBackColor = false;
+            this.buttonSeat1.Click += new System.EventHandler(this.buttonSeat1_Click);
             // 
-            // labelUsername7
+            // pictureBox1
             // 
-            this.labelUsername7.AutoSize = true;
-            this.labelUsername7.BackColor = System.Drawing.Color.Black;
-            this.labelUsername7.ForeColor = System.Drawing.Color.Gainsboro;
-            this.labelUsername7.Location = new System.Drawing.Point(114, 245);
-            this.labelUsername7.Name = "labelUsername7";
-            this.labelUsername7.Size = new System.Drawing.Size(53, 13);
-            this.labelUsername7.TabIndex = 14;
-            this.labelUsername7.Text = "username";
-            this.labelUsername7.Visible = false;
+            this.pictureBox1.BackColor = System.Drawing.Color.Transparent;
+            this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
+            this.pictureBox1.Location = new System.Drawing.Point(0, 0);
+            this.pictureBox1.Margin = new System.Windows.Forms.Padding(2);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(770, 344);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox1.TabIndex = 0;
+            this.pictureBox1.TabStop = false;
             // 
             // FormBlackjackGame
             // 
@@ -508,15 +510,15 @@
             this.Controls.Add(this.panelGame);
             this.Controls.Add(this.panelBottom);
             this.Controls.Add(this.panelTitle);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "FormBlackjackGame";
             this.Text = "FormBlackJack1";
             this.Load += new System.EventHandler(this.FormBlackjackGame1_Load);
             this.panelTitle.ResumeLayout(false);
             this.panelBottom.ResumeLayout(false);
             this.panelBottom.PerformLayout();
-            this.panelFiches.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureFiche)).EndInit();
+            this.panelFiches.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureFiche100)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureFiche50)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureFiche20)).EndInit();

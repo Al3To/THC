@@ -171,11 +171,18 @@ void Game()
                     {
                         string[] split;
                         split = data.Split(";");
+                        Console.Write(data);
                         Player player = new Player();
                         player.username = split[1];
                         player.seatPosition = Convert.ToInt32(split[2]);
                         player.playerSocket = handler;
                         players.Add(player);
+                        toSend = asc.GetBytes("okSeat/c/");
+                        handler.Send(toSend);
+                        toSend = asc.GetBytes("playerConnect;" + split[1] + ";" + split[2] + "/c/");
+                        for (int m = 0; m < sockets.Count; ++m)
+                            if (sockets[m] != handler)
+                                sockets[m].Send(toSend);
                     }
                     else if (data == "startGame")
                     {
@@ -193,22 +200,16 @@ void Game()
                         for (int j = 0; j < players.Count; ++j)
                             if (handler == players[j].playerSocket)
                             {
+                                Console.Write(j + "removed");
+                                seat = players[j].seatPosition.ToString();
                                 players.RemoveAt(j);
+
                                 for (int l = 0; l < sockets.Count; ++l)
                                     if (handler == sockets[l])
                                         sockets.RemoveAt(l);
-                                for (int k = 0; k < players.Count; k++)
-                                    if (handler == players[k].playerSocket)
-                                    {
-                                        seat = players[k].seatPosition.ToString();
-                                        players.RemoveAt(k);
-                                    }
+                                toSend = asc.GetBytes("playerDisconnect;" + seat + "/c/");
                                 for (int m = 0; m < sockets.Count; ++m)
-                                {
-                                    toSend = asc.GetBytes("playerDisconnect;" + seat + "/c/");
                                     sockets[m].Send(toSend);
-                                    Console.WriteLine(sockets[m].ToString());
-                                }
                             }   
                     }
                     else if(data == "Disconnect")

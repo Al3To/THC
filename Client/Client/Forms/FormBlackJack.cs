@@ -13,14 +13,16 @@ namespace Client.Forms
 {
     public partial class FormBlackJack : Form
     {
-        public FormBlackJack()
+        string username;
+        public FormBlackJack(string username)
         {
             InitializeComponent();
+            this.username = username;
         }
 
         private void pictureBoxServer1_Click(object sender, EventArgs e)
         {
-            FormBlackjackGame formBlackjackGame1 = new FormBlackjackGame();
+            FormBlackjackGame formBlackjackGame1 = new FormBlackjackGame(username);
             formBlackjackGame1.ShowDialog();
             
         }
