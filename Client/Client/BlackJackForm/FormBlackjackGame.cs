@@ -25,6 +25,10 @@ namespace Client.ServerForms
         bool isConnected = false;
         string playerUsername;
         Thread Treceive;
+        bool aceCard = false;
+        int cardsSumValue = 0;
+        int cardsSplitSumValue = 0;
+        int playerSeat;
         public FormBlackjackGame(string playerUsername)
         {
             InitializeComponent();
@@ -59,25 +63,7 @@ namespace Client.ServerForms
 
         private void buttonExit_Click(object sender, EventArgs e)
         {
-            byte[] toSend = null;
-            if (isSitten)
-            { 
-                toSend = Encoding.ASCII.GetBytes("disconnectFromTableOne/s/");
-                socket.Send(toSend);
-                socket.Shutdown(SocketShutdown.Both);
-                socket.Close();
-                Treceive.Abort();
-                this.Close();
-            }
-            else
-            {
-                toSend = Encoding.ASCII.GetBytes("Disconnect/s/");
-                socket.Send(toSend);
-                socket.Shutdown(SocketShutdown.Both);
-                socket.Close();
-                Treceive.Abort();
-                this.Close();
-            }
+            this.Close();
         }
 
         private void buttonSeat1_Click(object sender, EventArgs e)
@@ -134,6 +120,7 @@ namespace Client.ServerForms
             byte[] bytes = new byte[1024];
             byte[] toSend = Encoding.ASCII.GetBytes("seat;" + playerUsername + ";" + seat.ToString() +"/s/");
             socket.Send(toSend);
+            playerSeat = seat;
         }
         void ReceiveDatas()
         {
@@ -173,6 +160,24 @@ namespace Client.ServerForms
                         {
                             Invoke((MethodInvoker)delegate {
                                 PlayerConnect(data);
+                            });
+                        }
+                        else if (data.StartsWith("timerBet"))
+                        {
+                            Invoke((MethodInvoker)delegate {
+                                UpdateTimer(data);
+                            });
+                        }
+                        else if (data.StartsWith("addCard"))
+                        {
+                            Invoke((MethodInvoker)delegate {
+                                UpdateCard(data);
+                            });
+                        }
+                        else if (data.StartsWith("addDealerCard"))
+                        {
+                            Invoke((MethodInvoker)delegate {
+                                UpdateDealerCard(data);
                             });
                         }
                     }
@@ -300,6 +305,7 @@ namespace Client.ServerForms
         }
         void Seat()
         {
+            
             isSitten = true;
             pictureFiche.Visible = true;
             buttonSeat1.Visible = false;
@@ -326,32 +332,325 @@ namespace Client.ServerForms
                     Console.WriteLine("Entrato nel case 1");
                     labelUsername1.Text = username;
                     labelUsername1.Visible = true;
+                    buttonSeat1.Visible = false;
                     break;
                 case 2:
                     labelUsername2.Text = username;
                     labelUsername2.Visible = true;
+                    buttonSeat2.Visible = false;
                     break;
                 case 3:
                     labelUsername3.Text = username;
                     labelUsername3.Visible = true;
+                    buttonSeat3.Visible = false;
                     break;
                 case 4:
                     labelUsername4.Text = username;
                     labelUsername4.Visible = true;
+                    buttonSeat4.Visible = false;
                     break;
                 case 5:
                     labelUsername5.Text = username;
                     labelUsername5.Visible = true;
+                    buttonSeat5.Visible = false;
                     break;
                 case 6:
                     labelUsername6.Text = username;
                     labelUsername6.Visible = true;
+                    buttonSeat6.Visible = false;
                     break;
                 case 7:
                     labelUsername7.Text = username;
                     labelUsername7.Visible = true;
+                    buttonSeat7.Visible = false;
                     break;
             }
+        }
+        void UpdateTimer(string data)
+        {
+            string[] split = data.Split(';');
+            labelOpenedBet.Visible = true;
+            labelTimer.Text = split[1];
+            labelTimer.Visible = true;
+            if (Convert.ToInt32(split[1]) == 0)
+            {
+                labelTimer.Visible = false;
+                labelOpenedBet.Text = "SCOMMESSE CHIUSE";
+            }
+        }
+        void UpdateCard(string data)
+        {
+            string[] split = data.Split(';');
+            string dir = "../../../Images/cards/"+split[3] + split[4] + ".png";
+            if (split[1] == "1")
+            {
+                labelCardsTotal1.Text = split[6];
+                switch (split[2])
+                {
+                    case "1":
+                        card1_1.ImageLocation = dir;
+                        card1_1.Visible = true;
+                        break;
+                    case "2":
+                        Console.WriteLine("case 2");
+                        card2_1.ImageLocation = dir;
+                        card2_1.Visible = true;
+                        break;
+                    case "3":
+                        card3_1.ImageLocation = dir;
+                        card3_1.Visible = true;
+                        break;
+                    case "4":
+                        card4_1.ImageLocation = dir;
+                        card4_1.Visible = true;
+                        break;
+                    case "5":
+                        card5_1.ImageLocation = dir;
+                        card5_1.Visible = true;
+                        break;
+
+                }
+            }
+            else if (split[1] == "2")
+            {
+                labelCardsTotal2.Text = split[6];
+                switch (split[2])
+                {
+                    case "1":
+                        card1_2.ImageLocation = dir;
+                        card1_2.Visible = true;
+                        break;
+                    case "2":
+                        card2_2.ImageLocation = dir;
+                        card2_2.Visible = true;
+                        break;
+                    case "3":
+                        card3_2.ImageLocation = dir;
+                        card3_2.Visible = true;
+                        break;
+                    case "4":
+                        card4_2.ImageLocation = dir;
+                        card4_2.Visible = true;
+                        break;
+                    case "5":
+                        card5_2.ImageLocation = dir;
+                        card5_2.Visible = true;
+                        break;
+
+                }
+            }
+            else if (split[1] == "3")
+            {
+                labelCardsTotal3.Text = split[6];
+                switch (split[2])
+                {
+                    case "1":
+                        card1_3.ImageLocation = dir;
+                        card1_3.Visible = true;
+                        break;
+                    case "2":
+                        card2_3.ImageLocation = dir;
+                        card2_3.Visible = true;
+                        break;
+                    case "3":
+                        card3_3.ImageLocation = dir;
+                        card3_3.Visible = true;
+                        break;
+                    case "4":
+                        card4_3.ImageLocation = dir;
+                        card4_3.Visible = true;
+                        break;
+                    case "5":
+                        card5_3.ImageLocation = dir;
+                        card5_3.Visible = true;
+                        break;
+
+                }
+            }
+            else if (split[1] == "4")
+            {
+                labelCardsTotal4.Text = split[6];
+                switch (split[2])
+                {
+                    case "1":
+                        card1_4.ImageLocation = dir;
+                        card1_4.Visible = true;
+                        break;
+                    case "2":
+                        card2_4.ImageLocation = dir;
+                        card2_4.Visible = true;
+                        break;
+                    case "3":
+                        card3_4.ImageLocation = dir;
+                        card3_4.Visible = true;
+                        break;
+                    case "4":
+                        card4_4.ImageLocation = dir;
+                        card4_4.Visible = true;
+                        break;
+                    case "5":
+                        card5_4.ImageLocation = dir;
+                        card5_4.Visible = true;
+                        break;
+
+                }
+            }
+            else if (split[1] == "5")
+            {
+                labelCardsTotal5.Text = split[6];
+                switch (split[2])
+                {
+                    case "1":
+                        card1_5.ImageLocation = dir;
+                        card1_5.Visible = true;
+                        break;
+                    case "2":
+                        card2_5.ImageLocation = dir;
+                        card2_5.Visible = true;
+                        break;
+                    case "3":
+                        card3_5.ImageLocation = dir;
+                        card3_5.Visible = true;
+                        break;
+                    case "4":
+                        card4_5.ImageLocation = dir;
+                        card4_5.Visible = true;
+                        break;
+                    case "5":
+                        card5_5.ImageLocation = dir;
+                        card5_5.Visible = true;
+                        break;
+
+                }
+            }
+            else if (split[1] == "6")
+            {
+                labelCardsTotal6.Text = split[6];
+                switch (split[2])
+                {
+                    case "1":
+                        card1_6.ImageLocation = dir;
+                        card1_6.Visible = true;
+                        break;
+                    case "2":
+                        card2_6.ImageLocation = dir;
+                        card2_6.Visible = true;
+                        break;
+                    case "3":
+                        card3_6.ImageLocation = dir;
+                        card3_6.Visible = true;
+                        break;
+                    case "4":
+                        card4_6.ImageLocation = dir;
+                        card4_6.Visible = true;
+                        break;
+                    case "5":
+                        card5_6.ImageLocation = dir;
+                        card5_6.Visible = true;
+                        break;
+
+                }
+            }
+            else if (split[1] == "7")
+            {
+                labelCardsTotal7.Text = split[6];
+                switch (split[2])
+                {
+                    case "1":
+                        card1_7.ImageLocation = dir;
+                        card1_7.Visible = true;
+                        break;
+                    case "2":
+                        card2_7.ImageLocation = dir;
+                        card2_7.Visible = true;
+                        break;
+                    case "3":
+                        card3_7.ImageLocation = dir;
+                        card3_7.Visible = true;
+                        break;
+                    case "4":
+                        card4_7.ImageLocation = dir;
+                        card4_7.Visible = true;
+                        break;
+                    case "5":
+                        card5_7.ImageLocation = dir;
+                        card5_7.Visible = true;
+                        break;
+
+                }
+            }
+        }
+        void UpdateDealerCard(string data)
+        {
+            string[] split = data.Split(';');
+            if (split[1] == "covered")
+            {
+                card2_D.ImageLocation = "../../../Images/cards/covered.jpg";
+                card2_D.Visible = true;
+            }
+            else
+            {
+                string dir = "../../../Images/cards/" + split[2] + split[3] + ".png";
+                switch (split[1])
+                {
+                    case "1":
+                        card1_D.ImageLocation = dir;
+                        card1_D.Visible = true;
+                        break;
+                    case "2":
+                        card2_D.ImageLocation = dir;
+                        card2_D.Visible = true;
+                        break;
+                    case "3":
+                        card3_D.ImageLocation = dir;
+                        card3_D.Visible = true;
+                        break;
+                    case "4":
+                        card4_D.ImageLocation = dir;
+                        card4_D.Visible = true;
+                        break;
+                    case "5":
+                        card5_D.ImageLocation = dir;
+                        card5_D.Visible = true;
+                        break;
+                    case "6":
+                        card6_D.ImageLocation = dir;
+                        card6_D.Visible = true;
+                        break;
+                    case "7":
+                        card7_D.ImageLocation = dir;
+                        card7_D.Visible = true;
+                        break;
+                    case "8":
+                        card8_D.ImageLocation = dir;
+                        card8_D.Visible = true;
+                        break;
+                    case "9":
+                        card9_D.ImageLocation = dir;
+                        card9_D.Visible = true;
+                        break;
+                    case "10":
+                        card10_D.ImageLocation = dir;
+                        card10_D.Visible = true;
+                        break;
+                    case "11":
+                        card11_D.ImageLocation = dir;
+                        card11_D.Visible = true;
+                        break;
+                }
+            }
+        }
+        private void FormBlackjackGame_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            byte[] toSend = null;
+            if (isSitten)
+                toSend = Encoding.ASCII.GetBytes("disconnectFromTableOne/s/");
+            else
+                toSend = Encoding.ASCII.GetBytes("Disconnect/s/");
+            socket.Send(toSend);
+            socket.Shutdown(SocketShutdown.Both);
+            socket.Close();
+            Treceive.Abort();
         }
     }
 }

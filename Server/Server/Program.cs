@@ -6,16 +6,25 @@ using System.Text;
 using System.Runtime.CompilerServices;
 using System.Security.Principal;
 using System.Linq;
+using System.Timers;
+using System.Reflection.Emit;
+using System.Threading;
+
 
 IPAddress ipAddress = System.Net.IPAddress.Parse("127.0.0.1");
 IPEndPoint remoteEP = new IPEndPoint(ipAddress, 8888);
 Socket _socket = new Socket(ipAddress.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
 _socket.Bind(remoteEP);
+
 List<Socket> sockets = new List<Socket>();
 List<Card> deck = new List<Card>();
 List<Player> players = new List<Player>();
+List<Player> playingPlayers = new List<Player>();
+Dealer dealer = new Dealer();
 
 Encoding asc = Encoding.ASCII;
+bool betOpened = false;
+bool gameStarted = false;
 
 Console.WriteLine("THC - Tommasi Hall Casino [Versione BETA]\n(c) Tommasi Corporation.\n");
 bool temp = false;
@@ -183,16 +192,12 @@ void Game()
                         for (int m = 0; m < sockets.Count; ++m)
                             if (sockets[m] != handler)
                                 sockets[m].Send(toSend);
-                    }
-                    else if (data == "startGame")
-                    {
-                        CreateDeck(4);
-                        ShuffleDeck();
-                        FillTable();
-                    }
-                    else if(data == "update")
-                    {
-
+                        if (!betOpened && !gameStarted)
+                            if (players.Count >= 2)
+                            {
+                                betOpened = true;
+                                Timer();
+                            }
                     }
                     else if(data == "disconnectFromTableOne")
                     {
@@ -236,23 +241,23 @@ void Game()
 
 }
 
-
-void FillTable()
+async void Timer()
 {
-    for (int j = 0; j < 2; ++j) {
-        for (int n = 0; n < players.Count; ++n)
-        {
-            players[n].playerCards.Add(deck[0]);
-            deck.RemoveAt(0);
-        }
-    }
-}
-void ClearTable()
-{
-    for(int n = 0; n<players.Count; ++n)
+    int timer = 5;
+    while (timer >= 0)
     {
-        players[n].playerCards.Clear();
+        byte[] toSend = asc.GetBytes("timerBet;" + timer.ToString() + "/c/");
+        for (int m = 0; m < sockets.Count; ++m)
+            sockets[m].Send(toSend);
+        timer--;
+        await Task.Delay(1000);
     }
+    betOpened = false;
+    gameStarted = true;
+    SortPlayers();
+    CreateDeck(4);
+    ShuffleDeck();
+    FillTable();
 }
 void CreateDeck(int nDecks)
 {
@@ -260,25 +265,62 @@ void CreateDeck(int nDecks)
     {
         for (int n = 0; n < 4; ++n)
         {
-            for (int j = 0; j < 13; ++j)
+            for (int j = 1; j < 10; ++j)
             {
                 Card card = new Card();
+                card.cardName = (j + 1).ToString();
+                card.cardValue = j + 1;
                 switch (n)
                 {
                     case 0:
-                        card.cardValue = j + 1;
                         card.cardSymbol = "clubs";
                         break;
                     case 1:
-                        card.cardValue = j + 1;
                         card.cardSymbol = "spades";
                         break;
                     case 2:
-                        card.cardValue = j + 1;
                         card.cardSymbol = "diamonds";
                         break;
                     case 3:
-                        card.cardValue = j + 1;
+                        card.cardSymbol = "hearts";
+                        break;
+                }
+                deck.Add(card);
+            }
+            for(int m = 0; m<4; ++m)
+            {
+                Card card = new Card();
+                switch (m)
+                {
+                    case 0:
+                        card.cardName = "ace";
+                        card.cardValue = 11;
+                        break;
+                    case 1:
+                        card.cardName = "jack";
+                        card.cardValue = 10;
+                        break;
+                    case 2:
+                        card.cardName = "queen";
+                        card.cardValue = 10;
+                        break;
+                    case 3:
+                        card.cardName = "king";
+                        card.cardValue = 10;
+                        break;
+                }
+                switch (n)
+                {
+                    case 0:
+                        card.cardSymbol = "clubs";
+                        break;
+                    case 1:
+                        card.cardSymbol = "spades";
+                        break;
+                    case 2:
+                        card.cardSymbol = "diamonds";
+                        break;
+                    case 3:
                         card.cardSymbol = "hearts";
                         break;
                 }
@@ -292,20 +334,81 @@ void ShuffleDeck()
     Card temp = new Card();
     Random rand = new Random();
     int n = deck.Count * 3;
-    while(n > 1)
+    while (n > 1)
     {
         n--;
-        int k = rand.Next(0, deck.Count-1);
-        int j = rand.Next(0, deck.Count-1);
+        int k = rand.Next(0, deck.Count - 1);
+        int j = rand.Next(0, deck.Count - 1);
         temp = deck[k];
         deck[k] = deck[j];
         deck[j] = temp;
     }
 }
+async void FillTable()
+{
+    byte[] toSend = null;
+    for (int j = 0; j < 2; ++j) {
+        for (int n = 0; n < playingPlayers.Count; ++n)
+        {
+            playingPlayers[n].playerCards.Add(deck[0]);
+            playingPlayers[n].UpdateTotal();
+            if (deck[0].cardName == "ace")
+                playingPlayers[n].hasAce = true;
+            toSend = asc.GetBytes("addCard;" + playingPlayers[n].seatPosition + ";" + playingPlayers[n].playerCards.Count.ToString() + ";" +deck[0].cardName + ";" + deck[0].cardSymbol + ";" + deck[0].cardValue.ToString() + ";" + playingPlayers[n].cardsTotal.ToString() + "/c/");
+            for (int m = 0; m < sockets.Count; ++m)
+                sockets[m].Send(toSend);
+            deck.RemoveAt(0);
+            await Task.Delay(100);
+        }
+        dealer.dealerCards.Add(deck[0]);
+        dealer.UpdateTotal();
+        if (j == 0)
+            toSend = asc.GetBytes("addDealerCard;" + dealer.dealerCards.Count.ToString() + ";" + deck[0].cardName + ";" + deck[0].cardSymbol + ";" + deck[0].cardValue.ToString() + "/c/");
+        else if (j == 1)
+            toSend = asc.GetBytes("addDealerCard;covered/c/");
+        for (int m = 0; m < sockets.Count; ++m)
+            sockets[m].Send(toSend);
+        deck.RemoveAt(0);
+    }
+}
+void ClearTable()
+{
+    for(int n = 0; n< playingPlayers.Count; ++n)
+    {
+        playingPlayers[n].playerCards.Clear();
+    }
+}
 void SortPlayers()
 {
-    List<Player> SortedList = players.OrderBy(o => o.seatPosition).ToList();
-    players = SortedList;
+    playingPlayers = players.OrderBy(o => o.seatPosition).ToList();
+}
+
+void NextTurn()
+{
+
+}
+class Dealer
+{
+    public List<Card> dealerCards = new List<Card>();
+    public int cardsTotal = 0;
+    public bool hasAce;
+    bool aceValueOne = false;
+    public void UpdateTotal()
+    {
+        for (int n = 0; n < dealerCards.Count; ++n)
+            cardsTotal += dealerCards[n].cardValue;
+        if (this.hasAce && !aceValueOne)
+        {
+            if (cardsTotal > 21)
+                for (int n = 0; n < dealerCards.Count; ++n)
+                    if (dealerCards[n].cardName == "ace")
+                    {
+                        dealerCards[n].cardValue = 1;
+                        aceValueOne = true;
+                    }
+            this.UpdateTotal();
+        }
+    }
 }
 class Player
 {
@@ -313,13 +416,35 @@ class Player
     public string username;
     public int seatPosition;
     public List<Card> playerCards = new List<Card>();
+    public List<Card> playerSplitCards = new List<Card>();
     public float bet;
     public float win;
+    public bool hasAce;
+    bool aceValueOne = false;
+    public int cardsTotal = 0;
+
+    public void UpdateTotal()
+    {
+        for(int n = 0; n<playerCards.Count; ++n)
+            cardsTotal += playerCards[n].cardValue;
+        if (this.hasAce && !aceValueOne)
+        {
+            if (cardsTotal > 21)
+                for (int n = 0; n < playerCards.Count; ++n)
+                    if (playerCards[n].cardName == "ace")
+                    {
+                        playerCards[n].cardValue = 1;
+                        aceValueOne = true;
+                    }
+            this.UpdateTotal();
+        }
+    }
 }
 
 class Card
 {
     public int cardValue;
+    public string cardName;
     public string cardSymbol;
 }
 static class SocketExtensions
