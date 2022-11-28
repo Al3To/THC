@@ -21,21 +21,23 @@ namespace Client.ServerForms
         public static IPAddress ipAddress = IPAddress.Parse("127.0.0.1");
         IPEndPoint remoteEP = new IPEndPoint(ipAddress, 8888);
         Socket socket;
+        Thread Treceive;
         bool isSitten = false;
         bool isConnected = false;
         string playerUsername;
-        Thread Treceive;
-        bool aceCard = false;
-        int cardsSumValue = 0;
-        int cardsSplitSumValue = 0;
         int playerSeat;
-        public FormBlackjackGame(string playerUsername)
+        float playerBalance;
+        float bet;
+        bool insurance = false;
+        public FormBlackjackGame(string playerUsername, float playerBalance)
         {
             InitializeComponent();
             this.Text = string.Empty;
             this.ControlBox = false;
             this.DoubleBuffered = true;
             this.playerUsername = playerUsername;
+            this.playerBalance = playerBalance;
+            labelBalance.Text = "Saldo: " + playerBalance.ToString();
             //this.WindowState = FormWindowState.Maximized;
         }
 
@@ -178,6 +180,42 @@ namespace Client.ServerForms
                         {
                             Invoke((MethodInvoker)delegate {
                                 UpdateDealerCard(data);
+                            });
+                        }
+                        else if (data.StartsWith("playerBlackjack"))
+                        {
+                            Invoke((MethodInvoker)delegate {
+                                UpdateBlackJack(data);
+                            });
+                        }
+                        else if (data.StartsWith("blackjack"))
+                        {
+                            Invoke((MethodInvoker)delegate {
+                                BlackJack(data);
+                            });
+                        }else if(data == "insuranceRequest")
+                        {
+                            Invoke(new MethodInvoker(InsuranceRequest));
+                        }else if (data.StartsWith("timerInsurance"))
+                        {
+                            Invoke((MethodInvoker)delegate {
+                                UpdateInsuranceTimer(data);
+                            });
+                        }else if (data.StartsWith("dealerHasBJ"))
+                        {
+                            Invoke((MethodInvoker)delegate {
+                                DealerHasBJ(data);
+                            });
+                        }else if (data.StartsWith("makeChoose"))
+                        {
+                            Invoke((MethodInvoker)delegate {
+                                MakeChoose(data);
+                            });
+                        }
+                        else if (data.StartsWith("timerChoose"))
+                        {
+                            Invoke((MethodInvoker)delegate {
+                                UpdateChooseTimer(data);
                             });
                         }
                     }
@@ -640,6 +678,106 @@ namespace Client.ServerForms
                 }
             }
         }
+        void UpdateBlackJack(string data)
+        {
+            string[] split = data.Split(';');
+            switch (split[1])
+            {
+                case "1":
+                    labelResult1.Text = "BLACKJACK";
+                    break;
+                case "2":
+                    labelResult2.Text = "BLACKJACK";
+                    break;
+                case "3":
+                    labelResult3.Text = "BLACKJACK";
+                    break;
+                case "4":
+                    labelResult4.Text = "BLACKJACK";
+                    break;
+                case "5":
+                    labelResult5.Text = "BLACKJACK";
+                    break;
+                case "6":
+                    labelResult6.Text = "BLACKJACK";
+                    break;
+                case "7":
+                    labelResult7.Text = "BLACKJACK";
+                    break;
+            }
+        }
+        void BlackJack(string data)
+        {
+            string[] split = data.Split(';');
+            playerBalance += float.Parse(split[1]);
+            labelBalance.Text = "Saldo: " + playerBalance.ToString();
+            labelBet.Text = "0";
+            labelLastWin.Text = "Ultima Vincita: " + split[1].ToString();
+            switch (playerSeat)
+            {
+                case 1:
+                    labelResult1.Text = "BLACKJACK";
+                    break;
+                case 2:
+                    labelResult2.Text = "BLACKJACK";
+                    break;
+                case 3:
+                    labelResult3.Text = "BLACKJACK";
+                    break;
+                case 4:
+                    labelResult4.Text = "BLACKJACK";
+                    break;
+                case 5:
+                    labelResult5.Text = "BLACKJACK";
+                    break;
+                case 6:
+                    labelResult6.Text = "BLACKJACK";
+                    break;
+                case 7:
+                    labelResult7.Text = "BLACKJACK";
+                    break;
+            }
+        }
+        void InsuranceRequest()
+        {
+            panelInsurance.Visible = true;
+        }
+        void UpdateInsuranceTimer(string data)
+        {
+            byte[] toSend = null;
+            string[] split = data.Split(';');
+            labelInsuranceTimer.Text = split[1];
+            if (Convert.ToInt32(split[1]) == 0)
+            {
+                if (!insurance)
+                    toSend = Encoding.ASCII.GetBytes("insuranceResponse;false/s/");
+                else
+                    toSend = Encoding.ASCII.GetBytes("insuranceResponse;true/s/");
+                socket.Send(toSend);
+            }
+        }
+        void DealerHasBJ(string data)
+        {
+            string[] split = data.Split(';');
+            string dir = "../../../Images/cards/" + split[1] + split[2] + ".png";
+            card2_D.ImageLocation = dir;
+            playerBalance = Convert.ToInt32(split[3]);
+            labelBalance.Text = split[3];
+        }
+        void MakeChoose(string data)
+        {
+            string[] split = data.Split(';');
+            if (split[1] == "canSplit")
+                buttonSplit.Enabled = true;
+            else if (split[1] == "cantSplit")
+                buttonSplit.Enabled = false;
+            panelChoose.Visible = true;
+        }
+        void UpdateChooseTimer(string data)
+        {
+            string[] split = data.Split(';');
+            labelInsuranceTimer.Text = split[1];
+        }
         private void FormBlackjackGame_FormClosing(object sender, FormClosingEventArgs e)
         {
             byte[] toSend = null;
@@ -651,6 +789,24 @@ namespace Client.ServerForms
             socket.Shutdown(SocketShutdown.Both);
             socket.Close();
             Treceive.Abort();
+        }
+
+        private void buttonInsuranceNo_Click(object sender, EventArgs e)
+        {
+                panelInsurance.Visible = false;
+                insurance = false;
+        }
+
+        private void buttonInsuranceYes_Click(object sender, EventArgs e)
+        {
+            if (playerBalance >= bet / 2)
+            {
+                labelBalance.Text = (playerBalance - (bet / 2)).ToString();
+                panelInsurance.Visible = false;
+                insurance = true;
+            }
+            else
+                MessageBox.Show("Non hai abbastanza credito!");
         }
     }
 }

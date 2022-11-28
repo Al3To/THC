@@ -42,10 +42,24 @@
             this.pictureFiche10 = new System.Windows.Forms.PictureBox();
             this.pictureFiche5 = new System.Windows.Forms.PictureBox();
             this.pictureFiche1 = new System.Windows.Forms.PictureBox();
-            this.label1 = new System.Windows.Forms.Label();
+            this.labelLastWin = new System.Windows.Forms.Label();
             this.labelBet = new System.Windows.Forms.Label();
             this.labelBalance = new System.Windows.Forms.Label();
             this.panelGame = new System.Windows.Forms.Panel();
+            this.labelResult7 = new System.Windows.Forms.Label();
+            this.labelResult6 = new System.Windows.Forms.Label();
+            this.labelResult5 = new System.Windows.Forms.Label();
+            this.labelResult4 = new System.Windows.Forms.Label();
+            this.labelResult3 = new System.Windows.Forms.Label();
+            this.labelResult2 = new System.Windows.Forms.Label();
+            this.labelResult1 = new System.Windows.Forms.Label();
+            this.labelCardsTotal7 = new System.Windows.Forms.Label();
+            this.labelCardsTotal6 = new System.Windows.Forms.Label();
+            this.labelCardsTotal5 = new System.Windows.Forms.Label();
+            this.labelCardsTotal4 = new System.Windows.Forms.Label();
+            this.labelCardsTotal3 = new System.Windows.Forms.Label();
+            this.labelCardsTotal2 = new System.Windows.Forms.Label();
+            this.labelCardsTotal1 = new System.Windows.Forms.Label();
             this.card11_D = new System.Windows.Forms.PictureBox();
             this.card10_D = new System.Windows.Forms.PictureBox();
             this.card9_D = new System.Windows.Forms.PictureBox();
@@ -135,13 +149,18 @@
             this.buttonSeat2 = new FontAwesome.Sharp.IconButton();
             this.buttonSeat1 = new FontAwesome.Sharp.IconButton();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.labelCardsTotal1 = new System.Windows.Forms.Label();
-            this.labelCardsTotal2 = new System.Windows.Forms.Label();
-            this.labelCardsTotal3 = new System.Windows.Forms.Label();
-            this.labelCardsTotal4 = new System.Windows.Forms.Label();
-            this.labelCardsTotal5 = new System.Windows.Forms.Label();
-            this.labelCardsTotal6 = new System.Windows.Forms.Label();
-            this.labelCardsTotal7 = new System.Windows.Forms.Label();
+            this.panelInsurance = new System.Windows.Forms.Panel();
+            this.labelInsurance = new System.Windows.Forms.Label();
+            this.buttonInsuranceYes = new System.Windows.Forms.Button();
+            this.buttonInsuranceNo = new System.Windows.Forms.Button();
+            this.labelInsuranceTimer = new System.Windows.Forms.Label();
+            this.labelAutoSelectNo = new System.Windows.Forms.Label();
+            this.buttonCard = new System.Windows.Forms.Button();
+            this.buttonStay = new System.Windows.Forms.Button();
+            this.buttonDouble = new System.Windows.Forms.Button();
+            this.buttonSplit = new System.Windows.Forms.Button();
+            this.panelChoose = new System.Windows.Forms.Panel();
+            this.labelChooseTimer = new System.Windows.Forms.Label();
             this.panelTitle.SuspendLayout();
             this.panelBottom.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureFiche)).BeginInit();
@@ -228,6 +247,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.card2_1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.card1_1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.panelInsurance.SuspendLayout();
+            this.panelChoose.SuspendLayout();
             this.SuspendLayout();
             // 
             // panelTitle
@@ -289,9 +310,10 @@
             // panelBottom
             // 
             this.panelBottom.BackColor = System.Drawing.Color.Black;
+            this.panelBottom.Controls.Add(this.panelChoose);
             this.panelBottom.Controls.Add(this.pictureFiche);
             this.panelBottom.Controls.Add(this.panelFiches);
-            this.panelBottom.Controls.Add(this.label1);
+            this.panelBottom.Controls.Add(this.labelLastWin);
             this.panelBottom.Controls.Add(this.labelBet);
             this.panelBottom.Controls.Add(this.labelBalance);
             this.panelBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
@@ -303,7 +325,7 @@
             // 
             // pictureFiche
             // 
-            this.pictureFiche.Location = new System.Drawing.Point(898, 17);
+            this.pictureFiche.Location = new System.Drawing.Point(495, 19);
             this.pictureFiche.Margin = new System.Windows.Forms.Padding(2);
             this.pictureFiche.Name = "pictureFiche";
             this.pictureFiche.Size = new System.Drawing.Size(44, 41);
@@ -319,7 +341,7 @@
             this.panelFiches.Controls.Add(this.pictureFiche10);
             this.panelFiches.Controls.Add(this.pictureFiche5);
             this.panelFiches.Controls.Add(this.pictureFiche1);
-            this.panelFiches.Location = new System.Drawing.Point(946, 10);
+            this.panelFiches.Location = new System.Drawing.Point(543, 12);
             this.panelFiches.Margin = new System.Windows.Forms.Padding(2);
             this.panelFiches.Name = "panelFiches";
             this.panelFiches.Size = new System.Drawing.Size(355, 52);
@@ -380,17 +402,17 @@
             this.pictureFiche1.TabIndex = 0;
             this.pictureFiche1.TabStop = false;
             // 
-            // label1
+            // labelLastWin
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.Color.Gainsboro;
-            this.label1.Location = new System.Drawing.Point(9, 41);
-            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(97, 17);
-            this.label1.TabIndex = 2;
-            this.label1.Text = "Ultima Vincita:";
+            this.labelLastWin.AutoSize = true;
+            this.labelLastWin.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelLastWin.ForeColor = System.Drawing.Color.Gainsboro;
+            this.labelLastWin.Location = new System.Drawing.Point(9, 41);
+            this.labelLastWin.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.labelLastWin.Name = "labelLastWin";
+            this.labelLastWin.Size = new System.Drawing.Size(97, 17);
+            this.labelLastWin.TabIndex = 2;
+            this.labelLastWin.Text = "Ultima Vincita:";
             // 
             // labelBet
             // 
@@ -420,6 +442,14 @@
             // 
             this.panelGame.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("panelGame.BackgroundImage")));
             this.panelGame.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.panelGame.Controls.Add(this.panelInsurance);
+            this.panelGame.Controls.Add(this.labelResult7);
+            this.panelGame.Controls.Add(this.labelResult6);
+            this.panelGame.Controls.Add(this.labelResult5);
+            this.panelGame.Controls.Add(this.labelResult4);
+            this.panelGame.Controls.Add(this.labelResult3);
+            this.panelGame.Controls.Add(this.labelResult2);
+            this.panelGame.Controls.Add(this.labelResult1);
             this.panelGame.Controls.Add(this.labelCardsTotal7);
             this.panelGame.Controls.Add(this.labelCardsTotal6);
             this.panelGame.Controls.Add(this.labelCardsTotal5);
@@ -522,6 +552,188 @@
             this.panelGame.Name = "panelGame";
             this.panelGame.Size = new System.Drawing.Size(1904, 933);
             this.panelGame.TabIndex = 2;
+            // 
+            // labelResult7
+            // 
+            this.labelResult7.AutoSize = true;
+            this.labelResult7.BackColor = System.Drawing.Color.Black;
+            this.labelResult7.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelResult7.ForeColor = System.Drawing.Color.Gainsboro;
+            this.labelResult7.Location = new System.Drawing.Point(281, 707);
+            this.labelResult7.Name = "labelResult7";
+            this.labelResult7.Size = new System.Drawing.Size(62, 24);
+            this.labelResult7.TabIndex = 102;
+            this.labelResult7.Text = "Result";
+            this.labelResult7.Visible = false;
+            // 
+            // labelResult6
+            // 
+            this.labelResult6.AutoSize = true;
+            this.labelResult6.BackColor = System.Drawing.Color.Black;
+            this.labelResult6.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelResult6.ForeColor = System.Drawing.Color.Gainsboro;
+            this.labelResult6.Location = new System.Drawing.Point(497, 794);
+            this.labelResult6.Name = "labelResult6";
+            this.labelResult6.Size = new System.Drawing.Size(62, 24);
+            this.labelResult6.TabIndex = 101;
+            this.labelResult6.Text = "Result";
+            this.labelResult6.Visible = false;
+            // 
+            // labelResult5
+            // 
+            this.labelResult5.AutoSize = true;
+            this.labelResult5.BackColor = System.Drawing.Color.Black;
+            this.labelResult5.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelResult5.ForeColor = System.Drawing.Color.Gainsboro;
+            this.labelResult5.Location = new System.Drawing.Point(708, 842);
+            this.labelResult5.Name = "labelResult5";
+            this.labelResult5.Size = new System.Drawing.Size(62, 24);
+            this.labelResult5.TabIndex = 100;
+            this.labelResult5.Text = "Result";
+            this.labelResult5.Visible = false;
+            // 
+            // labelResult4
+            // 
+            this.labelResult4.AutoSize = true;
+            this.labelResult4.BackColor = System.Drawing.Color.Black;
+            this.labelResult4.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelResult4.ForeColor = System.Drawing.Color.Gainsboro;
+            this.labelResult4.Location = new System.Drawing.Point(933, 861);
+            this.labelResult4.Name = "labelResult4";
+            this.labelResult4.Size = new System.Drawing.Size(62, 24);
+            this.labelResult4.TabIndex = 99;
+            this.labelResult4.Text = "Result";
+            this.labelResult4.Visible = false;
+            // 
+            // labelResult3
+            // 
+            this.labelResult3.AutoSize = true;
+            this.labelResult3.BackColor = System.Drawing.Color.Black;
+            this.labelResult3.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelResult3.ForeColor = System.Drawing.Color.Gainsboro;
+            this.labelResult3.Location = new System.Drawing.Point(1153, 844);
+            this.labelResult3.Name = "labelResult3";
+            this.labelResult3.Size = new System.Drawing.Size(62, 24);
+            this.labelResult3.TabIndex = 98;
+            this.labelResult3.Text = "Result";
+            this.labelResult3.Visible = false;
+            // 
+            // labelResult2
+            // 
+            this.labelResult2.AutoSize = true;
+            this.labelResult2.BackColor = System.Drawing.Color.Black;
+            this.labelResult2.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelResult2.ForeColor = System.Drawing.Color.Gainsboro;
+            this.labelResult2.Location = new System.Drawing.Point(1370, 786);
+            this.labelResult2.Name = "labelResult2";
+            this.labelResult2.Size = new System.Drawing.Size(62, 24);
+            this.labelResult2.TabIndex = 97;
+            this.labelResult2.Text = "Result";
+            this.labelResult2.Visible = false;
+            // 
+            // labelResult1
+            // 
+            this.labelResult1.AutoSize = true;
+            this.labelResult1.BackColor = System.Drawing.Color.Black;
+            this.labelResult1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelResult1.ForeColor = System.Drawing.Color.Gainsboro;
+            this.labelResult1.Location = new System.Drawing.Point(1575, 737);
+            this.labelResult1.Name = "labelResult1";
+            this.labelResult1.Size = new System.Drawing.Size(62, 24);
+            this.labelResult1.TabIndex = 96;
+            this.labelResult1.Text = "Result";
+            this.labelResult1.Visible = false;
+            // 
+            // labelCardsTotal7
+            // 
+            this.labelCardsTotal7.AutoSize = true;
+            this.labelCardsTotal7.BackColor = System.Drawing.Color.Black;
+            this.labelCardsTotal7.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelCardsTotal7.ForeColor = System.Drawing.Color.Gainsboro;
+            this.labelCardsTotal7.Location = new System.Drawing.Point(282, 670);
+            this.labelCardsTotal7.Name = "labelCardsTotal7";
+            this.labelCardsTotal7.Size = new System.Drawing.Size(72, 16);
+            this.labelCardsTotal7.TabIndex = 95;
+            this.labelCardsTotal7.Text = "cardsTotal";
+            this.labelCardsTotal7.Visible = false;
+            // 
+            // labelCardsTotal6
+            // 
+            this.labelCardsTotal6.AutoSize = true;
+            this.labelCardsTotal6.BackColor = System.Drawing.Color.Black;
+            this.labelCardsTotal6.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelCardsTotal6.ForeColor = System.Drawing.Color.Gainsboro;
+            this.labelCardsTotal6.Location = new System.Drawing.Point(498, 756);
+            this.labelCardsTotal6.Name = "labelCardsTotal6";
+            this.labelCardsTotal6.Size = new System.Drawing.Size(72, 16);
+            this.labelCardsTotal6.TabIndex = 94;
+            this.labelCardsTotal6.Text = "cardsTotal";
+            this.labelCardsTotal6.Visible = false;
+            // 
+            // labelCardsTotal5
+            // 
+            this.labelCardsTotal5.AutoSize = true;
+            this.labelCardsTotal5.BackColor = System.Drawing.Color.Black;
+            this.labelCardsTotal5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelCardsTotal5.ForeColor = System.Drawing.Color.Gainsboro;
+            this.labelCardsTotal5.Location = new System.Drawing.Point(708, 812);
+            this.labelCardsTotal5.Name = "labelCardsTotal5";
+            this.labelCardsTotal5.Size = new System.Drawing.Size(72, 16);
+            this.labelCardsTotal5.TabIndex = 93;
+            this.labelCardsTotal5.Text = "cardsTotal";
+            this.labelCardsTotal5.Visible = false;
+            // 
+            // labelCardsTotal4
+            // 
+            this.labelCardsTotal4.AutoSize = true;
+            this.labelCardsTotal4.BackColor = System.Drawing.Color.Black;
+            this.labelCardsTotal4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelCardsTotal4.ForeColor = System.Drawing.Color.Gainsboro;
+            this.labelCardsTotal4.Location = new System.Drawing.Point(934, 827);
+            this.labelCardsTotal4.Name = "labelCardsTotal4";
+            this.labelCardsTotal4.Size = new System.Drawing.Size(72, 16);
+            this.labelCardsTotal4.TabIndex = 92;
+            this.labelCardsTotal4.Text = "cardsTotal";
+            this.labelCardsTotal4.Visible = false;
+            // 
+            // labelCardsTotal3
+            // 
+            this.labelCardsTotal3.AutoSize = true;
+            this.labelCardsTotal3.BackColor = System.Drawing.Color.Black;
+            this.labelCardsTotal3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelCardsTotal3.ForeColor = System.Drawing.Color.Gainsboro;
+            this.labelCardsTotal3.Location = new System.Drawing.Point(1147, 811);
+            this.labelCardsTotal3.Name = "labelCardsTotal3";
+            this.labelCardsTotal3.Size = new System.Drawing.Size(72, 16);
+            this.labelCardsTotal3.TabIndex = 91;
+            this.labelCardsTotal3.Text = "cardsTotal";
+            this.labelCardsTotal3.Visible = false;
+            // 
+            // labelCardsTotal2
+            // 
+            this.labelCardsTotal2.AutoSize = true;
+            this.labelCardsTotal2.BackColor = System.Drawing.Color.Black;
+            this.labelCardsTotal2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelCardsTotal2.ForeColor = System.Drawing.Color.Gainsboro;
+            this.labelCardsTotal2.Location = new System.Drawing.Point(1371, 752);
+            this.labelCardsTotal2.Name = "labelCardsTotal2";
+            this.labelCardsTotal2.Size = new System.Drawing.Size(72, 16);
+            this.labelCardsTotal2.TabIndex = 90;
+            this.labelCardsTotal2.Text = "cardsTotal";
+            this.labelCardsTotal2.Visible = false;
+            // 
+            // labelCardsTotal1
+            // 
+            this.labelCardsTotal1.AutoSize = true;
+            this.labelCardsTotal1.BackColor = System.Drawing.Color.Black;
+            this.labelCardsTotal1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelCardsTotal1.ForeColor = System.Drawing.Color.Gainsboro;
+            this.labelCardsTotal1.Location = new System.Drawing.Point(1573, 691);
+            this.labelCardsTotal1.Name = "labelCardsTotal1";
+            this.labelCardsTotal1.Size = new System.Drawing.Size(72, 16);
+            this.labelCardsTotal1.TabIndex = 89;
+            this.labelCardsTotal1.Text = "cardsTotal";
+            this.labelCardsTotal1.Visible = false;
             // 
             // card11_D
             // 
@@ -1507,96 +1719,166 @@
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
             // 
-            // labelCardsTotal1
+            // panelInsurance
             // 
-            this.labelCardsTotal1.AutoSize = true;
-            this.labelCardsTotal1.BackColor = System.Drawing.Color.Black;
-            this.labelCardsTotal1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelCardsTotal1.ForeColor = System.Drawing.Color.Gainsboro;
-            this.labelCardsTotal1.Location = new System.Drawing.Point(1573, 691);
-            this.labelCardsTotal1.Name = "labelCardsTotal1";
-            this.labelCardsTotal1.Size = new System.Drawing.Size(72, 16);
-            this.labelCardsTotal1.TabIndex = 89;
-            this.labelCardsTotal1.Text = "cardsTotal";
-            this.labelCardsTotal1.Visible = false;
+            this.panelInsurance.BackColor = System.Drawing.Color.Black;
+            this.panelInsurance.Controls.Add(this.labelAutoSelectNo);
+            this.panelInsurance.Controls.Add(this.labelInsuranceTimer);
+            this.panelInsurance.Controls.Add(this.buttonInsuranceNo);
+            this.panelInsurance.Controls.Add(this.buttonInsuranceYes);
+            this.panelInsurance.Controls.Add(this.labelInsurance);
+            this.panelInsurance.Location = new System.Drawing.Point(123, 0);
+            this.panelInsurance.Name = "panelInsurance";
+            this.panelInsurance.Size = new System.Drawing.Size(339, 136);
+            this.panelInsurance.TabIndex = 103;
+            this.panelInsurance.Visible = false;
             // 
-            // labelCardsTotal2
+            // labelInsurance
             // 
-            this.labelCardsTotal2.AutoSize = true;
-            this.labelCardsTotal2.BackColor = System.Drawing.Color.Black;
-            this.labelCardsTotal2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelCardsTotal2.ForeColor = System.Drawing.Color.Gainsboro;
-            this.labelCardsTotal2.Location = new System.Drawing.Point(1371, 752);
-            this.labelCardsTotal2.Name = "labelCardsTotal2";
-            this.labelCardsTotal2.Size = new System.Drawing.Size(72, 16);
-            this.labelCardsTotal2.TabIndex = 90;
-            this.labelCardsTotal2.Text = "cardsTotal";
-            this.labelCardsTotal2.Visible = false;
+            this.labelInsurance.AutoSize = true;
+            this.labelInsurance.BackColor = System.Drawing.Color.Black;
+            this.labelInsurance.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelInsurance.ForeColor = System.Drawing.Color.Gainsboro;
+            this.labelInsurance.Location = new System.Drawing.Point(85, 12);
+            this.labelInsurance.Name = "labelInsurance";
+            this.labelInsurance.Size = new System.Drawing.Size(171, 24);
+            this.labelInsurance.TabIndex = 0;
+            this.labelInsurance.Text = "ASSICURAZIONE?";
             // 
-            // labelCardsTotal3
+            // buttonInsuranceYes
             // 
-            this.labelCardsTotal3.AutoSize = true;
-            this.labelCardsTotal3.BackColor = System.Drawing.Color.Black;
-            this.labelCardsTotal3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelCardsTotal3.ForeColor = System.Drawing.Color.Gainsboro;
-            this.labelCardsTotal3.Location = new System.Drawing.Point(1147, 811);
-            this.labelCardsTotal3.Name = "labelCardsTotal3";
-            this.labelCardsTotal3.Size = new System.Drawing.Size(72, 16);
-            this.labelCardsTotal3.TabIndex = 91;
-            this.labelCardsTotal3.Text = "cardsTotal";
-            this.labelCardsTotal3.Visible = false;
+            this.buttonInsuranceYes.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.buttonInsuranceYes.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.buttonInsuranceYes.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonInsuranceYes.Location = new System.Drawing.Point(76, 90);
+            this.buttonInsuranceYes.Name = "buttonInsuranceYes";
+            this.buttonInsuranceYes.Size = new System.Drawing.Size(75, 23);
+            this.buttonInsuranceYes.TabIndex = 1;
+            this.buttonInsuranceYes.Text = "SI";
+            this.buttonInsuranceYes.UseVisualStyleBackColor = false;
+            this.buttonInsuranceYes.Click += new System.EventHandler(this.buttonInsuranceYes_Click);
             // 
-            // labelCardsTotal4
+            // buttonInsuranceNo
             // 
-            this.labelCardsTotal4.AutoSize = true;
-            this.labelCardsTotal4.BackColor = System.Drawing.Color.Black;
-            this.labelCardsTotal4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelCardsTotal4.ForeColor = System.Drawing.Color.Gainsboro;
-            this.labelCardsTotal4.Location = new System.Drawing.Point(934, 827);
-            this.labelCardsTotal4.Name = "labelCardsTotal4";
-            this.labelCardsTotal4.Size = new System.Drawing.Size(72, 16);
-            this.labelCardsTotal4.TabIndex = 92;
-            this.labelCardsTotal4.Text = "cardsTotal";
-            this.labelCardsTotal4.Visible = false;
+            this.buttonInsuranceNo.BackColor = System.Drawing.Color.White;
+            this.buttonInsuranceNo.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.buttonInsuranceNo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonInsuranceNo.Location = new System.Drawing.Point(192, 90);
+            this.buttonInsuranceNo.Name = "buttonInsuranceNo";
+            this.buttonInsuranceNo.Size = new System.Drawing.Size(75, 23);
+            this.buttonInsuranceNo.TabIndex = 2;
+            this.buttonInsuranceNo.Text = "NO";
+            this.buttonInsuranceNo.UseVisualStyleBackColor = false;
+            this.buttonInsuranceNo.Click += new System.EventHandler(this.buttonInsuranceNo_Click);
             // 
-            // labelCardsTotal5
+            // labelInsuranceTimer
             // 
-            this.labelCardsTotal5.AutoSize = true;
-            this.labelCardsTotal5.BackColor = System.Drawing.Color.Black;
-            this.labelCardsTotal5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelCardsTotal5.ForeColor = System.Drawing.Color.Gainsboro;
-            this.labelCardsTotal5.Location = new System.Drawing.Point(708, 812);
-            this.labelCardsTotal5.Name = "labelCardsTotal5";
-            this.labelCardsTotal5.Size = new System.Drawing.Size(72, 16);
-            this.labelCardsTotal5.TabIndex = 93;
-            this.labelCardsTotal5.Text = "cardsTotal";
-            this.labelCardsTotal5.Visible = false;
+            this.labelInsuranceTimer.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.labelInsuranceTimer.AutoSize = true;
+            this.labelInsuranceTimer.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelInsuranceTimer.ForeColor = System.Drawing.Color.Gainsboro;
+            this.labelInsuranceTimer.Location = new System.Drawing.Point(158, 46);
+            this.labelInsuranceTimer.Name = "labelInsuranceTimer";
+            this.labelInsuranceTimer.Size = new System.Drawing.Size(29, 20);
+            this.labelInsuranceTimer.TabIndex = 17;
+            this.labelInsuranceTimer.Text = "10";
             // 
-            // labelCardsTotal6
+            // labelAutoSelectNo
             // 
-            this.labelCardsTotal6.AutoSize = true;
-            this.labelCardsTotal6.BackColor = System.Drawing.Color.Black;
-            this.labelCardsTotal6.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelCardsTotal6.ForeColor = System.Drawing.Color.Gainsboro;
-            this.labelCardsTotal6.Location = new System.Drawing.Point(498, 756);
-            this.labelCardsTotal6.Name = "labelCardsTotal6";
-            this.labelCardsTotal6.Size = new System.Drawing.Size(72, 16);
-            this.labelCardsTotal6.TabIndex = 94;
-            this.labelCardsTotal6.Text = "cardsTotal";
-            this.labelCardsTotal6.Visible = false;
+            this.labelAutoSelectNo.AutoSize = true;
+            this.labelAutoSelectNo.BackColor = System.Drawing.Color.Black;
+            this.labelAutoSelectNo.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelAutoSelectNo.ForeColor = System.Drawing.Color.Gainsboro;
+            this.labelAutoSelectNo.Location = new System.Drawing.Point(54, 116);
+            this.labelAutoSelectNo.Name = "labelAutoSelectNo";
+            this.labelAutoSelectNo.Size = new System.Drawing.Size(237, 13);
+            this.labelAutoSelectNo.TabIndex = 18;
+            this.labelAutoSelectNo.Text = "In mancanza di risposta verrà selezionato il \"NO\"";
             // 
-            // labelCardsTotal7
+            // buttonCard
             // 
-            this.labelCardsTotal7.AutoSize = true;
-            this.labelCardsTotal7.BackColor = System.Drawing.Color.Black;
-            this.labelCardsTotal7.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelCardsTotal7.ForeColor = System.Drawing.Color.Gainsboro;
-            this.labelCardsTotal7.Location = new System.Drawing.Point(282, 670);
-            this.labelCardsTotal7.Name = "labelCardsTotal7";
-            this.labelCardsTotal7.Size = new System.Drawing.Size(72, 16);
-            this.labelCardsTotal7.TabIndex = 95;
-            this.labelCardsTotal7.Text = "cardsTotal";
-            this.labelCardsTotal7.Visible = false;
+            this.buttonCard.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(23)))), ((int)(((byte)(23)))));
+            this.buttonCard.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.buttonCard.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonCard.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonCard.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(248)))), ((int)(((byte)(3)))));
+            this.buttonCard.Location = new System.Drawing.Point(121, 8);
+            this.buttonCard.Margin = new System.Windows.Forms.Padding(2);
+            this.buttonCard.Name = "buttonCard";
+            this.buttonCard.Size = new System.Drawing.Size(84, 29);
+            this.buttonCard.TabIndex = 17;
+            this.buttonCard.Text = "CARTA";
+            this.buttonCard.UseVisualStyleBackColor = false;
+            // 
+            // buttonStay
+            // 
+            this.buttonStay.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(23)))), ((int)(((byte)(23)))));
+            this.buttonStay.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.buttonStay.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonStay.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonStay.ForeColor = System.Drawing.Color.Red;
+            this.buttonStay.Location = new System.Drawing.Point(211, 8);
+            this.buttonStay.Margin = new System.Windows.Forms.Padding(2);
+            this.buttonStay.Name = "buttonStay";
+            this.buttonStay.Size = new System.Drawing.Size(88, 29);
+            this.buttonStay.TabIndex = 18;
+            this.buttonStay.Text = "STAI";
+            this.buttonStay.UseVisualStyleBackColor = false;
+            // 
+            // buttonDouble
+            // 
+            this.buttonDouble.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(23)))), ((int)(((byte)(23)))));
+            this.buttonDouble.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.buttonDouble.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonDouble.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonDouble.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
+            this.buttonDouble.Location = new System.Drawing.Point(3, 8);
+            this.buttonDouble.Margin = new System.Windows.Forms.Padding(2);
+            this.buttonDouble.Name = "buttonDouble";
+            this.buttonDouble.Size = new System.Drawing.Size(112, 29);
+            this.buttonDouble.TabIndex = 19;
+            this.buttonDouble.Text = "RADDOPPIA";
+            this.buttonDouble.UseVisualStyleBackColor = false;
+            // 
+            // buttonSplit
+            // 
+            this.buttonSplit.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(23)))), ((int)(((byte)(23)))));
+            this.buttonSplit.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.buttonSplit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonSplit.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonSplit.ForeColor = System.Drawing.Color.Gainsboro;
+            this.buttonSplit.Location = new System.Drawing.Point(305, 8);
+            this.buttonSplit.Margin = new System.Windows.Forms.Padding(2);
+            this.buttonSplit.Name = "buttonSplit";
+            this.buttonSplit.Size = new System.Drawing.Size(70, 29);
+            this.buttonSplit.TabIndex = 20;
+            this.buttonSplit.Text = "DIVIDI";
+            this.buttonSplit.UseVisualStyleBackColor = false;
+            // 
+            // panelChoose
+            // 
+            this.panelChoose.Controls.Add(this.labelChooseTimer);
+            this.panelChoose.Controls.Add(this.buttonSplit);
+            this.panelChoose.Controls.Add(this.buttonDouble);
+            this.panelChoose.Controls.Add(this.buttonCard);
+            this.panelChoose.Controls.Add(this.buttonStay);
+            this.panelChoose.Location = new System.Drawing.Point(1157, 12);
+            this.panelChoose.Name = "panelChoose";
+            this.panelChoose.Size = new System.Drawing.Size(431, 46);
+            this.panelChoose.TabIndex = 21;
+            this.panelChoose.Visible = false;
+            // 
+            // labelChooseTimer
+            // 
+            this.labelChooseTimer.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.labelChooseTimer.AutoSize = true;
+            this.labelChooseTimer.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelChooseTimer.ForeColor = System.Drawing.Color.Gainsboro;
+            this.labelChooseTimer.Location = new System.Drawing.Point(392, 12);
+            this.labelChooseTimer.Name = "labelChooseTimer";
+            this.labelChooseTimer.Size = new System.Drawing.Size(27, 20);
+            this.labelChooseTimer.TabIndex = 21;
+            this.labelChooseTimer.Text = "15";
             // 
             // FormBlackjackGame
             // 
@@ -1701,6 +1983,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.card2_1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.card1_1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.panelInsurance.ResumeLayout(false);
+            this.panelInsurance.PerformLayout();
+            this.panelChoose.ResumeLayout(false);
+            this.panelChoose.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -1711,7 +1997,7 @@
         private System.Windows.Forms.Panel panelBottom;
         private System.Windows.Forms.Label labelBalance;
         private System.Windows.Forms.Panel panelGame;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label labelLastWin;
         private System.Windows.Forms.Label labelBet;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Panel panelFiches;
@@ -1820,5 +2106,24 @@
         private System.Windows.Forms.Label labelCardsTotal3;
         private System.Windows.Forms.Label labelCardsTotal2;
         private System.Windows.Forms.Label labelCardsTotal1;
+        private System.Windows.Forms.Label labelResult7;
+        private System.Windows.Forms.Label labelResult6;
+        private System.Windows.Forms.Label labelResult5;
+        private System.Windows.Forms.Label labelResult4;
+        private System.Windows.Forms.Label labelResult3;
+        private System.Windows.Forms.Label labelResult2;
+        private System.Windows.Forms.Label labelResult1;
+        private System.Windows.Forms.Panel panelInsurance;
+        private System.Windows.Forms.Label labelInsuranceTimer;
+        private System.Windows.Forms.Button buttonInsuranceNo;
+        private System.Windows.Forms.Button buttonInsuranceYes;
+        private System.Windows.Forms.Label labelInsurance;
+        private System.Windows.Forms.Label labelAutoSelectNo;
+        private System.Windows.Forms.Button buttonSplit;
+        private System.Windows.Forms.Button buttonDouble;
+        private System.Windows.Forms.Button buttonStay;
+        private System.Windows.Forms.Button buttonCard;
+        private System.Windows.Forms.Panel panelChoose;
+        private System.Windows.Forms.Label labelChooseTimer;
     }
 }

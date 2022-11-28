@@ -1,3 +1,5 @@
 Al3To;ciaociao123;admin;aletommy238@gmail.com;200;Alessandro;Tommasi;29-12-2003
 PierGiorgio1;pieroStupendo;user;piergiorgio@gmail.com;134,50;Piero;Sangiovanni;15-03-2001
 giorgione01;giorgioErMagnifico01;user;giorgio@gmail.com;0;Giorgio;Chiellini;11-05-2001
+Mario99;mario99;user;mario99@gmail.com;0;Mario;Surini;11-11-1999
+luca01;luca01;user;lucaluca@gmail.com;0;Luca;Sarri;08-06-1994

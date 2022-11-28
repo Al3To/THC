@@ -89,7 +89,7 @@ namespace Client.Forms
                     string data = null;
                     socket = new Socket(ipAddress.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
                     socket.Connect(remoteEP);
-                    toSend = Encoding.ASCII.GetBytes("\nregister;" + username + ";" + password + ";" + email + ";" + name + ";" + surname + ";" + DOB + "/s/");
+                    toSend = Encoding.ASCII.GetBytes("register;" + username + ";" + password + ";" + email + ";" + name + ";" + surname + ";" + DOB + "/s/");
                     socket.Send(toSend);
                     int bytesRec = socket.Receive(bytes);
                     data += Encoding.ASCII.GetString(bytes, 0, bytesRec);
@@ -123,6 +123,7 @@ namespace Client.Forms
                 }catch(Exception ex)
                 {
                     MessageBox.Show(ex.ToString(), "Errore!", MessageBoxButtons.OK);
+                    buttonRegister.Enabled = true;
                 }
             }
         }

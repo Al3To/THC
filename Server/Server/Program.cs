@@ -25,7 +25,7 @@ Dealer dealer = new Dealer();
 Encoding asc = Encoding.ASCII;
 bool betOpened = false;
 bool gameStarted = false;
-
+int turn = 0;
 Console.WriteLine("THC - Tommasi Hall Casino [Versione BETA]\n(c) Tommasi Corporation.\n");
 bool temp = false;
 while (!temp)
@@ -152,7 +152,7 @@ void Game()
                         }
                         else
                         {
-                            File.AppendAllText(@"../../../../files/users.txt", split[1] + ";" + split[2] + ";user;" + split[3] + ";0;" + split[4] + ";" + split[5] + ";" + split[6]);
+                            File.AppendAllText(@"../../../../files/users.txt","\n" + split[1] + ";" + split[2] + ";user;" + split[3] + ";0;" + split[4] + ";" + split[5] + ";" + split[6]);
                             toSend = asc.GetBytes("ok/c/");
                             handler.Send(toSend);
                         }
@@ -199,6 +199,22 @@ void Game()
                                 Timer();
                             }
                     }
+                    else if (data.StartsWith("insuranceResponse"))
+                    {
+                        string[] split = data.Split(';');
+                        bool insurance = false;
+                        if (split[1] == "false")
+                            insurance = false;
+                        else if (split[1] == "true")
+                            insurance = true;
+                        for (int n = 0; n < playingPlayers.Count; ++n)
+                            if (playingPlayers[n].playerSocket == handler)
+                            {
+                                playingPlayers[n].insurance = insurance;
+                                if (insurance)
+                                    playingPlayers[n].balance -= playingPlayers[n].bet / 2;
+                            }
+                    }
                     else if(data == "disconnectFromTableOne")
                     {
                         string seat = null;
@@ -232,13 +248,8 @@ void Game()
             }
         }
         else
-        {
             Thread.Sleep(Timeout.Infinite);
-        }
-
     }
-
-
 }
 
 async void Timer()
@@ -370,6 +381,39 @@ async void FillTable()
             sockets[m].Send(toSend);
         deck.RemoveAt(0);
     }
+    if (dealer.dealerCards[0].cardName == "ace")
+    {
+        toSend = asc.GetBytes("insuranceRequest/c/");
+        for (int m = 0; m < playingPlayers.Count; ++m)
+            playingPlayers[m].playerSocket.Send(toSend);
+        int timer = 10;
+        while (timer >= 0)
+        {
+            toSend = asc.GetBytes("timerInsurance;" + timer.ToString() + "/c/");
+            for (int m = 0; m < playingPlayers.Count; ++m)
+                playingPlayers[m].playerSocket.Send(toSend);
+            timer--;
+            await Task.Delay(1000);
+        }
+        await Task.Delay(1000);
+
+        if (dealer.dealerCards[1].cardValue == 10)
+
+            for (int m = 0; m < playingPlayers.Count; ++m)
+            {
+                if (playingPlayers[m].insurance)
+                    playingPlayers[m].balance += playingPlayers[m].bet;
+                else if (!playingPlayers[m].insurance && playingPlayers[m].cardsTotal == 21)
+                    playingPlayers[m].balance += playingPlayers[m].bet;
+
+                toSend = asc.GetBytes("dealerHasBJ;" + dealer.dealerCards[1].cardName + ";" + dealer.dealerCards[1].cardSymbol + ";" + playingPlayers[m].balance + "/c/");
+                playingPlayers[m].playerSocket.Send(toSend);
+            }
+        else
+            NextTurn();
+        
+    }
+    
 }
 void ClearTable()
 {
@@ -382,8 +426,64 @@ void SortPlayers()
 {
     playingPlayers = players.OrderBy(o => o.seatPosition).ToList();
 }
+void CheckBlackJack()
+{
+    byte[] toSend;
+    for (int n = 0; n < playingPlayers.Count; ++n)
+        if (playingPlayers[n].cardsTotal == 21 && dealer.cardsTotal != 21)
+        {
+            playingPlayers[n].done = true;
+            playingPlayers[n].win = playingPlayers[n].bet + (playingPlayers[n].bet * 1.5f);
+            toSend = asc.GetBytes("blackjack;" + playingPlayers[n].win.ToString() + "/c/");
+            playingPlayers[n].playerSocket.Send(toSend);
+            for(int m = 0; m < playingPlayers.Count; ++m)
+                if(m != n)
+                {
+                    toSend = asc.GetBytes("playerBlackJack;" + playingPlayers[n].seatPosition + "/c/");
+                    playingPlayers[m].playerSocket.Send(toSend);
+                }
+        }
+}
+async void NextTurn()
+{
+    byte[] toSend = null;
+    bool allPlayersDone = false;
+    for(int n = 0; n<playingPlayers.Count; ++n)
+    {
+        if (!playingPlayers[n].done) break;
+        if(n == playingPlayers.Count - 1) 
+            allPlayersDone = true;
+    }
+    if (allPlayersDone)
+        EndGame();
 
-void NextTurn()
+    if (turn >= playingPlayers.Count -1 && !allPlayersDone)
+        turn = 0;
+
+    while (playingPlayers[turn].done)
+        turn++;
+
+
+    if (playingPlayers[turn].cardsTotal == 21)
+    {
+        playingPlayers[turn].done = true;
+        NextTurn();
+    }
+    else if (playingPlayers[turn].playerCards[0] == playingPlayers[turn].playerCards[1] && playingPlayers[turn].playerCards.Count == 2)
+        toSend = asc.GetBytes("makeChoose;canSplit/c/");
+    else
+        toSend = asc.GetBytes("makeChoose;cantSplit/c/");
+    playingPlayers[turn].playerSocket.Send(toSend);
+    int timer = 15;
+    while (timer >= 0)
+    {
+        toSend = asc.GetBytes("timerChoose;" + timer.ToString() + "/c/");
+        playingPlayers[turn].playerSocket.Send(toSend);
+        timer--;
+        await Task.Delay(1000);
+    }
+}
+void EndGame()
 {
 
 }
@@ -414,14 +514,17 @@ class Player
 {
     public Socket playerSocket;
     public string username;
+    public float balance;
     public int seatPosition;
     public List<Card> playerCards = new List<Card>();
     public List<Card> playerSplitCards = new List<Card>();
-    public float bet;
-    public float win;
     public bool hasAce;
     bool aceValueOne = false;
     public int cardsTotal = 0;
+    public float bet;
+    public float win;
+    public bool done = false;
+    public bool insurance = false;
 
     public void UpdateTotal()
     {
