@@ -13,6 +13,7 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 using System.Windows.Markup;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using System.Threading;
+using System.Runtime.InteropServices;
 
 namespace Client.ServerForms
 {
@@ -32,6 +33,9 @@ namespace Client.ServerForms
         public FormBlackjackGame(string playerUsername, float playerBalance)
         {
             InitializeComponent();
+            this.StartPosition = FormStartPosition.CenterScreen;
+            this.FormBorderStyle = FormBorderStyle.Sizable;
+            this.MinimumSize = new Size(1483, 970);
             this.Text = string.Empty;
             this.ControlBox = false;
             this.DoubleBuffered = true;
@@ -44,7 +48,7 @@ namespace Client.ServerForms
         private void FormBlackjackGame1_Load(object sender, EventArgs e)
         {
             byte[] toSend = null;
-            
+
 
             try
             {
@@ -56,7 +60,7 @@ namespace Client.ServerForms
                 toSend = Encoding.ASCII.GetBytes("connectToTableOne" + "/s/");
                 socket.Send(toSend);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.ToString(), "Errore!");
                 this.Close();
@@ -120,7 +124,7 @@ namespace Client.ServerForms
         void Seat(int seat)
         {
             byte[] bytes = new byte[1024];
-            byte[] toSend = Encoding.ASCII.GetBytes("seat;" + playerUsername + ";" + seat.ToString() +"/s/");
+            byte[] toSend = Encoding.ASCII.GetBytes("seat;" + playerUsername + ";" + seat.ToString() + "/s/");
             socket.Send(toSend);
             playerSeat = seat;
         }
@@ -135,7 +139,7 @@ namespace Client.ServerForms
                     int bytesRec = socket.Receive(bytes);
                     data += Encoding.ASCII.GetString(bytes, 0, bytesRec);
                     Console.WriteLine(data);
-                    
+
                     if (data.EndsWith("/c/"))
                     {
                         data = data.Remove(data.Length - 1);
@@ -143,14 +147,16 @@ namespace Client.ServerForms
                         data = data.Remove(data.Length - 1);
                         if (data.StartsWith("playerDisconnect"))
                         {
-                            Invoke((MethodInvoker)delegate {
+                            Invoke((MethodInvoker)delegate
+                            {
                                 PlayerDisconnect(data);
                             });
 
                         }
                         else if (data.StartsWith("seat"))
                         {
-                            Invoke((MethodInvoker)delegate {
+                            Invoke((MethodInvoker)delegate
+                            {
                                 OccupiedSeat(data);
                             });
                         }
@@ -158,68 +164,83 @@ namespace Client.ServerForms
                         {
                             Invoke(new MethodInvoker(Seat));
                         }
-                        else if(data.StartsWith("playerConnect"))
+                        else if (data.StartsWith("playerConnect"))
                         {
-                            Invoke((MethodInvoker)delegate {
+                            Invoke((MethodInvoker)delegate
+                            {
                                 PlayerConnect(data);
                             });
                         }
                         else if (data.StartsWith("timerBet"))
                         {
-                            Invoke((MethodInvoker)delegate {
+                            Invoke((MethodInvoker)delegate
+                            {
                                 UpdateTimer(data);
                             });
                         }
                         else if (data.StartsWith("addCard"))
                         {
-                            Invoke((MethodInvoker)delegate {
+                            Invoke((MethodInvoker)delegate
+                            {
                                 UpdateCard(data);
                             });
                         }
                         else if (data.StartsWith("addDealerCard"))
                         {
-                            Invoke((MethodInvoker)delegate {
+                            Invoke((MethodInvoker)delegate
+                            {
                                 UpdateDealerCard(data);
                             });
                         }
                         else if (data.StartsWith("playerBlackjack"))
                         {
-                            Invoke((MethodInvoker)delegate {
+                            Invoke((MethodInvoker)delegate
+                            {
                                 UpdateBlackJack(data);
                             });
                         }
                         else if (data.StartsWith("blackjack"))
                         {
-                            Invoke((MethodInvoker)delegate {
+                            Invoke((MethodInvoker)delegate
+                            {
                                 BlackJack(data);
                             });
-                        }else if(data == "insuranceRequest")
+                        }
+                        else if (data == "insuranceRequest")
                         {
                             Invoke(new MethodInvoker(InsuranceRequest));
-                        }else if (data.StartsWith("timerInsurance"))
+                        }
+                        else if (data.StartsWith("timerInsurance"))
                         {
-                            Invoke((MethodInvoker)delegate {
+                            Invoke((MethodInvoker)delegate
+                            {
                                 UpdateInsuranceTimer(data);
                             });
-                        }else if (data.StartsWith("dealerHasBJ"))
+                        }
+                        else if (data.StartsWith("dealerHasBJ"))
                         {
-                            Invoke((MethodInvoker)delegate {
+                            Invoke((MethodInvoker)delegate
+                            {
                                 DealerHasBJ(data);
                             });
-                        }else if (data.StartsWith("makeChoose"))
+                        }
+                        else if (data.StartsWith("makeChoose"))
                         {
-                            Invoke((MethodInvoker)delegate {
+                            Invoke((MethodInvoker)delegate
+                            {
                                 MakeChoose(data);
                             });
                         }
                         else if (data.StartsWith("timerChoose"))
                         {
-                            Invoke((MethodInvoker)delegate {
+                            Invoke((MethodInvoker)delegate
+                            {
                                 UpdateChooseTimer(data);
                             });
                         }
                     }
-                }catch(Exception ex)
+                }
+                catch (Exception ex)
                 {
                     Console.WriteLine(ex.ToString(), "Errore!");
                 }
@@ -295,7 +316,7 @@ namespace Client.ServerForms
         }
         void OccupiedSeat(string data)
         {
-            
+
             string[] split;
             split = data.Split(';');
             for (int n = 1; n < split.Length; ++n)
@@ -343,7 +364,7 @@ namespace Client.ServerForms
         }
         void Seat()
         {
-            
+
             isSitten = true;
             pictureFiche.Visible = true;
             buttonSeat1.Visible = false;
@@ -419,7 +440,7 @@ namespace Client.ServerForms
         void UpdateCard(string data)
         {
             string[] split = data.Split(';');
-            string dir = "../../../Images/cards/"+split[3] + split[4] + ".png";
+            string dir = "../../../Images/cards/" + split[3] + split[4] + ".png";
             if (split[1] == "1")
             {
                 labelCardsTotal1.Text = split[6];
@@ -793,8 +814,8 @@ namespace Client.ServerForms
 
         private void buttonInsuranceNo_Click(object sender, EventArgs e)
         {
-                panelInsurance.Visible = false;
-                insurance = false;
+            panelInsurance.Visible = false;
+            insurance = false;
         }
 
         private void buttonInsuranceYes_Click(object sender, EventArgs e)
@@ -807,6 +828,54 @@ namespace Client.ServerForms
             }
             else
                 MessageBox.Show("Non hai abbastanza credito!");
+        }
+        //Move Form
+        [DllImport("user32.DLL", EntryPoint = "ReleaseCapture")]
+        private extern static void ReleaseCapture();
+        [DllImport("user32.DLL", EntryPoint = "SendMessage")]
+        private extern static void SendMessage(System.IntPtr hWnd, int wMsg, int wParam, int lParam);
+
+        private void panelTitle_MouseDown(object sender, MouseEventArgs e)
+        {
+            base.OnMouseDown(e);
+
+            if (e.Button == MouseButtons.Left)
+                if (e.Clicks > 1)
+                    buttonMaximize_Click(this.buttonMaximize, e);
+                else
+                {
+                    FormBorderStyle = FormBorderStyle.Sizable;
+                    ReleaseCapture();
+                    SendMessage(this.Handle, 0x112, 0xf012, 0);
+                }
+        }
+
+        private void buttonMaximize_Click(object sender, EventArgs e)
+        {
+            if (this.WindowState == FormWindowState.Maximized)
+            {
+                FormBorderStyle = FormBorderStyle.Sizable;
+                this.WindowState = FormWindowState.Normal;
+            }
+            else
+            {
+                FormBorderStyle = FormBorderStyle.None;
+                this.MaximizedBounds = Screen.FromHandle(this.Handle).WorkingArea;
+                this.WindowState = FormWindowState.Maximized;
+            }
+        }
+
+        private void buttonMinimize_Click(object sender, EventArgs e)
+        {
+            this.WindowState = FormWindowState.Minimized;
+        }
+
+        private void FormBlackjackGame_Resize(object sender, EventArgs e)
+        {
+            if (this.WindowState != FormWindowState.Maximized)
+                FormBorderStyle = FormBorderStyle.Sizable;
+            else
+                FormBorderStyle = FormBorderStyle.None;
         }
     }
 }
