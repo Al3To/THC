@@ -30,6 +30,8 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormBlackjackGame));
             this.panelTitle = new System.Windows.Forms.Panel();
+            this.buttonMinimize = new System.Windows.Forms.Button();
+            this.buttonMaximize = new System.Windows.Forms.Button();
             this.labelTimer = new System.Windows.Forms.Label();
             this.labelOpenedBet = new System.Windows.Forms.Label();
             this.buttonExit = new System.Windows.Forms.Button();
@@ -161,8 +163,20 @@
             this.buttonSeat2 = new FontAwesome.Sharp.IconButton();
             this.buttonSeat1 = new FontAwesome.Sharp.IconButton();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.buttonMaximize = new System.Windows.Forms.Button();
-            this.buttonMinimize = new System.Windows.Forms.Button();
+            this.labelSplitResult1 = new System.Windows.Forms.Label();
+            this.labelSplitCardsTotal1 = new System.Windows.Forms.Label();
+            this.labelSplitResult2 = new System.Windows.Forms.Label();
+            this.labelSplitCardsTotal2 = new System.Windows.Forms.Label();
+            this.labelSplitResult3 = new System.Windows.Forms.Label();
+            this.labelSplitCardsTotal3 = new System.Windows.Forms.Label();
+            this.labelSplitResult4 = new System.Windows.Forms.Label();
+            this.labelSplitCardsTotal4 = new System.Windows.Forms.Label();
+            this.labelSplitResult5 = new System.Windows.Forms.Label();
+            this.labelSplitCardsTotal5 = new System.Windows.Forms.Label();
+            this.labelSplitResult6 = new System.Windows.Forms.Label();
+            this.labelSplitCardsTotal6 = new System.Windows.Forms.Label();
+            this.labelSplitResult7 = new System.Windows.Forms.Label();
+            this.labelSplitCardsTotal7 = new System.Windows.Forms.Label();
             this.panelTitle.SuspendLayout();
             this.panelBottom.SuspendLayout();
             this.panelChoose.SuspendLayout();
@@ -269,6 +283,41 @@
             this.panelTitle.TabIndex = 0;
             this.panelTitle.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panelTitle_MouseDown);
             // 
+            // buttonMinimize
+            // 
+            this.buttonMinimize.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonMinimize.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(23)))), ((int)(((byte)(23)))));
+            this.buttonMinimize.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.buttonMinimize.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonMinimize.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonMinimize.ForeColor = System.Drawing.Color.Gainsboro;
+            this.buttonMinimize.Location = new System.Drawing.Point(1376, 2);
+            this.buttonMinimize.Margin = new System.Windows.Forms.Padding(2);
+            this.buttonMinimize.Name = "buttonMinimize";
+            this.buttonMinimize.Size = new System.Drawing.Size(27, 26);
+            this.buttonMinimize.TabIndex = 18;
+            this.buttonMinimize.Text = "_";
+            this.buttonMinimize.UseVisualStyleBackColor = false;
+            this.buttonMinimize.Click += new System.EventHandler(this.buttonMinimize_Click);
+            // 
+            // buttonMaximize
+            // 
+            this.buttonMaximize.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonMaximize.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(23)))), ((int)(((byte)(23)))));
+            this.buttonMaximize.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.buttonMaximize.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonMaximize.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonMaximize.ForeColor = System.Drawing.Color.Gainsboro;
+            this.buttonMaximize.Location = new System.Drawing.Point(1407, 2);
+            this.buttonMaximize.Margin = new System.Windows.Forms.Padding(2);
+            this.buttonMaximize.Name = "buttonMaximize";
+            this.buttonMaximize.Size = new System.Drawing.Size(27, 26);
+            this.buttonMaximize.TabIndex = 17;
+            this.buttonMaximize.Text = "□";
+            this.buttonMaximize.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.buttonMaximize.UseVisualStyleBackColor = false;
+            this.buttonMaximize.Click += new System.EventHandler(this.buttonMaximize_Click);
+            // 
             // labelTimer
             // 
             this.labelTimer.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -367,6 +416,7 @@
             this.buttonSplit.TabIndex = 20;
             this.buttonSplit.Text = "DIVIDI";
             this.buttonSplit.UseVisualStyleBackColor = false;
+            this.buttonSplit.Click += new System.EventHandler(this.buttonSplit_Click);
             // 
             // buttonDouble
             // 
@@ -382,6 +432,7 @@
             this.buttonDouble.TabIndex = 19;
             this.buttonDouble.Text = "RADDOPPIA";
             this.buttonDouble.UseVisualStyleBackColor = false;
+            this.buttonDouble.Click += new System.EventHandler(this.buttonDouble_Click);
             // 
             // buttonCard
             // 
@@ -397,6 +448,7 @@
             this.buttonCard.TabIndex = 17;
             this.buttonCard.Text = "CARTA";
             this.buttonCard.UseVisualStyleBackColor = false;
+            this.buttonCard.Click += new System.EventHandler(this.buttonCard_Click);
             // 
             // buttonStay
             // 
@@ -412,6 +464,7 @@
             this.buttonStay.TabIndex = 18;
             this.buttonStay.Text = "STAI";
             this.buttonStay.UseVisualStyleBackColor = false;
+            this.buttonStay.Click += new System.EventHandler(this.buttonStay_Click);
             // 
             // pictureFiche
             // 
@@ -532,6 +585,20 @@
             // 
             this.panelGame.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("panelGame.BackgroundImage")));
             this.panelGame.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.panelGame.Controls.Add(this.labelSplitResult7);
+            this.panelGame.Controls.Add(this.labelSplitCardsTotal7);
+            this.panelGame.Controls.Add(this.labelSplitResult6);
+            this.panelGame.Controls.Add(this.labelSplitCardsTotal6);
+            this.panelGame.Controls.Add(this.labelSplitResult5);
+            this.panelGame.Controls.Add(this.labelSplitCardsTotal5);
+            this.panelGame.Controls.Add(this.labelSplitResult4);
+            this.panelGame.Controls.Add(this.labelSplitCardsTotal4);
+            this.panelGame.Controls.Add(this.labelSplitResult3);
+            this.panelGame.Controls.Add(this.labelSplitCardsTotal3);
+            this.panelGame.Controls.Add(this.labelSplitResult2);
+            this.panelGame.Controls.Add(this.labelSplitCardsTotal2);
+            this.panelGame.Controls.Add(this.labelSplitResult1);
+            this.panelGame.Controls.Add(this.labelSplitCardsTotal1);
             this.panelGame.Controls.Add(this.panelInsurance);
             this.panelGame.Controls.Add(this.labelResult7);
             this.panelGame.Controls.Add(this.labelResult6);
@@ -651,7 +718,7 @@
             this.panelInsurance.Controls.Add(this.buttonInsuranceNo);
             this.panelInsurance.Controls.Add(this.buttonInsuranceYes);
             this.panelInsurance.Controls.Add(this.labelInsurance);
-            this.panelInsurance.Location = new System.Drawing.Point(34, -9);
+            this.panelInsurance.Location = new System.Drawing.Point(12, 0);
             this.panelInsurance.Name = "panelInsurance";
             this.panelInsurance.Size = new System.Drawing.Size(339, 136);
             this.panelInsurance.TabIndex = 103;
@@ -726,7 +793,7 @@
             this.labelResult7.BackColor = System.Drawing.Color.Black;
             this.labelResult7.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelResult7.ForeColor = System.Drawing.Color.Gainsboro;
-            this.labelResult7.Location = new System.Drawing.Point(147, 609);
+            this.labelResult7.Location = new System.Drawing.Point(200, 582);
             this.labelResult7.Name = "labelResult7";
             this.labelResult7.Size = new System.Drawing.Size(62, 24);
             this.labelResult7.TabIndex = 102;
@@ -740,7 +807,7 @@
             this.labelResult6.BackColor = System.Drawing.Color.Black;
             this.labelResult6.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelResult6.ForeColor = System.Drawing.Color.Gainsboro;
-            this.labelResult6.Location = new System.Drawing.Point(316, 682);
+            this.labelResult6.Location = new System.Drawing.Point(371, 654);
             this.labelResult6.Name = "labelResult6";
             this.labelResult6.Size = new System.Drawing.Size(62, 24);
             this.labelResult6.TabIndex = 101;
@@ -754,7 +821,7 @@
             this.labelResult5.BackColor = System.Drawing.Color.Black;
             this.labelResult5.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelResult5.ForeColor = System.Drawing.Color.Gainsboro;
-            this.labelResult5.Location = new System.Drawing.Point(512, 743);
+            this.labelResult5.Location = new System.Drawing.Point(552, 707);
             this.labelResult5.Name = "labelResult5";
             this.labelResult5.Size = new System.Drawing.Size(62, 24);
             this.labelResult5.TabIndex = 100;
@@ -768,7 +835,7 @@
             this.labelResult4.BackColor = System.Drawing.Color.Black;
             this.labelResult4.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelResult4.ForeColor = System.Drawing.Color.Gainsboro;
-            this.labelResult4.Location = new System.Drawing.Point(694, 744);
+            this.labelResult4.Location = new System.Drawing.Point(739, 721);
             this.labelResult4.Name = "labelResult4";
             this.labelResult4.Size = new System.Drawing.Size(62, 24);
             this.labelResult4.TabIndex = 99;
@@ -782,7 +849,7 @@
             this.labelResult3.BackColor = System.Drawing.Color.Black;
             this.labelResult3.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelResult3.ForeColor = System.Drawing.Color.Gainsboro;
-            this.labelResult3.Location = new System.Drawing.Point(880, 734);
+            this.labelResult3.Location = new System.Drawing.Point(922, 706);
             this.labelResult3.Name = "labelResult3";
             this.labelResult3.Size = new System.Drawing.Size(62, 24);
             this.labelResult3.TabIndex = 98;
@@ -796,7 +863,7 @@
             this.labelResult2.BackColor = System.Drawing.Color.Black;
             this.labelResult2.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelResult2.ForeColor = System.Drawing.Color.Gainsboro;
-            this.labelResult2.Location = new System.Drawing.Point(1054, 691);
+            this.labelResult2.Location = new System.Drawing.Point(1119, 657);
             this.labelResult2.Name = "labelResult2";
             this.labelResult2.Size = new System.Drawing.Size(62, 24);
             this.labelResult2.TabIndex = 97;
@@ -810,7 +877,7 @@
             this.labelResult1.BackColor = System.Drawing.Color.Black;
             this.labelResult1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelResult1.ForeColor = System.Drawing.Color.Gainsboro;
-            this.labelResult1.Location = new System.Drawing.Point(1236, 609);
+            this.labelResult1.Location = new System.Drawing.Point(1282, 582);
             this.labelResult1.Name = "labelResult1";
             this.labelResult1.Size = new System.Drawing.Size(62, 24);
             this.labelResult1.TabIndex = 96;
@@ -824,7 +891,7 @@
             this.labelCardsTotal7.BackColor = System.Drawing.Color.Black;
             this.labelCardsTotal7.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelCardsTotal7.ForeColor = System.Drawing.Color.Gainsboro;
-            this.labelCardsTotal7.Location = new System.Drawing.Point(166, 558);
+            this.labelCardsTotal7.Location = new System.Drawing.Point(201, 564);
             this.labelCardsTotal7.Name = "labelCardsTotal7";
             this.labelCardsTotal7.Size = new System.Drawing.Size(72, 16);
             this.labelCardsTotal7.TabIndex = 95;
@@ -838,7 +905,7 @@
             this.labelCardsTotal6.BackColor = System.Drawing.Color.Black;
             this.labelCardsTotal6.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelCardsTotal6.ForeColor = System.Drawing.Color.Gainsboro;
-            this.labelCardsTotal6.Location = new System.Drawing.Point(349, 638);
+            this.labelCardsTotal6.Location = new System.Drawing.Point(372, 637);
             this.labelCardsTotal6.Name = "labelCardsTotal6";
             this.labelCardsTotal6.Size = new System.Drawing.Size(72, 16);
             this.labelCardsTotal6.TabIndex = 94;
@@ -852,7 +919,7 @@
             this.labelCardsTotal5.BackColor = System.Drawing.Color.Black;
             this.labelCardsTotal5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelCardsTotal5.ForeColor = System.Drawing.Color.Gainsboro;
-            this.labelCardsTotal5.Location = new System.Drawing.Point(521, 688);
+            this.labelCardsTotal5.Location = new System.Drawing.Point(553, 687);
             this.labelCardsTotal5.Name = "labelCardsTotal5";
             this.labelCardsTotal5.Size = new System.Drawing.Size(72, 16);
             this.labelCardsTotal5.TabIndex = 93;
@@ -866,7 +933,7 @@
             this.labelCardsTotal4.BackColor = System.Drawing.Color.Black;
             this.labelCardsTotal4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelCardsTotal4.ForeColor = System.Drawing.Color.Gainsboro;
-            this.labelCardsTotal4.Location = new System.Drawing.Point(699, 703);
+            this.labelCardsTotal4.Location = new System.Drawing.Point(740, 702);
             this.labelCardsTotal4.Name = "labelCardsTotal4";
             this.labelCardsTotal4.Size = new System.Drawing.Size(72, 16);
             this.labelCardsTotal4.TabIndex = 92;
@@ -880,7 +947,7 @@
             this.labelCardsTotal3.BackColor = System.Drawing.Color.Black;
             this.labelCardsTotal3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelCardsTotal3.ForeColor = System.Drawing.Color.Gainsboro;
-            this.labelCardsTotal3.Location = new System.Drawing.Point(882, 688);
+            this.labelCardsTotal3.Location = new System.Drawing.Point(923, 688);
             this.labelCardsTotal3.Name = "labelCardsTotal3";
             this.labelCardsTotal3.Size = new System.Drawing.Size(72, 16);
             this.labelCardsTotal3.TabIndex = 91;
@@ -894,7 +961,7 @@
             this.labelCardsTotal2.BackColor = System.Drawing.Color.Black;
             this.labelCardsTotal2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelCardsTotal2.ForeColor = System.Drawing.Color.Gainsboro;
-            this.labelCardsTotal2.Location = new System.Drawing.Point(1055, 642);
+            this.labelCardsTotal2.Location = new System.Drawing.Point(1120, 637);
             this.labelCardsTotal2.Name = "labelCardsTotal2";
             this.labelCardsTotal2.Size = new System.Drawing.Size(72, 16);
             this.labelCardsTotal2.TabIndex = 90;
@@ -908,7 +975,7 @@
             this.labelCardsTotal1.BackColor = System.Drawing.Color.Black;
             this.labelCardsTotal1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelCardsTotal1.ForeColor = System.Drawing.Color.Gainsboro;
-            this.labelCardsTotal1.Location = new System.Drawing.Point(1235, 566);
+            this.labelCardsTotal1.Location = new System.Drawing.Point(1283, 558);
             this.labelCardsTotal1.Name = "labelCardsTotal1";
             this.labelCardsTotal1.Size = new System.Drawing.Size(72, 16);
             this.labelCardsTotal1.TabIndex = 89;
@@ -1735,7 +1802,7 @@
             this.labelUsername7.AutoSize = true;
             this.labelUsername7.BackColor = System.Drawing.Color.Black;
             this.labelUsername7.ForeColor = System.Drawing.Color.Gainsboro;
-            this.labelUsername7.Location = new System.Drawing.Point(168, 580);
+            this.labelUsername7.Location = new System.Drawing.Point(146, 610);
             this.labelUsername7.Name = "labelUsername7";
             this.labelUsername7.Size = new System.Drawing.Size(53, 13);
             this.labelUsername7.TabIndex = 14;
@@ -1748,7 +1815,7 @@
             this.labelUsername6.AutoSize = true;
             this.labelUsername6.BackColor = System.Drawing.Color.Black;
             this.labelUsername6.ForeColor = System.Drawing.Color.Gainsboro;
-            this.labelUsername6.Location = new System.Drawing.Point(349, 660);
+            this.labelUsername6.Location = new System.Drawing.Point(325, 687);
             this.labelUsername6.Name = "labelUsername6";
             this.labelUsername6.Size = new System.Drawing.Size(53, 13);
             this.labelUsername6.TabIndex = 13;
@@ -1761,7 +1828,7 @@
             this.labelUsername5.AutoSize = true;
             this.labelUsername5.BackColor = System.Drawing.Color.Black;
             this.labelUsername5.ForeColor = System.Drawing.Color.Gainsboro;
-            this.labelUsername5.Location = new System.Drawing.Point(521, 714);
+            this.labelUsername5.Location = new System.Drawing.Point(506, 732);
             this.labelUsername5.Name = "labelUsername5";
             this.labelUsername5.Size = new System.Drawing.Size(53, 13);
             this.labelUsername5.TabIndex = 12;
@@ -1774,7 +1841,7 @@
             this.labelUsername4.AutoSize = true;
             this.labelUsername4.BackColor = System.Drawing.Color.Black;
             this.labelUsername4.ForeColor = System.Drawing.Color.Gainsboro;
-            this.labelUsername4.Location = new System.Drawing.Point(699, 721);
+            this.labelUsername4.Location = new System.Drawing.Point(680, 743);
             this.labelUsername4.Name = "labelUsername4";
             this.labelUsername4.Size = new System.Drawing.Size(53, 13);
             this.labelUsername4.TabIndex = 11;
@@ -1787,7 +1854,7 @@
             this.labelUsername3.AutoSize = true;
             this.labelUsername3.BackColor = System.Drawing.Color.Black;
             this.labelUsername3.ForeColor = System.Drawing.Color.Gainsboro;
-            this.labelUsername3.Location = new System.Drawing.Point(882, 706);
+            this.labelUsername3.Location = new System.Drawing.Point(860, 736);
             this.labelUsername3.Name = "labelUsername3";
             this.labelUsername3.Size = new System.Drawing.Size(53, 13);
             this.labelUsername3.TabIndex = 10;
@@ -1800,7 +1867,7 @@
             this.labelUsername2.AutoSize = true;
             this.labelUsername2.BackColor = System.Drawing.Color.Black;
             this.labelUsername2.ForeColor = System.Drawing.Color.Gainsboro;
-            this.labelUsername2.Location = new System.Drawing.Point(1055, 660);
+            this.labelUsername2.Location = new System.Drawing.Point(1074, 699);
             this.labelUsername2.Name = "labelUsername2";
             this.labelUsername2.Size = new System.Drawing.Size(53, 13);
             this.labelUsername2.TabIndex = 9;
@@ -1813,7 +1880,7 @@
             this.labelUsername1.AutoSize = true;
             this.labelUsername1.BackColor = System.Drawing.Color.Black;
             this.labelUsername1.ForeColor = System.Drawing.Color.Gainsboro;
-            this.labelUsername1.Location = new System.Drawing.Point(1235, 585);
+            this.labelUsername1.Location = new System.Drawing.Point(1241, 620);
             this.labelUsername1.Name = "labelUsername1";
             this.labelUsername1.Size = new System.Drawing.Size(53, 13);
             this.labelUsername1.TabIndex = 8;
@@ -1980,40 +2047,201 @@
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
             // 
-            // buttonMaximize
+            // labelSplitResult1
             // 
-            this.buttonMaximize.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonMaximize.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(23)))), ((int)(((byte)(23)))));
-            this.buttonMaximize.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.buttonMaximize.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonMaximize.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonMaximize.ForeColor = System.Drawing.Color.Gainsboro;
-            this.buttonMaximize.Location = new System.Drawing.Point(1407, 2);
-            this.buttonMaximize.Margin = new System.Windows.Forms.Padding(2);
-            this.buttonMaximize.Name = "buttonMaximize";
-            this.buttonMaximize.Size = new System.Drawing.Size(27, 26);
-            this.buttonMaximize.TabIndex = 17;
-            this.buttonMaximize.Text = "□";
-            this.buttonMaximize.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.buttonMaximize.UseVisualStyleBackColor = false;
-            this.buttonMaximize.Click += new System.EventHandler(this.buttonMaximize_Click);
+            this.labelSplitResult1.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.labelSplitResult1.AutoSize = true;
+            this.labelSplitResult1.BackColor = System.Drawing.Color.Black;
+            this.labelSplitResult1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelSplitResult1.ForeColor = System.Drawing.Color.Gainsboro;
+            this.labelSplitResult1.Location = new System.Drawing.Point(1176, 557);
+            this.labelSplitResult1.Name = "labelSplitResult1";
+            this.labelSplitResult1.Size = new System.Drawing.Size(62, 24);
+            this.labelSplitResult1.TabIndex = 105;
+            this.labelSplitResult1.Text = "Result";
+            this.labelSplitResult1.Visible = false;
             // 
-            // buttonMinimize
+            // labelSplitCardsTotal1
             // 
-            this.buttonMinimize.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonMinimize.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(23)))), ((int)(((byte)(23)))));
-            this.buttonMinimize.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.buttonMinimize.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonMinimize.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonMinimize.ForeColor = System.Drawing.Color.Gainsboro;
-            this.buttonMinimize.Location = new System.Drawing.Point(1376, 2);
-            this.buttonMinimize.Margin = new System.Windows.Forms.Padding(2);
-            this.buttonMinimize.Name = "buttonMinimize";
-            this.buttonMinimize.Size = new System.Drawing.Size(27, 26);
-            this.buttonMinimize.TabIndex = 18;
-            this.buttonMinimize.Text = "_";
-            this.buttonMinimize.UseVisualStyleBackColor = false;
-            this.buttonMinimize.Click += new System.EventHandler(this.buttonMinimize_Click);
+            this.labelSplitCardsTotal1.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.labelSplitCardsTotal1.AutoSize = true;
+            this.labelSplitCardsTotal1.BackColor = System.Drawing.Color.Black;
+            this.labelSplitCardsTotal1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelSplitCardsTotal1.ForeColor = System.Drawing.Color.Gainsboro;
+            this.labelSplitCardsTotal1.Location = new System.Drawing.Point(1177, 533);
+            this.labelSplitCardsTotal1.Name = "labelSplitCardsTotal1";
+            this.labelSplitCardsTotal1.Size = new System.Drawing.Size(72, 16);
+            this.labelSplitCardsTotal1.TabIndex = 104;
+            this.labelSplitCardsTotal1.Text = "cardsTotal";
+            this.labelSplitCardsTotal1.Visible = false;
+            // 
+            // labelSplitResult2
+            // 
+            this.labelSplitResult2.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.labelSplitResult2.AutoSize = true;
+            this.labelSplitResult2.BackColor = System.Drawing.Color.Black;
+            this.labelSplitResult2.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelSplitResult2.ForeColor = System.Drawing.Color.Gainsboro;
+            this.labelSplitResult2.Location = new System.Drawing.Point(1011, 616);
+            this.labelSplitResult2.Name = "labelSplitResult2";
+            this.labelSplitResult2.Size = new System.Drawing.Size(62, 24);
+            this.labelSplitResult2.TabIndex = 107;
+            this.labelSplitResult2.Text = "Result";
+            this.labelSplitResult2.Visible = false;
+            // 
+            // labelSplitCardsTotal2
+            // 
+            this.labelSplitCardsTotal2.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.labelSplitCardsTotal2.AutoSize = true;
+            this.labelSplitCardsTotal2.BackColor = System.Drawing.Color.Black;
+            this.labelSplitCardsTotal2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelSplitCardsTotal2.ForeColor = System.Drawing.Color.Gainsboro;
+            this.labelSplitCardsTotal2.Location = new System.Drawing.Point(1012, 596);
+            this.labelSplitCardsTotal2.Name = "labelSplitCardsTotal2";
+            this.labelSplitCardsTotal2.Size = new System.Drawing.Size(72, 16);
+            this.labelSplitCardsTotal2.TabIndex = 106;
+            this.labelSplitCardsTotal2.Text = "cardsTotal";
+            this.labelSplitCardsTotal2.Visible = false;
+            // 
+            // labelSplitResult3
+            // 
+            this.labelSplitResult3.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.labelSplitResult3.AutoSize = true;
+            this.labelSplitResult3.BackColor = System.Drawing.Color.Black;
+            this.labelSplitResult3.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelSplitResult3.ForeColor = System.Drawing.Color.Gainsboro;
+            this.labelSplitResult3.Location = new System.Drawing.Point(823, 681);
+            this.labelSplitResult3.Name = "labelSplitResult3";
+            this.labelSplitResult3.Size = new System.Drawing.Size(62, 24);
+            this.labelSplitResult3.TabIndex = 109;
+            this.labelSplitResult3.Text = "Result";
+            this.labelSplitResult3.Visible = false;
+            // 
+            // labelSplitCardsTotal3
+            // 
+            this.labelSplitCardsTotal3.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.labelSplitCardsTotal3.AutoSize = true;
+            this.labelSplitCardsTotal3.BackColor = System.Drawing.Color.Black;
+            this.labelSplitCardsTotal3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelSplitCardsTotal3.ForeColor = System.Drawing.Color.Gainsboro;
+            this.labelSplitCardsTotal3.Location = new System.Drawing.Point(824, 657);
+            this.labelSplitCardsTotal3.Name = "labelSplitCardsTotal3";
+            this.labelSplitCardsTotal3.Size = new System.Drawing.Size(72, 16);
+            this.labelSplitCardsTotal3.TabIndex = 108;
+            this.labelSplitCardsTotal3.Text = "cardsTotal";
+            this.labelSplitCardsTotal3.Visible = false;
+            // 
+            // labelSplitResult4
+            // 
+            this.labelSplitResult4.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.labelSplitResult4.AutoSize = true;
+            this.labelSplitResult4.BackColor = System.Drawing.Color.Black;
+            this.labelSplitResult4.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelSplitResult4.ForeColor = System.Drawing.Color.Gainsboro;
+            this.labelSplitResult4.Location = new System.Drawing.Point(642, 700);
+            this.labelSplitResult4.Name = "labelSplitResult4";
+            this.labelSplitResult4.Size = new System.Drawing.Size(62, 24);
+            this.labelSplitResult4.TabIndex = 111;
+            this.labelSplitResult4.Text = "Result";
+            this.labelSplitResult4.Visible = false;
+            // 
+            // labelSplitCardsTotal4
+            // 
+            this.labelSplitCardsTotal4.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.labelSplitCardsTotal4.AutoSize = true;
+            this.labelSplitCardsTotal4.BackColor = System.Drawing.Color.Black;
+            this.labelSplitCardsTotal4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelSplitCardsTotal4.ForeColor = System.Drawing.Color.Gainsboro;
+            this.labelSplitCardsTotal4.Location = new System.Drawing.Point(643, 676);
+            this.labelSplitCardsTotal4.Name = "labelSplitCardsTotal4";
+            this.labelSplitCardsTotal4.Size = new System.Drawing.Size(72, 16);
+            this.labelSplitCardsTotal4.TabIndex = 110;
+            this.labelSplitCardsTotal4.Text = "cardsTotal";
+            this.labelSplitCardsTotal4.Visible = false;
+            // 
+            // labelSplitResult5
+            // 
+            this.labelSplitResult5.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.labelSplitResult5.AutoSize = true;
+            this.labelSplitResult5.BackColor = System.Drawing.Color.Black;
+            this.labelSplitResult5.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelSplitResult5.ForeColor = System.Drawing.Color.Gainsboro;
+            this.labelSplitResult5.Location = new System.Drawing.Point(466, 671);
+            this.labelSplitResult5.Name = "labelSplitResult5";
+            this.labelSplitResult5.Size = new System.Drawing.Size(62, 24);
+            this.labelSplitResult5.TabIndex = 113;
+            this.labelSplitResult5.Text = "Result";
+            this.labelSplitResult5.Visible = false;
+            // 
+            // labelSplitCardsTotal5
+            // 
+            this.labelSplitCardsTotal5.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.labelSplitCardsTotal5.AutoSize = true;
+            this.labelSplitCardsTotal5.BackColor = System.Drawing.Color.Black;
+            this.labelSplitCardsTotal5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelSplitCardsTotal5.ForeColor = System.Drawing.Color.Gainsboro;
+            this.labelSplitCardsTotal5.Location = new System.Drawing.Point(467, 647);
+            this.labelSplitCardsTotal5.Name = "labelSplitCardsTotal5";
+            this.labelSplitCardsTotal5.Size = new System.Drawing.Size(72, 16);
+            this.labelSplitCardsTotal5.TabIndex = 112;
+            this.labelSplitCardsTotal5.Text = "cardsTotal";
+            this.labelSplitCardsTotal5.Visible = false;
+            // 
+            // labelSplitResult6
+            // 
+            this.labelSplitResult6.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.labelSplitResult6.AutoSize = true;
+            this.labelSplitResult6.BackColor = System.Drawing.Color.Black;
+            this.labelSplitResult6.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelSplitResult6.ForeColor = System.Drawing.Color.Gainsboro;
+            this.labelSplitResult6.Location = new System.Drawing.Point(291, 620);
+            this.labelSplitResult6.Name = "labelSplitResult6";
+            this.labelSplitResult6.Size = new System.Drawing.Size(62, 24);
+            this.labelSplitResult6.TabIndex = 115;
+            this.labelSplitResult6.Text = "Result";
+            this.labelSplitResult6.Visible = false;
+            // 
+            // labelSplitCardsTotal6
+            // 
+            this.labelSplitCardsTotal6.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.labelSplitCardsTotal6.AutoSize = true;
+            this.labelSplitCardsTotal6.BackColor = System.Drawing.Color.Black;
+            this.labelSplitCardsTotal6.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelSplitCardsTotal6.ForeColor = System.Drawing.Color.Gainsboro;
+            this.labelSplitCardsTotal6.Location = new System.Drawing.Point(292, 596);
+            this.labelSplitCardsTotal6.Name = "labelSplitCardsTotal6";
+            this.labelSplitCardsTotal6.Size = new System.Drawing.Size(72, 16);
+            this.labelSplitCardsTotal6.TabIndex = 114;
+            this.labelSplitCardsTotal6.Text = "cardsTotal";
+            this.labelSplitCardsTotal6.Visible = false;
+            // 
+            // labelSplitResult7
+            // 
+            this.labelSplitResult7.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.labelSplitResult7.AutoSize = true;
+            this.labelSplitResult7.BackColor = System.Drawing.Color.Black;
+            this.labelSplitResult7.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelSplitResult7.ForeColor = System.Drawing.Color.Gainsboro;
+            this.labelSplitResult7.Location = new System.Drawing.Point(97, 582);
+            this.labelSplitResult7.Name = "labelSplitResult7";
+            this.labelSplitResult7.Size = new System.Drawing.Size(62, 24);
+            this.labelSplitResult7.TabIndex = 117;
+            this.labelSplitResult7.Text = "Result";
+            this.labelSplitResult7.Visible = false;
+            // 
+            // labelSplitCardsTotal7
+            // 
+            this.labelSplitCardsTotal7.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.labelSplitCardsTotal7.AutoSize = true;
+            this.labelSplitCardsTotal7.BackColor = System.Drawing.Color.Black;
+            this.labelSplitCardsTotal7.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelSplitCardsTotal7.ForeColor = System.Drawing.Color.Gainsboro;
+            this.labelSplitCardsTotal7.Location = new System.Drawing.Point(98, 558);
+            this.labelSplitCardsTotal7.Name = "labelSplitCardsTotal7";
+            this.labelSplitCardsTotal7.Size = new System.Drawing.Size(72, 16);
+            this.labelSplitCardsTotal7.TabIndex = 116;
+            this.labelSplitCardsTotal7.Text = "cardsTotal";
+            this.labelSplitCardsTotal7.Visible = false;
             // 
             // FormBlackjackGame
             // 
@@ -2263,5 +2491,19 @@
         private System.Windows.Forms.Label labelChooseTimer;
         private System.Windows.Forms.Button buttonMinimize;
         private System.Windows.Forms.Button buttonMaximize;
+        private System.Windows.Forms.Label labelSplitResult7;
+        private System.Windows.Forms.Label labelSplitCardsTotal7;
+        private System.Windows.Forms.Label labelSplitResult6;
+        private System.Windows.Forms.Label labelSplitCardsTotal6;
+        private System.Windows.Forms.Label labelSplitResult5;
+        private System.Windows.Forms.Label labelSplitCardsTotal5;
+        private System.Windows.Forms.Label labelSplitResult4;
+        private System.Windows.Forms.Label labelSplitCardsTotal4;
+        private System.Windows.Forms.Label labelSplitResult3;
+        private System.Windows.Forms.Label labelSplitCardsTotal3;
+        private System.Windows.Forms.Label labelSplitResult2;
+        private System.Windows.Forms.Label labelSplitCardsTotal2;
+        private System.Windows.Forms.Label labelSplitResult1;
+        private System.Windows.Forms.Label labelSplitCardsTotal1;
     }
 }

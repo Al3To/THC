@@ -29,6 +29,7 @@ namespace Client.ServerForms
         int playerSeat;
         float playerBalance;
         float bet;
+        bool splitCard = false;
         bool insurance = false;
         public FormBlackjackGame(string playerUsername, float playerBalance)
         {
@@ -184,6 +185,14 @@ namespace Client.ServerForms
                             {
                                 UpdateCard(data);
                             });
+                        }
+                        else if (data.StartsWith("addSplitCard"))
+                        {
+                            Invoke((MethodInvoker)delegate
+                            {
+                                UpdateSplitCard(data);
+                            });
+
                         }
                         else if (data.StartsWith("addDealerCard"))
                         {
@@ -388,7 +397,6 @@ namespace Client.ServerForms
             switch (seat)
             {
                 case 1:
-                    Console.WriteLine("Entrato nel case 1");
                     labelUsername1.Text = username;
                     labelUsername1.Visible = true;
                     buttonSeat1.Visible = false;
@@ -443,7 +451,13 @@ namespace Client.ServerForms
             string dir = "../../../Images/cards/" + split[3] + split[4] + ".png";
             if (split[1] == "1")
             {
+                if (Convert.ToInt32(split[6]) > 21)
+                {
+                    labelResult1.Text = "BUSTED";
+                    labelResult1.Visible = true;
+                }
                 labelCardsTotal1.Text = split[6];
+                labelCardsTotal1.Visible = true;
                 switch (split[2])
                 {
                     case "1":
@@ -472,7 +486,13 @@ namespace Client.ServerForms
             }
             else if (split[1] == "2")
             {
+                if (Convert.ToInt32(split[6]) > 21)
+                {
+                    labelResult2.Text = "BUSTED";
+                    labelResult2.Visible = true;
+                }
                 labelCardsTotal2.Text = split[6];
+                labelCardsTotal2.Visible = true;
                 switch (split[2])
                 {
                     case "1":
@@ -500,6 +520,12 @@ namespace Client.ServerForms
             }
             else if (split[1] == "3")
             {
+                if (Convert.ToInt32(split[6]) > 21)
+                {
+                    labelResult3.Text = "BUSTED";
+                    labelResult3.Visible = true;
+                }
+                labelCardsTotal3.Visible = true;
                 labelCardsTotal3.Text = split[6];
                 switch (split[2])
                 {
@@ -528,7 +554,13 @@ namespace Client.ServerForms
             }
             else if (split[1] == "4")
             {
+                if (Convert.ToInt32(split[6]) > 21)
+                {
+                    labelResult4.Text = "BUSTED";
+                    labelResult4.Visible = true;
+                }
                 labelCardsTotal4.Text = split[6];
+                labelCardsTotal4.Visible = true;
                 switch (split[2])
                 {
                     case "1":
@@ -556,7 +588,13 @@ namespace Client.ServerForms
             }
             else if (split[1] == "5")
             {
+                if (Convert.ToInt32(split[6]) > 21)
+                {
+                    labelResult5.Text = "BUSTED";
+                    labelResult5.Visible = true;
+                }
                 labelCardsTotal5.Text = split[6];
+                labelCardsTotal5.Visible = true;
                 switch (split[2])
                 {
                     case "1":
@@ -584,7 +622,13 @@ namespace Client.ServerForms
             }
             else if (split[1] == "6")
             {
+                if (Convert.ToInt32(split[6]) > 21)
+                {
+                    labelResult6.Text = "BUSTED";
+                    labelResult6.Visible = true;
+                }
                 labelCardsTotal6.Text = split[6];
+                labelCardsTotal6.Visible = true;
                 switch (split[2])
                 {
                     case "1":
@@ -612,7 +656,13 @@ namespace Client.ServerForms
             }
             else if (split[1] == "7")
             {
+                if (Convert.ToInt32(split[6]) > 21)
+                {
+                    labelResult7.Text = "BUSTED";
+                    labelResult7.Visible = true;
+                }
                 labelCardsTotal7.Text = split[6];
+                labelCardsTotal7.Visible = true;
                 switch (split[2])
                 {
                     case "1":
@@ -636,6 +686,187 @@ namespace Client.ServerForms
                         card5_7.Visible = true;
                         break;
 
+                }
+            }
+        }
+        void UpdateSplitCard(string data)
+        {
+            string[] split = data.Split(';');
+            string dir = "../../../Images/cards/" + split[3] + split[4] + ".png";
+            if (split[1] == "1")
+            {
+                if (Convert.ToInt32(split[6]) > 21)
+                {
+                    labelSplitResult1.Text = "BUSTED";
+                    labelSplitResult1.Visible = true;
+                }
+                labelSplitCardsTotal1.Text = split[6];
+                labelSplitCardsTotal1.Visible = true;
+                switch (split[2])
+                {
+                    case "2":
+                        cardSplit2_1.ImageLocation = dir;
+                        cardSplit2_1.Visible = true;
+                        break;
+                    case "3":
+                        cardSplit3_1.ImageLocation = dir;
+                        cardSplit3_1.Visible = true;
+                        break;
+                    case "4":
+                        cardSplit4_1.ImageLocation = dir;
+                        cardSplit4_1.Visible = true;
+                        break;
+
+                }
+            }
+            else if (split[1] == "2")
+            {
+                if (Convert.ToInt32(split[6]) > 21)
+                {
+                    labelSplitResult2.Text = "BUSTED";
+                    labelSplitResult2.Visible = true;
+                }
+                labelSplitCardsTotal2.Text = split[6];
+                labelSplitCardsTotal2.Visible = true;
+                switch (split[2])
+                {
+                    case "2":
+                        cardSplit2_2.ImageLocation = dir;
+                        cardSplit2_2.Visible = true;
+                        break;
+                    case "3":
+                        cardSplit3_2.ImageLocation = dir;
+                        cardSplit3_2.Visible = true;
+                        break;
+                    case "4":
+                        cardSplit4_2.ImageLocation = dir;
+                        cardSplit4_2.Visible = true;
+                        break;
+                }
+            }
+            else if (split[1] == "3")
+            {
+                if (Convert.ToInt32(split[6]) > 21)
+                {
+                    labelSplitResult3.Text = "BUSTED";
+                    labelSplitResult3.Visible = true;
+                }
+                labelSplitCardsTotal3.Visible = true;
+                labelSplitCardsTotal3.Text = split[6];
+                switch (split[2])
+                {
+                    case "2":
+                        cardSplit2_3.ImageLocation = dir;
+                        cardSplit2_3.Visible = true;
+                        break;
+                    case "3":
+                        cardSplit3_3.ImageLocation = dir;
+                        cardSplit3_3.Visible = true;
+                        break;
+                    case "4":
+                        cardSplit4_3.ImageLocation = dir;
+                        cardSplit4_3.Visible = true;
+                        break;
+                }
+            }
+            else if (split[1] == "4")
+            {
+                if (Convert.ToInt32(split[6]) > 21)
+                {
+                    labelSplitResult4.Text = "BUSTED";
+                    labelSplitResult4.Visible = true;
+                }
+                labelSplitCardsTotal4.Text = split[6];
+                labelSplitCardsTotal4.Visible = true;
+                switch (split[2])
+                {
+                    case "2":
+                        cardSplit2_4.ImageLocation = dir;
+                        cardSplit2_4.Visible = true;
+                        break;
+                    case "3":
+                        cardSplit3_4.ImageLocation = dir;
+                        cardSplit3_4.Visible = true;
+                        break;
+                    case "4":
+                        cardSplit4_4.ImageLocation = dir;
+                        cardSplit4_4.Visible = true;
+                        break;
+                }
+            }
+            else if (split[1] == "5")
+            {
+                if (Convert.ToInt32(split[6]) > 21)
+                {
+                    labelSplitResult5.Text = "BUSTED";
+                    labelSplitResult5.Visible = true;
+                }
+                labelCardsTotal5.Text = split[6];
+                labelCardsTotal5.Visible = true;
+                switch (split[2])
+                {
+                    case "2":
+                        cardSplit2_5.ImageLocation = dir;
+                        cardSplit2_5.Visible = true;
+                        break;
+                    case "3":
+                        cardSplit3_5.ImageLocation = dir;
+                        cardSplit3_5.Visible = true;
+                        break;
+                    case "4":
+                        cardSplit4_5.ImageLocation = dir;
+                        cardSplit4_5.Visible = true;
+                        break;
+                }
+            }
+            else if (split[1] == "6")
+            {
+                if (Convert.ToInt32(split[6]) > 21)
+                {
+                    labelSplitResult6.Text = "BUSTED";
+                    labelSplitResult6.Visible = true;
+                }
+                labelSplitCardsTotal6.Text = split[6];
+                labelSplitCardsTotal6.Visible = true;
+                switch (split[2])
+                {
+                    case "2":
+                        cardSplit2_6.ImageLocation = dir;
+                        cardSplit2_6.Visible = true;
+                        break;
+                    case "3":
+                        cardSplit3_6.ImageLocation = dir;
+                        cardSplit3_6.Visible = true;
+                        break;
+                    case "4":
+                        cardSplit4_6.ImageLocation = dir;
+                        cardSplit4_6.Visible = true;
+                        break;
+                }
+            }
+            else if (split[1] == "7")
+            {
+                if (Convert.ToInt32(split[6]) > 21)
+                {
+                    labelSplitResult7.Text = "BUSTED";
+                    labelSplitResult7.Visible = true;
+                }
+                labelSplitCardsTotal7.Text = split[6];
+                labelSplitCardsTotal7.Visible = true;
+                switch (split[2])
+                {
+                    case "2":
+                        cardSplit2_7.ImageLocation = dir;
+                        cardSplit2_7.Visible = true;
+                        break;
+                    case "3":
+                        cardSplit3_7.ImageLocation = dir;
+                        cardSplit3_7.Visible = true;
+                        break;
+                    case "4":
+                        cardSplit4_7.ImageLocation = dir;
+                        cardSplit4_7.Visible = true;
+                        break;
                 }
             }
         }
@@ -706,24 +937,31 @@ namespace Client.ServerForms
             {
                 case "1":
                     labelResult1.Text = "BLACKJACK";
+                    labelResult1.Visible = true;
                     break;
                 case "2":
                     labelResult2.Text = "BLACKJACK";
+                    labelResult2.Visible = true;
                     break;
                 case "3":
                     labelResult3.Text = "BLACKJACK";
+                    labelResult3.Visible = true;
                     break;
                 case "4":
                     labelResult4.Text = "BLACKJACK";
+                    labelResult4.Visible = true;
                     break;
                 case "5":
                     labelResult5.Text = "BLACKJACK";
+                    labelResult5.Visible = true;
                     break;
                 case "6":
                     labelResult6.Text = "BLACKJACK";
+                    labelResult6.Visible = true;
                     break;
                 case "7":
                     labelResult7.Text = "BLACKJACK";
+                    labelResult7.Visible = true;
                     break;
             }
         }
@@ -732,30 +970,37 @@ namespace Client.ServerForms
             string[] split = data.Split(';');
             playerBalance += float.Parse(split[1]);
             labelBalance.Text = "Saldo: " + playerBalance.ToString();
-            labelBet.Text = "0";
+            labelBet.Text = "Puntata: 0";
             labelLastWin.Text = "Ultima Vincita: " + split[1].ToString();
             switch (playerSeat)
             {
                 case 1:
                     labelResult1.Text = "BLACKJACK";
+                    labelResult1.Visible = true;
                     break;
                 case 2:
                     labelResult2.Text = "BLACKJACK";
+                    labelResult2.Visible = true;
                     break;
                 case 3:
                     labelResult3.Text = "BLACKJACK";
+                    labelResult3.Visible = true;
                     break;
                 case 4:
                     labelResult4.Text = "BLACKJACK";
+                    labelResult4.Visible = true;
                     break;
                 case 5:
                     labelResult5.Text = "BLACKJACK";
+                    labelResult5.Visible = true;
                     break;
                 case 6:
                     labelResult6.Text = "BLACKJACK";
+                    labelResult6.Visible = true;
                     break;
                 case 7:
                     labelResult7.Text = "BLACKJACK";
+                    labelResult7.Visible = true;
                     break;
             }
         }
@@ -770,6 +1015,7 @@ namespace Client.ServerForms
             labelInsuranceTimer.Text = split[1];
             if (Convert.ToInt32(split[1]) == 0)
             {
+                panelInsurance.Visible = false;
                 if (!insurance)
                     toSend = Encoding.ASCII.GetBytes("insuranceResponse;false/s/");
                 else
@@ -783,7 +1029,7 @@ namespace Client.ServerForms
             string dir = "../../../Images/cards/" + split[1] + split[2] + ".png";
             card2_D.ImageLocation = dir;
             playerBalance = Convert.ToInt32(split[3]);
-            labelBalance.Text = split[3];
+            labelBalance.Text = "Saldo: " + split[3];
         }
         void MakeChoose(string data)
         {
@@ -825,6 +1071,93 @@ namespace Client.ServerForms
                 labelBalance.Text = (playerBalance - (bet / 2)).ToString();
                 panelInsurance.Visible = false;
                 insurance = true;
+            }
+            else
+                MessageBox.Show("Non hai abbastanza credito!");
+        }
+        private void buttonDouble_Click(object sender, EventArgs e)
+        {
+            if (playerBalance >= bet)
+            {
+                bet *= 2;
+                labelBet.Text = "Puntata: " + bet.ToString();
+                byte[] toSend = Encoding.ASCII.GetBytes("double/s/");
+                socket.Send(toSend);
+                panelChoose.Visible = false;
+            }
+            else
+                MessageBox.Show("Non hai abbastanza credito!");
+        }
+
+        private void buttonCard_Click(object sender, EventArgs e)
+        {
+            byte[] toSend = Encoding.ASCII.GetBytes("getCard/s/");
+            socket.Send(toSend);
+            panelChoose.Visible = false;
+        }
+
+        private void buttonStay_Click(object sender, EventArgs e)
+        {
+            byte[] toSend = Encoding.ASCII.GetBytes("stay/s/");
+            socket.Send(toSend);
+            panelChoose.Visible = false;
+        }
+
+        private void buttonSplit_Click(object sender, EventArgs e)
+        {
+            if (playerBalance >= bet)
+            {
+                splitCard = true;
+                switch (playerSeat)
+                {
+                    case 1:
+                        cardSplit1_1.ImageLocation = card2_1.ImageLocation;
+                        card2_1.ImageLocation = card1_1.ImageLocation;
+                        card1_1.Visible = false;
+                        card1_1.ImageLocation = null;
+                        break;
+                    case 2:
+                        cardSplit1_2.ImageLocation = card2_2.ImageLocation;
+                        card2_2.ImageLocation = card1_2.ImageLocation;
+                        card1_2.Visible = false;
+                        card1_2.ImageLocation = null;
+                        break;
+                    case 3:
+                        cardSplit1_3.ImageLocation = card2_3.ImageLocation;
+                        card2_3.ImageLocation = card1_3.ImageLocation;
+                        card1_3.Visible = false;
+                        card1_3.ImageLocation = null;
+                        break;
+                    case 4:
+                        cardSplit1_4.ImageLocation = card2_4.ImageLocation;
+                        card2_4.ImageLocation = card1_4.ImageLocation;
+                        card1_4.Visible = false;
+                        card1_4.ImageLocation = null;
+                        break;
+                    case 5:
+                        cardSplit1_5.ImageLocation = card2_5.ImageLocation;
+                        card2_5.ImageLocation = card1_5.ImageLocation;
+                        card1_5.Visible = false;
+                        card1_5.ImageLocation = null;
+                        break;
+                    case 6:
+                        cardSplit1_6.ImageLocation = card2_6.ImageLocation;
+                        card2_6.ImageLocation = card1_6.ImageLocation;
+                        card1_6.Visible = false;
+                        card1_6.ImageLocation = null;
+                        break;
+                    case 7:
+                        cardSplit1_7.ImageLocation = card2_7.ImageLocation;
+                        card2_7.ImageLocation = card1_7.ImageLocation;
+                        card1_7.Visible = false;
+                        card1_7.ImageLocation = null;
+                        break;
+                }
+                bet *= 2;
+                labelBet.Text = "Puntata: " + bet.ToString();
+                byte[] toSend = Encoding.ASCII.GetBytes("split/s/");
+                socket.Send(toSend);
+                panelChoose.Visible = false;
             }
             else
                 MessageBox.Show("Non hai abbastanza credito!");

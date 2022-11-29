@@ -131,7 +131,7 @@ void Game()
                             toSend = asc.GetBytes("none/c/");
                             handler.Send(toSend);
                         }
-                        
+
                     }
                     else if (data.StartsWith("register"))
                     {
@@ -145,14 +145,14 @@ void Game()
                             if (_split[3] == split[3])
                                 alredyUsedEmail = true;
                         }
-                        if (alredyUsedEmail) 
+                        if (alredyUsedEmail)
                         {
                             toSend = asc.GetBytes("alredyUsed/c/");
                             handler.Send(toSend);
                         }
                         else
                         {
-                            File.AppendAllText(@"../../../../files/users.txt","\n" + split[1] + ";" + split[2] + ";user;" + split[3] + ";0;" + split[4] + ";" + split[5] + ";" + split[6]);
+                            File.AppendAllText(@"../../../../files/users.txt", "\n" + split[1] + ";" + split[2] + ";user;" + split[3] + ";0;" + split[4] + ";" + split[5] + ";" + split[6]);
                             toSend = asc.GetBytes("ok/c/");
                             handler.Send(toSend);
                         }
@@ -215,7 +215,66 @@ void Game()
                                     playingPlayers[n].balance -= playingPlayers[n].bet / 2;
                             }
                     }
-                    else if(data == "disconnectFromTableOne")
+                    else if (data == "double")
+                    {
+                        playingPlayers[turn].done = true;
+                        playingPlayers[turn].balance -= playingPlayers[turn].bet;
+                        playingPlayers[turn].bet *= 2;
+                        playingPlayers[turn].playerCards.Add(deck[0]);
+                        playingPlayers[turn].UpdateTotal();
+                        toSend = asc.GetBytes("addCard;" + playingPlayers[turn].seatPosition + ";" + playingPlayers[turn].playerCards.Count.ToString() + ";" + deck[0].cardName + ";" + deck[0].cardSymbol + ";" + deck[0].cardValue.ToString() + ";" + playingPlayers[turn].cardsTotal.ToString() + "/c/");
+                        for (int m = 0; m < sockets.Count; ++m)
+                            sockets[m].Send(toSend);
+                        deck.RemoveAt(0);
+                        NextTurn();
+                    }
+                    else if (data == "getCard")
+                    {
+
+                        playingPlayers[turn].playerCards.Add(deck[0]);
+                        playingPlayers[turn].UpdateTotal();
+                        toSend = asc.GetBytes("addCard;" + playingPlayers[turn].seatPosition + ";" + playingPlayers[turn].playerCards.Count.ToString() + ";" + deck[0].cardName + ";" + deck[0].cardSymbol + ";" + deck[0].cardValue.ToString() + ";" + playingPlayers[turn].cardsTotal.ToString() + "/c/");
+                        for (int m = 0; m < sockets.Count; ++m)
+                            sockets[m].Send(toSend);
+                        deck.RemoveAt(0);
+                        if (playingPlayers[turn].cardsTotal > 21)
+                        {
+                            playingPlayers[turn].done = true;
+                            NextTurn();
+                        }
+                        else
+                            MakeChoose();
+
+                    }
+                    else if (data == "stay")
+                    {
+                        if (playingPlayers[turn].done)
+                            playingPlayers[turn].doneSplit = true;
+                        else
+                            playingPlayers[turn].done = true;
+                        NextTurn();
+                    }
+                    else if (data == "split")
+                    {
+                        playingPlayers[turn].balance -= playingPlayers[turn].bet;
+                        playingPlayers[turn].bet *= 2;
+                        playingPlayers[turn].playerSplitCards.Add(playingPlayers[turn].playerSplitCards[1]);
+                        playingPlayers[turn].playerCards.RemoveAt(1);
+                        playingPlayers[turn].playerCards.Add(deck[0]);
+                        playingPlayers[turn].UpdateTotal();
+                        toSend = asc.GetBytes("addCard;" + playingPlayers[turn].seatPosition + ";" + playingPlayers[turn].playerCards.Count.ToString() + ";" + deck[0].cardName + ";" + deck[0].cardSymbol + ";" + deck[0].cardValue.ToString() + ";" + playingPlayers[turn].cardsTotal.ToString() + "/c/");
+                        for (int m = 0; m < sockets.Count; ++m)
+                            sockets[m].Send(toSend);
+                        deck.RemoveAt(0);
+                        playingPlayers[turn].playerSplitCards.Add(deck[0]);
+                        playingPlayers[turn].UpdateSplitTotal();
+                        toSend = asc.GetBytes("addSplitCard;" + playingPlayers[turn].seatPosition + ";" + playingPlayers[turn].playerSplitCards.Count.ToString() + ";" + deck[0].cardName + ";" + deck[0].cardSymbol + ";" + deck[0].cardValue.ToString() + ";" + playingPlayers[turn].splitCardsTotal.ToString() + "/c/");
+                        for (int m = 0; m < sockets.Count; ++m)
+                            sockets[m].Send(toSend);
+                        deck.RemoveAt(0);
+                        MakeChoose();
+                    }
+                    else if (data == "disconnectFromTableOne")
                     {
                         string seat = null;
                         for (int j = 0; j < players.Count; ++j)
@@ -231,9 +290,9 @@ void Game()
                                 toSend = asc.GetBytes("playerDisconnect;" + seat + "/c/");
                                 for (int m = 0; m < sockets.Count; ++m)
                                     sockets[m].Send(toSend);
-                            }   
+                            }
                     }
-                    else if(data == "Disconnect")
+                    else if (data == "Disconnect")
                     {
                         for (int j = 0; j < sockets.Count; ++j)
                             if (handler == sockets[j])
@@ -344,7 +403,7 @@ void ShuffleDeck()
 {
     Card temp = new Card();
     Random rand = new Random();
-    int n = deck.Count * 3;
+    int n = deck.Count * 6;
     while (n > 1)
     {
         n--;
@@ -371,6 +430,7 @@ async void FillTable()
             deck.RemoveAt(0);
             await Task.Delay(100);
         }
+        
         dealer.dealerCards.Add(deck[0]);
         dealer.UpdateTotal();
         if (j == 0)
@@ -381,6 +441,7 @@ async void FillTable()
             sockets[m].Send(toSend);
         deck.RemoveAt(0);
     }
+    await Task.Delay(1000);
     if (dealer.dealerCards[0].cardName == "ace")
     {
         toSend = asc.GetBytes("insuranceRequest/c/");
@@ -389,16 +450,15 @@ async void FillTable()
         int timer = 10;
         while (timer >= 0)
         {
+            await Task.Delay(1000);
             toSend = asc.GetBytes("timerInsurance;" + timer.ToString() + "/c/");
             for (int m = 0; m < playingPlayers.Count; ++m)
                 playingPlayers[m].playerSocket.Send(toSend);
             timer--;
-            await Task.Delay(1000);
         }
         await Task.Delay(1000);
 
         if (dealer.dealerCards[1].cardValue == 10)
-
             for (int m = 0; m < playingPlayers.Count; ++m)
             {
                 if (playingPlayers[m].insurance)
@@ -411,8 +471,10 @@ async void FillTable()
             }
         else
             NextTurn();
-        
+
     }
+    else
+        NextTurn();
     
 }
 void ClearTable()
@@ -425,6 +487,9 @@ void ClearTable()
 void SortPlayers()
 {
     playingPlayers = players.OrderBy(o => o.seatPosition).ToList();
+    for(int n = 0; n<playingPlayers.Count; ++n)
+        if(playingPlayers[n].bet == 0)
+            playingPlayers.RemoveAt(n);
 }
 void CheckBlackJack()
 {
@@ -444,44 +509,52 @@ void CheckBlackJack()
                 }
         }
 }
-async void NextTurn()
+void NextTurn()
 {
     byte[] toSend = null;
-    bool allPlayersDone = false;
-    for(int n = 0; n<playingPlayers.Count; ++n)
-    {
-        if (!playingPlayers[n].done) break;
-        if(n == playingPlayers.Count - 1) 
-            allPlayersDone = true;
-    }
-    if (allPlayersDone)
-        EndGame();
 
-    if (turn >= playingPlayers.Count -1 && !allPlayersDone)
-        turn = 0;
+    if (playingPlayers[playingPlayers.Count - 1].done && playingPlayers[playingPlayers.Count - 1].playerSplitCards.Count == 0)
+        EndGame();
+    else if (playingPlayers[playingPlayers.Count - 1].doneSplit)
+        EndGame();
 
     while (playingPlayers[turn].done)
         turn++;
 
-
     if (playingPlayers[turn].cardsTotal == 21)
     {
         playingPlayers[turn].done = true;
-        NextTurn();
+        if (playingPlayers[turn].playerSplitCards.Count > 0 && !playingPlayers[turn].doneSplit)
+            MakeChoose();
+        else
+        {
+            turn++;
+            NextTurn();
+        }
     }
-    else if (playingPlayers[turn].playerCards[0] == playingPlayers[turn].playerCards[1] && playingPlayers[turn].playerCards.Count == 2)
+    else
+        MakeChoose();
+    
+    
+}
+async void MakeChoose()
+{
+    byte[] toSend = null;
+
+    if (playingPlayers[turn].playerCards[0].cardName == playingPlayers[turn].playerCards[1].cardName && playingPlayers[turn].playerCards.Count == 2 && playingPlayers[turn].playerSplitCards.Count == 0)
         toSend = asc.GetBytes("makeChoose;canSplit/c/");
     else
         toSend = asc.GetBytes("makeChoose;cantSplit/c/");
+
     playingPlayers[turn].playerSocket.Send(toSend);
     int timer = 15;
-    while (timer >= 0)
-    {
-        toSend = asc.GetBytes("timerChoose;" + timer.ToString() + "/c/");
-        playingPlayers[turn].playerSocket.Send(toSend);
-        timer--;
-        await Task.Delay(1000);
-    }
+        while (timer >= 0)
+        {
+            await Task.Delay(1000);
+            toSend = asc.GetBytes("timerChoose;" + timer.ToString() + "/c/");
+            playingPlayers[turn].playerSocket.Send(toSend);
+            timer--;
+        }
 }
 void EndGame()
 {
@@ -492,20 +565,16 @@ class Dealer
     public List<Card> dealerCards = new List<Card>();
     public int cardsTotal = 0;
     public bool hasAce;
-    bool aceValueOne = false;
     public void UpdateTotal()
     {
-        for (int n = 0; n < dealerCards.Count; ++n)
-            cardsTotal += dealerCards[n].cardValue;
-        if (this.hasAce && !aceValueOne)
+        for (int n = 0; n < this.dealerCards.Count; ++n)
+            this.cardsTotal += this.dealerCards[n].cardValue;
+        if (this.hasAce)
         {
-            if (cardsTotal > 21)
-                for (int n = 0; n < dealerCards.Count; ++n)
-                    if (dealerCards[n].cardName == "ace")
-                    {
-                        dealerCards[n].cardValue = 1;
-                        aceValueOne = true;
-                    }
+            if (this.cardsTotal > 21)
+                for (int n = 0; n < this.dealerCards.Count; ++n)
+                    if (this.dealerCards[n].cardName == "ace" && this.dealerCards[n].cardValue == 11)
+                        this.dealerCards[n].cardValue = 1;
             this.UpdateTotal();
         }
     }
@@ -519,27 +588,40 @@ class Player
     public List<Card> playerCards = new List<Card>();
     public List<Card> playerSplitCards = new List<Card>();
     public bool hasAce;
-    bool aceValueOne = false;
-    public int cardsTotal = 0;
+    public int cardsTotal;
+    public int splitCardsTotal;
     public float bet;
     public float win;
     public bool done = false;
+    public bool doneSplit = false;
     public bool insurance = false;
 
     public void UpdateTotal()
     {
-        for(int n = 0; n<playerCards.Count; ++n)
-            cardsTotal += playerCards[n].cardValue;
-        if (this.hasAce && !aceValueOne)
+        this.cardsTotal = 0;
+        for(int n = 0; n<this.playerCards.Count; ++n)
+            this.cardsTotal += this.playerCards[n].cardValue;
+        if (this.hasAce)
         {
-            if (cardsTotal > 21)
-                for (int n = 0; n < playerCards.Count; ++n)
-                    if (playerCards[n].cardName == "ace")
-                    {
-                        playerCards[n].cardValue = 1;
-                        aceValueOne = true;
-                    }
+            if (this.cardsTotal > 21)
+                for (int n = 0; n < this.playerCards.Count; ++n)
+                    if (this.playerCards[n].cardName == "ace" && this.playerCards[n].cardValue == 11)
+                        this.playerCards[n].cardValue = 1;
             this.UpdateTotal();
+        }
+    }
+    public void UpdateSplitTotal()
+    {
+        this.splitCardsTotal = 0;
+        for (int n = 0; n < this.playerSplitCards.Count; ++n)
+            this.splitCardsTotal += this.playerSplitCards[n].cardValue;
+        if (this.hasAce)
+        {
+            if (this.splitCardsTotal > 21)
+                for (int n = 0; n < this.playerCards.Count; ++n)
+                    if (this.playerSplitCards[n].cardName == "ace" && this.playerSplitCards[n].cardValue == 11)
+                        this.playerSplitCards[n].cardValue = 1;
+            this.UpdateSplitTotal();
         }
     }
 }
