@@ -28,6 +28,7 @@ namespace Client.ServerForms
         string playerUsername;
         int playerSeat;
         float playerBalance;
+        List<int> betLog = new List<int>();
         float bet;
         bool splitCard = false;
         bool insurance = false;
@@ -77,6 +78,7 @@ namespace Client.ServerForms
         {
             Seat(1);
             labelUsername1.Text = playerUsername;
+            labelUsername1.BackColor = Color.Yellow;
             labelUsername1.Visible = true;
         }
 
@@ -84,6 +86,7 @@ namespace Client.ServerForms
         {
             Seat(2);
             labelUsername2.Text = playerUsername;
+            labelUsername2.BackColor = Color.Yellow;
             labelUsername2.Visible = true;
         }
 
@@ -91,6 +94,7 @@ namespace Client.ServerForms
         {
             Seat(3);
             labelUsername3.Text = playerUsername;
+            labelUsername3.BackColor = Color.Yellow;
             labelUsername3.Visible = true;
         }
 
@@ -98,6 +102,7 @@ namespace Client.ServerForms
         {
             Seat(4);
             labelUsername4.Text = playerUsername;
+            labelUsername4.BackColor = Color.Yellow;
             labelUsername4.Visible = true;
         }
 
@@ -105,6 +110,7 @@ namespace Client.ServerForms
         {
             Seat(5);
             labelUsername5.Text = playerUsername;
+            labelUsername5.BackColor = Color.Yellow;
             labelUsername5.Visible = true;
         }
 
@@ -113,6 +119,7 @@ namespace Client.ServerForms
         {
             Seat(6);
             labelUsername6.Text = playerUsername;
+            labelUsername6.BackColor = Color.Yellow;
             labelUsername6.Visible = true;
         }
 
@@ -120,12 +127,13 @@ namespace Client.ServerForms
         {
             Seat(7);
             labelUsername7.Text = playerUsername;
+            labelUsername7.BackColor = Color.Yellow;
             labelUsername7.Visible = true;
         }
         void Seat(int seat)
         {
             byte[] bytes = new byte[1024];
-            byte[] toSend = Encoding.ASCII.GetBytes("seat;" + playerUsername + ";" + seat.ToString() + "/s/");
+            byte[] toSend = Encoding.ASCII.GetBytes("seat;" + playerUsername + ";" + seat.ToString() + ";" + playerBalance.ToString() + "/s/");
             socket.Send(toSend);
             playerSeat = seat;
         }
@@ -436,11 +444,17 @@ namespace Client.ServerForms
         void UpdateTimer(string data)
         {
             string[] split = data.Split(';');
-            labelOpenedBet.Visible = true;
+            if (Convert.ToInt32(split[1]) == 30)
+            {
+                labelOpenedBet.Text = "SCOMMESSE APERTE";
+                labelOpenedBet.Visible = true;
+                labelTimer.Visible = true;
+            }
             labelTimer.Text = split[1];
-            labelTimer.Visible = true;
             if (Convert.ToInt32(split[1]) == 0)
             {
+                panelFiches.Visible = false;
+                pictureFiche.Enabled = false;
                 labelTimer.Visible = false;
                 labelOpenedBet.Text = "SCOMMESSE CHIUSE";
             }
@@ -1079,32 +1093,37 @@ namespace Client.ServerForms
         {
             if (playerBalance >= bet)
             {
+                panelChoose.Visible = false;
                 bet *= 2;
                 labelBet.Text = "Puntata: " + bet.ToString();
                 byte[] toSend = Encoding.ASCII.GetBytes("double/s/");
                 socket.Send(toSend);
-                panelChoose.Visible = false;
             }
             else
+            {
                 MessageBox.Show("Non hai abbastanza credito!");
+                panelChoose.Visible = true;
+            }
         }
 
         private void buttonCard_Click(object sender, EventArgs e)
         {
+            panelChoose.Visible = false;
             byte[] toSend = Encoding.ASCII.GetBytes("getCard/s/");
             socket.Send(toSend);
-            panelChoose.Visible = false;
+            
         }
 
         private void buttonStay_Click(object sender, EventArgs e)
         {
+            panelChoose.Visible = false;
             byte[] toSend = Encoding.ASCII.GetBytes("stay/s/");
             socket.Send(toSend);
-            panelChoose.Visible = false;
         }
 
         private void buttonSplit_Click(object sender, EventArgs e)
         {
+            panelChoose.Visible = false;
             if (playerBalance >= bet)
             {
                 splitCard = true;
@@ -1157,10 +1176,12 @@ namespace Client.ServerForms
                 labelBet.Text = "Puntata: " + bet.ToString();
                 byte[] toSend = Encoding.ASCII.GetBytes("split/s/");
                 socket.Send(toSend);
-                panelChoose.Visible = false;
             }
             else
+            {
                 MessageBox.Show("Non hai abbastanza credito!");
+                panelChoose.Visible = true;
+            }
         }
         //Move Form
         [DllImport("user32.DLL", EntryPoint = "ReleaseCapture")]
@@ -1209,6 +1230,65 @@ namespace Client.ServerForms
                 FormBorderStyle = FormBorderStyle.Sizable;
             else
                 FormBorderStyle = FormBorderStyle.None;
+        }
+
+        private void pictureFiche_Click(object sender, EventArgs e)
+        {
+            if (panelFiches.Visible == false)
+                panelFiches.Visible = true;
+            else
+                panelFiches.Visible = false;
+        }
+        void ApplyBet(int tag)
+        {
+            if (playerBalance >= Convert.ToInt32(tag))
+            {
+                bet += Convert.ToInt32(tag);
+                playerBalance -= Convert.ToInt32(tag);
+                betLog.Add(Convert.ToInt32(tag));
+                pictureBack.Enabled = true;
+            }
+            else
+                MessageBox.Show("Non hai abbastamza credito!");
+        }
+
+        private void pictureFiche1_Click(object sender, EventArgs e)
+        {
+            ApplyBet(Convert.ToInt32(pictureFiche1.Tag));
+        }
+
+        private void pictureFiche5_Click(object sender, EventArgs e)
+        {
+            ApplyBet(Convert.ToInt32(pictureFiche5.Tag));
+        }
+
+        private void pictureFiche10_Click(object sender, EventArgs e)
+        {
+            ApplyBet(Convert.ToInt32(pictureFiche10.Tag));
+        }
+
+        private void pictureFiche20_Click(object sender, EventArgs e)
+        {
+            ApplyBet(Convert.ToInt32(pictureFiche20.Tag));
+        }
+
+        private void pictureFiche50_Click(object sender, EventArgs e)
+        {
+            ApplyBet(Convert.ToInt32(pictureFiche50.Tag));
+        }
+
+        private void pictureFiche100_Click(object sender, EventArgs e)
+        {
+            ApplyBet(Convert.ToInt32(pictureFiche100.Tag));
+        }
+
+        private void pictureBack_Click(object sender, EventArgs e)
+        {
+            if (betLog.Count == 1)
+                pictureBack.Enabled = false;
+            bet -= betLog[betLog.Count - 1];
+            playerBalance += betLog[betLog.Count - 1];
+            betLog.RemoveAt(betLog.Count - 1);
         }
     }
 }
