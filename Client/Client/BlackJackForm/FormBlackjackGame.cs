@@ -70,6 +70,7 @@ namespace Client.ServerForms
 
         private void buttonExit_Click(object sender, EventArgs e)
         {
+            DialogResult = DialogResult.OK;
             this.Close();
         }
 
@@ -469,6 +470,7 @@ namespace Client.ServerForms
         void UpdateTimerBet(string data)
         {
             string[] split = data.Split(';');
+            byte[] toSend = null;
             if (Convert.ToInt32(split[1]) == 30)
             {
                 labelOpenedBet.Text = "SCOMMESSE APERTE";
@@ -479,13 +481,21 @@ namespace Client.ServerForms
             labelTimer.Text = split[1];
             if (Convert.ToInt32(split[1]) == 0)
             {
-                betLog.Clear();
-                panelFiches.Visible = false;
-                pictureFiche.Enabled = false;
-                labelTimer.Visible = false;
-                labelOpenedBet.Text = "SCOMMESSE CHIUSE";
-                byte[] toSend = Encoding.ASCII.GetBytes("sendBet;" + bet + "/s/");
-                socket.Send(toSend);
+                if (bet != 0)
+                {
+                    betLog.Clear();
+                    panelFiches.Visible = false;
+                    pictureFiche.Enabled = false;
+                    labelTimer.Visible = false;
+                    labelOpenedBet.Text = "SCOMMESSE CHIUSE";
+                    toSend = Encoding.ASCII.GetBytes("sendBet;" + bet.ToString() + "/s/");
+                    socket.Send(toSend);
+                }
+                else
+                {
+                    toSend = Encoding.ASCII.GetBytes("doesntPlay/s/");
+                    socket.Send(toSend);
+                }
             }
         }
         void UpdateCard(string data)
@@ -1011,6 +1021,7 @@ namespace Client.ServerForms
         {
             string[] split = data.Split(';');
             playerBalance += float.Parse(split[1]);
+            Program.balance = playerBalance;
             labelBalance.Text = "Saldo: " + playerBalance.ToString();
             labelBet.Text = "Puntata: 0";
             labelLastWin.Text = "Ultima Vincita: " + split[1].ToString();
@@ -1071,6 +1082,7 @@ namespace Client.ServerForms
             string dir = "../../../Images/cards/" + split[1] + split[2] + ".png";
             card2_D.ImageLocation = dir;
             playerBalance = Convert.ToInt32(split[3]);
+            Program.balance = playerBalance;
             labelBalance.Text = "Saldo: " + split[3];
         }
         void MakeChoose(string data)
@@ -1126,7 +1138,9 @@ namespace Client.ServerForms
         {
             if (playerBalance >= bet / 2)
             {
-                labelBalance.Text = (playerBalance - (bet / 2)).ToString();
+                playerBalance = (playerBalance - (bet / 2));
+                Program.balance = playerBalance;
+                labelBalance.Text = "Saldo: " + playerBalance.ToString();
                 panelInsurance.Visible = false;
                 insurance = true;
             }
@@ -1137,10 +1151,13 @@ namespace Client.ServerForms
         {
             if (playerBalance >= bet)
             {
+                playerBalance -= (bet);
+                Program.balance = playerBalance;
                 panelChoose.Visible = false;
                 bet *= 2;
                 labelBet.Text = "Puntata: " + bet.ToString();
-                chooseToSend = "double/s";
+                labelBalance.Text = "Saldo: " + playerBalance.ToString();
+                chooseToSend = "double/s/";
             }
             else
             {
@@ -1211,8 +1228,11 @@ namespace Client.ServerForms
                         card1_7.ImageLocation = null;
                         break;
                 }
+                playerBalance -= (bet);
+                Program.balance = playerBalance;
                 bet *= 2;
                 labelBet.Text = "Puntata: " + bet.ToString();
+                labelBalance.Text = "Saldo: " + playerBalance.ToString();
                 chooseToSend = "split/s/";
             }
             else
@@ -1233,6 +1253,7 @@ namespace Client.ServerForms
             if (playerBalance >= Convert.ToInt32(tag))
             {
                 playerBalance -= Convert.ToInt32(tag);
+                Program.balance = playerBalance;
                 bet += Convert.ToInt32(tag);
                 betLog.Add(Convert.ToInt32(tag));
                 pictureBack.Enabled = true;
@@ -1279,12 +1300,14 @@ namespace Client.ServerForms
                 pictureBack.Enabled = false;
             bet -= betLog[betLog.Count - 1];
             playerBalance += betLog[betLog.Count - 1];
+            Program.balance = playerBalance;
             betLog.RemoveAt(betLog.Count - 1);
         }
         void Win(string data)
         {
             string[] split = data.Split(';');
             playerBalance = Convert.ToInt32(split[2]);
+            Program.balance = playerBalance;
             labelLastWin.Text = "Ultima Vincita: " + split[1];
             bet = 0;
             labelBet.Text = "Puntata: 0";
@@ -1293,6 +1316,7 @@ namespace Client.ServerForms
         {
             string[] split = data.Split(';');
             playerBalance = Convert.ToInt32(split[2]);
+            Program.balance = playerBalance;
             labelLastWin.Text = "Ultima Vincita: " + split[1];
             bet = 0;
             labelBet.Text = "Puntata: 0";
@@ -1301,11 +1325,13 @@ namespace Client.ServerForms
         {
             bet = 0;
             labelLastWin.Text = "Ultima Vincita: 0";
+            labelBet.Text = "Puntata: 0";
         }
         void Lose()
         {
             bet = 0;
             labelLastWin.Text = "Ultima Vincita: 0";
+            labelBet.Text = "Puntata: 0";
         }
         void GameFinished()
         {

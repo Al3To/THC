@@ -14,7 +14,7 @@ namespace Client.Forms
     public partial class FormBlackJack : Form
     {
         string username;
-        float balance;
+        public float balance;
         public FormBlackJack(string username, float balance)
         {
             InitializeComponent();
@@ -26,7 +26,6 @@ namespace Client.Forms
         {
             FormBlackjackGame formBlackjackGame1 = new FormBlackjackGame(username, balance);
             formBlackjackGame1.ShowDialog();
-            
         }
     }
 }

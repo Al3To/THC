@@ -1,4 +1,5 @@
 ﻿using Client.Forms;
+using Client.ServerForms;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -78,6 +79,7 @@ namespace Client
                 user.username = FormLogin.username;
                 user.mail = FormLogin.mail;
                 user.balance = float.Parse(FormLogin.balance);
+                Program.balance = user.balance;
                 if(FormLogin.role == "admin")
                 {
                     user.admin = true;

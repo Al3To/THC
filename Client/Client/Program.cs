@@ -8,6 +8,7 @@ namespace Client
 {
     internal static class Program
     {
+        public static float balance;
         /// <summary>
         /// Punto di ingresso principale dell'applicazione.
         /// </summary>
