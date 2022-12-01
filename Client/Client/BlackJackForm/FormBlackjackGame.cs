@@ -31,6 +31,7 @@ namespace Client.ServerForms
         List<int> betLog = new List<int>();
         float bet;
         bool insurance = false;
+        string chooseToSend = null;
         public FormBlackjackGame(string playerUsername, float playerBalance)
         {
             InitializeComponent();
@@ -1084,10 +1085,14 @@ namespace Client.ServerForms
         void UpdateChooseTimer(string data)
         {
             string[] split = data.Split(';');
+            byte[] toSend = null;
             if (split[1] == "0")
             {
                 panelChoose.Visible = false;
-                byte[] toSend = Encoding.ASCII.GetBytes("stay/s/");
+                if (chooseToSend == null || chooseToSend == "")
+                    toSend = Encoding.ASCII.GetBytes("stay/s/");
+                else
+                    toSend = Encoding.ASCII.GetBytes(chooseToSend);
                 socket.Send(toSend);
             }
             labelChooseTimer.Text = split[1];
@@ -1135,8 +1140,7 @@ namespace Client.ServerForms
                 panelChoose.Visible = false;
                 bet *= 2;
                 labelBet.Text = "Puntata: " + bet.ToString();
-                byte[] toSend = Encoding.ASCII.GetBytes("double/s/");
-                socket.Send(toSend);
+                chooseToSend = "double/s";
             }
             else
             {
@@ -1148,16 +1152,13 @@ namespace Client.ServerForms
         private void buttonCard_Click(object sender, EventArgs e)
         {
             panelChoose.Visible = false;
-            byte[] toSend = Encoding.ASCII.GetBytes("getCard/s/");
-            socket.Send(toSend);
-            
+            chooseToSend = "getCard/s/";
         }
 
         private void buttonStay_Click(object sender, EventArgs e)
         {
             panelChoose.Visible = false;
-            byte[] toSend = Encoding.ASCII.GetBytes("stay/s/");
-            socket.Send(toSend);
+            chooseToSend = "stay/s/";
         }
 
         private void buttonSplit_Click(object sender, EventArgs e)
@@ -1212,8 +1213,7 @@ namespace Client.ServerForms
                 }
                 bet *= 2;
                 labelBet.Text = "Puntata: " + bet.ToString();
-                byte[] toSend = Encoding.ASCII.GetBytes("split/s/");
-                socket.Send(toSend);
+                chooseToSend = "split/s/";
             }
             else
             {

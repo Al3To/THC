@@ -356,7 +356,7 @@ void Game()
 
 async void Timer()
 {
-    int timer = 5;
+    int timer = 30;
     while (timer >= 0)
     {
         byte[] toSend = asc.GetBytes("timerBet;" + timer.ToString() + "/c/");
@@ -506,6 +506,7 @@ async void FillTable()
         await Task.Delay(1000);
 
         if (dealer.dealerCards[1].cardValue == 10)
+        {
             for (int m = 0; m < playingPlayers.Count; ++m)
             {
                 if (playingPlayers[m].insurance)
@@ -516,9 +517,10 @@ async void FillTable()
                 toSend = asc.GetBytes("dealerHasBJ;" + dealer.dealerCards[1].cardName + ";" + dealer.dealerCards[1].cardSymbol + ";" + playingPlayers[m].balance + "/c/");
                 playingPlayers[m].playerSocket.Send(toSend);
             }
+            CheckForWins();
+        }
         else
             NextTurn();
-
     }
     else
         NextTurn();
@@ -611,20 +613,13 @@ async void MakeChoose()
         toSend = asc.GetBytes("makeChoose;cantSplit/c/");
 
     playingPlayers[turn].playerSocket.Send(toSend);
-    int timer = 15;
+    int timer = 10;
         while (timer >= 0)
-        {
-        try
         {
             await Task.Delay(1000);
             toSend = asc.GetBytes("timerChoose;" + timer.ToString() + "/c/");
             playingPlayers[turn].playerSocket.Send(toSend);
             timer--;
-        }
-        catch(Exception ex)
-        {
-            break;
-        }
         }
 }
 async void ShowDealerCards()
@@ -716,13 +711,13 @@ class Dealer
         for (int n = 0; n < this.dealerCards.Count; ++n)
             this.cardsTotal += this.dealerCards[n].cardValue;
         if (this.hasAce)
-        {
             if (this.cardsTotal > 21)
                 for (int n = 0; n < this.dealerCards.Count; ++n)
                     if (this.dealerCards[n].cardName == "ace" && this.dealerCards[n].cardValue == 11)
+                    {
                         this.dealerCards[n].cardValue = 1;
-            this.UpdateTotal();
-        }
+                        this.UpdateTotal();
+                    }
     }
 }
 class Player
@@ -748,13 +743,13 @@ class Player
         for(int n = 0; n<this.playerCards.Count; ++n)
             this.cardsTotal += this.playerCards[n].cardValue;
         if (this.hasAce)
-        {
             if (this.cardsTotal > 21)
                 for (int n = 0; n < this.playerCards.Count; ++n)
                     if (this.playerCards[n].cardName == "ace" && this.playerCards[n].cardValue == 11)
+                    {
                         this.playerCards[n].cardValue = 1;
-            this.UpdateTotal();
-        }
+                        this.UpdateTotal();
+                    }
     }
     public void UpdateSplitTotal()
     {
