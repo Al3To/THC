@@ -684,13 +684,13 @@ async void CheckForWins()
             playingPlayers[n].bet = 0;
             toSend = asc.GetBytes("busted/c/");
         }
-        else if (playingPlayers[n].cardsTotal < 21)
+        else if (playingPlayers[n].cardsTotal <= 21) {
             if (dealerBusted || playingPlayers[n].cardsTotal > dealer.cardsTotal)
             {
                 playingPlayers[n].win = playingPlayers[n].bet * 2f;
                 playingPlayers[n].balance += playingPlayers[n].win;
                 playingPlayers[n].bet = 0;
-                toSend = asc.GetBytes("win;" + playingPlayers[n].win.ToString() + ";" + playingPlayers[n].balance.ToString() +"/c/");
+                toSend = asc.GetBytes("win;" + playingPlayers[n].win.ToString() + ";" + playingPlayers[n].balance.ToString() + "/c/");
             }
             else if (dealer.cardsTotal > playingPlayers[n].cardsTotal)
             {
@@ -704,6 +704,7 @@ async void CheckForWins()
                 playingPlayers[n].bet = 0;
                 toSend = asc.GetBytes("draw;" + playingPlayers[n].win.ToString() + ";" + playingPlayers[n].balance.ToString() + "/c/");
             }
+        }
         playingPlayers[n].playerSocket.Send(toSend);
         await Task.Delay(500);
     }

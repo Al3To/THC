@@ -501,6 +501,7 @@
             // pictureBack
             // 
             this.pictureBack.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pictureBack.Image = ((System.Drawing.Image)(resources.GetObject("pictureBack.Image")));
             this.pictureBack.Location = new System.Drawing.Point(339, 6);
             this.pictureBack.Margin = new System.Windows.Forms.Padding(2);
             this.pictureBack.Name = "pictureBack";
