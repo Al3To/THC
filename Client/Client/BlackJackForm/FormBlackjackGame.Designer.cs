@@ -178,6 +178,7 @@
             this.buttonSeat2 = new FontAwesome.Sharp.IconButton();
             this.buttonSeat1 = new FontAwesome.Sharp.IconButton();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.panelTitle.SuspendLayout();
             this.panelBottom.SuspendLayout();
             this.panelChoose.SuspendLayout();
@@ -267,11 +268,13 @@
             ((System.ComponentModel.ISupportInitialize)(this.card2_1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.card1_1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.SuspendLayout();
             // 
             // panelTitle
             // 
             this.panelTitle.BackColor = System.Drawing.Color.Black;
+            this.panelTitle.Controls.Add(this.pictureBox2);
             this.panelTitle.Controls.Add(this.buttonMinimize);
             this.panelTitle.Controls.Add(this.buttonMaximize);
             this.panelTitle.Controls.Add(this.labelTimer);
@@ -2294,6 +2297,17 @@
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
             // 
+            // pictureBox2
+            // 
+            this.pictureBox2.BackColor = System.Drawing.Color.Transparent;
+            this.pictureBox2.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox2.Image")));
+            this.pictureBox2.Location = new System.Drawing.Point(-1, 0);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(107, 46);
+            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox2.TabIndex = 19;
+            this.pictureBox2.TabStop = false;
+            // 
             // FormBlackjackGame
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -2403,6 +2417,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.card2_1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.card1_1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -2558,5 +2573,6 @@
         private System.Windows.Forms.Label labelSplitResult1;
         private System.Windows.Forms.Label labelSplitCardsTotal1;
         private System.Windows.Forms.PictureBox pictureBack;
+        private System.Windows.Forms.PictureBox pictureBox2;
     }
 }

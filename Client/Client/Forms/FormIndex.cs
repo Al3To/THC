@@ -11,7 +11,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Forms;
-
+using System.Threading;
 namespace Client
 {
     public partial class Client : Form
@@ -26,11 +26,22 @@ namespace Client
             this.Text = string.Empty;
             this.ControlBox = false;
             this.DoubleBuffered = true;
+            this.Icon = new Icon("../../../icon.ico");
+            timer1.Start();
+
         }
 
         private void userAdmin()
         {
 
+        }
+        void UpdateBalance()
+        {
+            while (true)
+            {
+                user.balance = Program.balance;
+                labelBalance.Text = "Credito: " + user.balance.ToString();
+            }
         }
         //Child Forms
         private void OpenChildForm(Form childForm)
@@ -65,7 +76,11 @@ namespace Client
             if (!loggedIn)
                 System.Windows.MessageBox.Show("Devi creare un account o accedere ad uno esistente prima di poter giocare!", "Errore!", MessageBoxButton.OK);
             else
+            {
+                Thread t = new Thread(UpdateBalance);
+                t.Start();
                 OpenChildForm(new FormBlackJack(user.username, user.balance));
+            }
         }
         private void buttonLogin_Click(object sender, EventArgs e)
         {
@@ -208,6 +223,13 @@ namespace Client
                     ReleaseCapture();
                     SendMessage(this.Handle, 0x112, 0xf012, 0);
                 }
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+
+            labelTime.Text = DateTime.Now.ToString("T");
+            labelDate.Text = DateTime.Now.ToString("dddd" + "," + "M" + " MMMM" + "," + "yyyy");
         }
     }
     class User
