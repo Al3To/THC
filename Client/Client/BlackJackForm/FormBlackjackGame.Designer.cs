@@ -30,6 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormBlackjackGame));
             this.panelTitle = new System.Windows.Forms.Panel();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.buttonMinimize = new System.Windows.Forms.Button();
             this.buttonMaximize = new System.Windows.Forms.Button();
             this.labelTimer = new System.Windows.Forms.Label();
@@ -55,6 +56,7 @@
             this.labelBet = new System.Windows.Forms.Label();
             this.labelBalance = new System.Windows.Forms.Label();
             this.panelGame = new System.Windows.Forms.Panel();
+            this.panelResult = new System.Windows.Forms.Panel();
             this.labelSplitResult7 = new System.Windows.Forms.Label();
             this.labelSplitCardsTotal7 = new System.Windows.Forms.Label();
             this.labelSplitResult6 = new System.Windows.Forms.Label();
@@ -178,8 +180,10 @@
             this.buttonSeat2 = new FontAwesome.Sharp.IconButton();
             this.buttonSeat1 = new FontAwesome.Sharp.IconButton();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.labelResult = new System.Windows.Forms.Label();
+            this.labelWin = new System.Windows.Forms.Label();
             this.panelTitle.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.panelBottom.SuspendLayout();
             this.panelChoose.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureFiche)).BeginInit();
@@ -192,6 +196,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureFiche5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureFiche1)).BeginInit();
             this.panelGame.SuspendLayout();
+            this.panelResult.SuspendLayout();
             this.panelInsurance.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.card11_D)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.card10_D)).BeginInit();
@@ -268,7 +273,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.card2_1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.card1_1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.SuspendLayout();
             // 
             // panelTitle
@@ -287,6 +291,17 @@
             this.panelTitle.Size = new System.Drawing.Size(1467, 44);
             this.panelTitle.TabIndex = 0;
             this.panelTitle.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panelTitle_MouseDown);
+            // 
+            // pictureBox2
+            // 
+            this.pictureBox2.BackColor = System.Drawing.Color.Transparent;
+            this.pictureBox2.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox2.Image")));
+            this.pictureBox2.Location = new System.Drawing.Point(-1, 0);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(107, 46);
+            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox2.TabIndex = 19;
+            this.pictureBox2.TabStop = false;
             // 
             // buttonMinimize
             // 
@@ -639,6 +654,7 @@
             // 
             this.panelGame.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("panelGame.BackgroundImage")));
             this.panelGame.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.panelGame.Controls.Add(this.panelResult);
             this.panelGame.Controls.Add(this.labelSplitResult7);
             this.panelGame.Controls.Add(this.labelSplitCardsTotal7);
             this.panelGame.Controls.Add(this.labelSplitResult6);
@@ -763,6 +779,18 @@
             this.panelGame.Name = "panelGame";
             this.panelGame.Size = new System.Drawing.Size(1467, 823);
             this.panelGame.TabIndex = 2;
+            // 
+            // panelResult
+            // 
+            this.panelResult.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.panelResult.BackColor = System.Drawing.Color.Black;
+            this.panelResult.Controls.Add(this.labelWin);
+            this.panelResult.Controls.Add(this.labelResult);
+            this.panelResult.Location = new System.Drawing.Point(610, 247);
+            this.panelResult.Name = "panelResult";
+            this.panelResult.Size = new System.Drawing.Size(286, 122);
+            this.panelResult.TabIndex = 118;
+            this.panelResult.Visible = false;
             // 
             // labelSplitResult7
             // 
@@ -2297,16 +2325,28 @@
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
             // 
-            // pictureBox2
+            // labelResult
             // 
-            this.pictureBox2.BackColor = System.Drawing.Color.Transparent;
-            this.pictureBox2.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox2.Image")));
-            this.pictureBox2.Location = new System.Drawing.Point(-1, 0);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(107, 46);
-            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox2.TabIndex = 19;
-            this.pictureBox2.TabStop = false;
+            this.labelResult.AutoSize = true;
+            this.labelResult.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelResult.ForeColor = System.Drawing.Color.Gainsboro;
+            this.labelResult.Location = new System.Drawing.Point(81, 19);
+            this.labelResult.Name = "labelResult";
+            this.labelResult.Size = new System.Drawing.Size(131, 25);
+            this.labelResult.TabIndex = 0;
+            this.labelResult.Text = "HAI VINTO!";
+            // 
+            // labelWin
+            // 
+            this.labelWin.AutoSize = true;
+            this.labelWin.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelWin.ForeColor = System.Drawing.Color.Gainsboro;
+            this.labelWin.Location = new System.Drawing.Point(108, 73);
+            this.labelWin.Name = "labelWin";
+            this.labelWin.Size = new System.Drawing.Size(64, 25);
+            this.labelWin.TabIndex = 1;
+            this.labelWin.Text = "€100";
+            this.labelWin.Visible = false;
             // 
             // FormBlackjackGame
             // 
@@ -2325,6 +2365,7 @@
             this.Resize += new System.EventHandler(this.FormBlackjackGame_Resize);
             this.panelTitle.ResumeLayout(false);
             this.panelTitle.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.panelBottom.ResumeLayout(false);
             this.panelBottom.PerformLayout();
             this.panelChoose.ResumeLayout(false);
@@ -2340,6 +2381,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureFiche1)).EndInit();
             this.panelGame.ResumeLayout(false);
             this.panelGame.PerformLayout();
+            this.panelResult.ResumeLayout(false);
+            this.panelResult.PerformLayout();
             this.panelInsurance.ResumeLayout(false);
             this.panelInsurance.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.card11_D)).EndInit();
@@ -2417,7 +2460,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.card2_1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.card1_1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -2574,5 +2616,8 @@
         private System.Windows.Forms.Label labelSplitCardsTotal1;
         private System.Windows.Forms.PictureBox pictureBack;
         private System.Windows.Forms.PictureBox pictureBox2;
+        private System.Windows.Forms.Panel panelResult;
+        private System.Windows.Forms.Label labelWin;
+        private System.Windows.Forms.Label labelResult;
     }
 }

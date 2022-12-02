@@ -218,7 +218,10 @@ void Game()
                             {
                                 playingPlayers[n].insurance = insurance;
                                 if (insurance)
+                                {
                                     playingPlayers[n].balance -= playingPlayers[n].bet / 2;
+                                    //UpdateBalanceInFile(playingPlayers[n].username, playingPlayers[n].balance.ToString());
+                                }
                             }
                     }
                     else if (data.StartsWith("sendBet"))
@@ -230,10 +233,12 @@ void Game()
                                 string[] split = data.Split(';');
                                 players[n].bet = Convert.ToInt32(split[1]);
                                 players[n].balance -= players[n].bet;
+                                //UpdateBalanceInFile(players[n].username, players[n].balance.ToString());
                                 players[n].play = true;
                             }
                         }
-                    }else if (data == "doesntPlay")
+                    }
+                    else if (data == "doesntPlay")
                     {
                         for (int n = 0; n < players.Count; ++n)
                             if (players[n].playerSocket == handler)
@@ -243,9 +248,9 @@ void Game()
                     {
                         if (playingPlayers[turn].playerSocket == handler)
                         {
-                            Console.WriteLine("Entrato");
                             playingPlayers[turn].done = true;
                             playingPlayers[turn].balance -= playingPlayers[turn].bet;
+                            //UpdateBalanceInFile(playingPlayers[turn].username, playingPlayers[turn].balance.ToString());
                             playingPlayers[turn].bet *= 2;
                             playingPlayers[turn].playerCards.Add(deck[0]);
                             if (deck[0].cardName == "ace")
@@ -273,7 +278,7 @@ void Game()
                             if (playingPlayers[turn].cardsTotal > 21)
                                 playingPlayers[turn].done = true;
                             NextTurn();
-                                
+
                         }
                     }
                     else if (data == "stay")
@@ -292,8 +297,9 @@ void Game()
                         if (playingPlayers[turn].playerSocket == handler)
                         {
                             playingPlayers[turn].balance -= playingPlayers[turn].bet;
+                            //UpdateBalanceInFile(playingPlayers[turn].username, playingPlayers[turn].balance.ToString());
                             playingPlayers[turn].bet *= 2;
-                            playingPlayers[turn].playerSplitCards.Add(playingPlayers[turn].playerSplitCards[1]);
+                            playingPlayers[turn].playerSplitCards.Add(playingPlayers[turn].playerCards[1]);
                             playingPlayers[turn].playerCards.RemoveAt(1);
                             playingPlayers[turn].playerCards.Add(deck[0]);
                             if (deck[0].cardName == "ace")
@@ -314,10 +320,18 @@ void Game()
                             if (playingPlayers[turn].playerSplitCards[0].cardName == "ace")
                             {
                                 playingPlayers[turn].playerSplitCards[0].cardValue = 1;
-                                playingPlayers[turn].done = true;   
+                                playingPlayers[turn].done = true;
                             }
                             NextTurn();
                         }
+                    }
+                    else if (data.StartsWith("recharge"))
+                    {
+                        string[] split = data.Split(';');
+                        //UpdateBalanceInFile(split[1], split[2]);
+                        toSend = asc.GetBytes("rechargeOK/c/");
+                        handler.Send(toSend);
+                        break;
                     }
                     else if (data == "disconnectFromTableOne")
                     {
@@ -472,7 +486,13 @@ async void FillTable()
     for (int j = 0; j < 2; ++j) {
         for (int n = 0; n < playingPlayers.Count; ++n)
         {
+            Card card = new Card();
+            card.cardValue = 2;
+            card.cardName = "2";
+            card.cardSymbol = "hearts";
+            //deck[0] = card;
             playingPlayers[n].playerCards.Add(deck[0]);
+
             if (deck[0].cardName == "ace")
                 playingPlayers[n].hasAce = true;
             playingPlayers[n].UpdateTotal();
@@ -518,10 +538,15 @@ async void FillTable()
             for (int m = 0; m < playingPlayers.Count; ++m)
             {
                 if (playingPlayers[m].insurance)
+                {
                     playingPlayers[m].balance += playingPlayers[m].bet;
+                    //UpdateBalanceInFile(playingPlayers[m].username, playingPlayers[m].balance.ToString());
+                }
                 else if (!playingPlayers[m].insurance && playingPlayers[m].cardsTotal == 21)
+                {
                     playingPlayers[m].balance += playingPlayers[m].bet;
-
+                    //UpdateBalanceInFile(playingPlayers[m].username, playingPlayers[m].balance.ToString());
+                }
                 toSend = asc.GetBytes("dealerHasBJ;" + dealer.dealerCards[1].cardName + ";" + dealer.dealerCards[1].cardSymbol + ";" + playingPlayers[m].balance + "/c/");
                 playingPlayers[m].playerSocket.Send(toSend);
             }
@@ -589,9 +614,11 @@ void CheckBlackJack()
             {
                 playingPlayers[n].win = playingPlayers[n].bet + (playingPlayers[n].bet * 1.5f);
                 playingPlayers[n].balance += playingPlayers[n].win;
+                //UpdateBalanceInFile(playingPlayers[n].username, playingPlayers[n].balance.ToString());
                 playingPlayers[n].bet = 0;
                 toSend = asc.GetBytes("blackjack;" + playingPlayers[n].win.ToString() + "/c/");
                 playingPlayers[n].playerSocket.Send(toSend);
+
                 for (int m = 0; m < playingPlayers.Count; ++m)
                     if (m != n)
                     {
@@ -684,11 +711,12 @@ async void CheckForWins()
             playingPlayers[n].bet = 0;
             toSend = asc.GetBytes("busted/c/");
         }
-        else if (playingPlayers[n].cardsTotal <= 21) {
+        else if (playingPlayers[n].cardsTotal < 21) {
             if (dealerBusted || playingPlayers[n].cardsTotal > dealer.cardsTotal)
             {
                 playingPlayers[n].win = playingPlayers[n].bet * 2f;
                 playingPlayers[n].balance += playingPlayers[n].win;
+                //UpdateBalanceInFile(playingPlayers[n].username, playingPlayers[n].balance.ToString());
                 playingPlayers[n].bet = 0;
                 toSend = asc.GetBytes("win;" + playingPlayers[n].win.ToString() + ";" + playingPlayers[n].balance.ToString() + "/c/");
             }
@@ -701,6 +729,25 @@ async void CheckForWins()
             {
                 playingPlayers[n].win = playingPlayers[n].bet;
                 playingPlayers[n].balance += playingPlayers[n].win;
+                //UpdateBalanceInFile(playingPlayers[n].username, playingPlayers[n].balance.ToString());
+                playingPlayers[n].bet = 0;
+                toSend = asc.GetBytes("draw;" + playingPlayers[n].win.ToString() + ";" + playingPlayers[n].balance.ToString() + "/c/");
+            }
+        }else if (playingPlayers[n].cardsTotal == 21)
+        {
+            if (dealer.cardsTotal != 21)
+            {
+                playingPlayers[n].win = playingPlayers[n].bet * 2f;
+                playingPlayers[n].balance += playingPlayers[n].win;
+                //UpdateBalanceInFile(playingPlayers[n].username, playingPlayers[n].balance.ToString());
+                playingPlayers[n].bet = 0;
+                toSend = asc.GetBytes("win;" + playingPlayers[n].win.ToString() + ";" + playingPlayers[n].balance.ToString() + "/c/");
+            }
+            else
+            {
+                playingPlayers[n].win = playingPlayers[n].bet;
+                playingPlayers[n].balance += playingPlayers[n].win;
+                //UpdateBalanceInFile(playingPlayers[n].username, playingPlayers[n].balance.ToString());
                 playingPlayers[n].bet = 0;
                 toSend = asc.GetBytes("draw;" + playingPlayers[n].win.ToString() + ";" + playingPlayers[n].balance.ToString() + "/c/");
             }
@@ -729,8 +776,80 @@ void UpdateBalance()
         for (int m = 0; m < players.Count; ++m)
             if (playingPlayers[n].username == players[m].username)
                 players[m].balance = playingPlayers[n].balance;
+    List<string> username = new List<string>();
+    List<string> password = new List<string>();
+    List<string> role = new List<string>();
+    List<string> mail = new List<string>();
+    List<string> balance = new List<string>();
+    List<string> name = new List<string>();
+    List<string> surname = new List<string>();
+    List<string> DOB = new List<string>();
+    string[] split;
+    foreach (string line in File.ReadLines(@"../../../../files/users.txt"))
+    {
+        split = line.Split(";");
+        username.Add(split[0]);
+        password.Add(split[1]);
+        role.Add(split[2]);
+        mail.Add(split[3]);
+        balance.Add(split[4]);
+        name.Add(split[5]);
+        surname.Add(split[6]);
+        DOB.Add(split[7]);
+    }
+    for (int n = 0; n < username.Count; ++n)
+        for (int j = 0; j < players.Count; j++)
+            if (players[j].username == username[n])
+                balance[n] = players[n].balance.ToString();
+    File.WriteAllText(@"../../../../files/users.txt", string.Empty);
+    for (int n = 0; n < username.Count; ++n)
+        if (n == 0)
+            File.AppendAllText(@"../../../../files/users.txt", username[n] + ";" + password[n] + ";" + role[n] + ";" + mail[n] + ";" + balance[n] + ";" + name[n] + ";" + surname[n] + ";" + DOB[n]);
+        else
+            File.AppendAllText(@"../../../../files/users.txt", "\n" + username[n] + ";" + password[n] + ";" + role[n] + ";" + mail[n] + ";" + balance[n] + ";" + name[n] + ";" + surname[n] + ";" + DOB[n]);
 
 }
+/*void UpdateBalanceInFile(string _username, string _balance)
+{
+    List<string> username = new List<string>();
+    List<string> password = new List<string>();
+    List<string> role = new List<string>();
+    List<string> mail = new List<string>();
+    List<string> balance = new List<string>();
+    List<string> name = new List<string>();
+    List<string> surname = new List<string>();
+    List<string> DOB = new List<string>();
+    string[] split;
+    try
+    {
+        foreach (string line in File.ReadLines(@"../../../../files/users.txt"))
+        {
+            split = line.Split(";");
+            username.Add(split[0]);
+            password.Add(split[1]);
+            role.Add(split[2]);
+            mail.Add(split[3]);
+            balance.Add(split[4]);
+            name.Add(split[5]);
+            surname.Add(split[6]);
+            DOB.Add(split[7]);
+        }
+        for (int n = 0; n < username.Count; ++n)
+            if (_username == username[n])
+            {
+                balance[n] = _balance;
+                break;
+            }
+        File.WriteAllText(@"../../../../files/users.txt", string.Empty);
+        for (int n = 0; n < username.Count; ++n)
+            if (n == 0)
+                File.AppendAllText(@"../../../../files/users.txt", username[n] + ";" + password[n] + ";" + role[n] + ";" + mail[n] + ";" + balance[n] + ";" + name[n] + ";" + surname[n] + ";" + DOB[n]);
+            else
+                File.AppendAllText(@"../../../../files/users.txt", "\n" + username[n] + ";" + password[n] + ";" + role[n] + ";" + mail[n] + ";" + balance[n] + ";" + name[n] + ";" + surname[n] + ";" + DOB[n]);
+    }catch(Exception e)
+    {
+    }
+}*/
 class Dealer
 {
     public List<Card> dealerCards = new List<Card>();

@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormRegister));
             this.panelTitle = new System.Windows.Forms.Panel();
             this.buttonClose = new FontAwesome.Sharp.IconButton();
             this.panelBottonBar = new System.Windows.Forms.Panel();
@@ -57,15 +58,18 @@
             this.textBoxName = new System.Windows.Forms.TextBox();
             this.iconSurname = new FontAwesome.Sharp.IconButton();
             this.textBoxSurname = new System.Windows.Forms.TextBox();
+            this.pictureLogo = new System.Windows.Forms.PictureBox();
             this.panelTitle.SuspendLayout();
             this.panelBottonBar.SuspendLayout();
             this.panelRegister1.SuspendLayout();
             this.panelRegister2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureLogo)).BeginInit();
             this.SuspendLayout();
             // 
             // panelTitle
             // 
             this.panelTitle.BackColor = System.Drawing.Color.Black;
+            this.panelTitle.Controls.Add(this.pictureLogo);
             this.panelTitle.Controls.Add(this.buttonClose);
             this.panelTitle.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelTitle.Location = new System.Drawing.Point(0, 0);
@@ -470,6 +474,18 @@
             this.textBoxSurname.Enter += new System.EventHandler(this.textBoxSurname_Enter);
             this.textBoxSurname.Leave += new System.EventHandler(this.textBoxSurname_Leave);
             // 
+            // pictureLogo
+            // 
+            this.pictureLogo.BackColor = System.Drawing.Color.Transparent;
+            this.pictureLogo.Dock = System.Windows.Forms.DockStyle.Left;
+            this.pictureLogo.Image = ((System.Drawing.Image)(resources.GetObject("pictureLogo.Image")));
+            this.pictureLogo.Location = new System.Drawing.Point(0, 0);
+            this.pictureLogo.Name = "pictureLogo";
+            this.pictureLogo.Size = new System.Drawing.Size(126, 61);
+            this.pictureLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureLogo.TabIndex = 21;
+            this.pictureLogo.TabStop = false;
+            // 
             // FormRegister
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -489,6 +505,7 @@
             this.panelRegister1.PerformLayout();
             this.panelRegister2.ResumeLayout(false);
             this.panelRegister2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureLogo)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -524,5 +541,6 @@
         private FontAwesome.Sharp.IconButton iconBirthDate;
         private System.Windows.Forms.DateTimePicker dateBirthDate;
         private System.Windows.Forms.Button buttonBack;
+        private System.Windows.Forms.PictureBox pictureLogo;
     }
 }

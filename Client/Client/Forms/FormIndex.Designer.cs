@@ -31,6 +31,7 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Client));
             this.panelDesktop = new System.Windows.Forms.Panel();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.labelDate = new System.Windows.Forms.Label();
             this.labelTime = new System.Windows.Forms.Label();
             this.panelTitle = new System.Windows.Forms.Panel();
@@ -48,8 +49,9 @@
             this.buttonLoginProfile = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.buttonRecharge = new System.Windows.Forms.Button();
             this.panelDesktop.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.panelTitle.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureMinimize)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureMaximize)).BeginInit();
@@ -57,7 +59,6 @@
             this.panelSideBar.SuspendLayout();
             this.panelProfile.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.SuspendLayout();
             // 
             // panelDesktop
@@ -73,6 +74,18 @@
             this.panelDesktop.Name = "panelDesktop";
             this.panelDesktop.Size = new System.Drawing.Size(650, 369);
             this.panelDesktop.TabIndex = 5;
+            // 
+            // pictureBox2
+            // 
+            this.pictureBox2.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.pictureBox2.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox2.Image")));
+            this.pictureBox2.Location = new System.Drawing.Point(194, 64);
+            this.pictureBox2.Margin = new System.Windows.Forms.Padding(2);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(233, 136);
+            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox2.TabIndex = 6;
+            this.pictureBox2.TabStop = false;
             // 
             // labelDate
             // 
@@ -219,7 +232,7 @@
             this.buttonBJ.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.buttonBJ.IconSize = 26;
             this.buttonBJ.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.buttonBJ.Location = new System.Drawing.Point(0, 138);
+            this.buttonBJ.Location = new System.Drawing.Point(0, 170);
             this.buttonBJ.Margin = new System.Windows.Forms.Padding(2);
             this.buttonBJ.Name = "buttonBJ";
             this.buttonBJ.Size = new System.Drawing.Size(150, 36);
@@ -241,7 +254,7 @@
             this.buttonHome.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.buttonHome.IconSize = 26;
             this.buttonHome.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.buttonHome.Location = new System.Drawing.Point(0, 102);
+            this.buttonHome.Location = new System.Drawing.Point(0, 134);
             this.buttonHome.Margin = new System.Windows.Forms.Padding(2);
             this.buttonHome.Name = "buttonHome";
             this.buttonHome.Size = new System.Drawing.Size(150, 36);
@@ -254,6 +267,7 @@
             // panelProfile
             // 
             this.panelProfile.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(23)))), ((int)(((byte)(23)))));
+            this.panelProfile.Controls.Add(this.buttonRecharge);
             this.panelProfile.Controls.Add(this.labelBalance);
             this.panelProfile.Controls.Add(this.labelUsername);
             this.panelProfile.Controls.Add(this.buttonLoginProfile);
@@ -262,7 +276,7 @@
             this.panelProfile.Location = new System.Drawing.Point(0, 0);
             this.panelProfile.Margin = new System.Windows.Forms.Padding(2);
             this.panelProfile.Name = "panelProfile";
-            this.panelProfile.Size = new System.Drawing.Size(150, 102);
+            this.panelProfile.Size = new System.Drawing.Size(150, 134);
             this.panelProfile.TabIndex = 0;
             // 
             // labelBalance
@@ -296,7 +310,7 @@
             this.buttonLoginProfile.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonLoginProfile.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonLoginProfile.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(248)))), ((int)(((byte)(3)))));
-            this.buttonLoginProfile.Location = new System.Drawing.Point(34, 55);
+            this.buttonLoginProfile.Location = new System.Drawing.Point(34, 80);
             this.buttonLoginProfile.Margin = new System.Windows.Forms.Padding(2);
             this.buttonLoginProfile.Name = "buttonLoginProfile";
             this.buttonLoginProfile.Size = new System.Drawing.Size(75, 26);
@@ -322,17 +336,22 @@
             // 
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
-            // pictureBox2
+            // buttonRecharge
             // 
-            this.pictureBox2.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.pictureBox2.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox2.Image")));
-            this.pictureBox2.Location = new System.Drawing.Point(194, 64);
-            this.pictureBox2.Margin = new System.Windows.Forms.Padding(2);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(233, 136);
-            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox2.TabIndex = 6;
-            this.pictureBox2.TabStop = false;
+            this.buttonRecharge.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(30)))));
+            this.buttonRecharge.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.buttonRecharge.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonRecharge.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonRecharge.ForeColor = System.Drawing.Color.Black;
+            this.buttonRecharge.Location = new System.Drawing.Point(24, 97);
+            this.buttonRecharge.Margin = new System.Windows.Forms.Padding(2);
+            this.buttonRecharge.Name = "buttonRecharge";
+            this.buttonRecharge.Size = new System.Drawing.Size(96, 29);
+            this.buttonRecharge.TabIndex = 8;
+            this.buttonRecharge.Text = "RICARICA";
+            this.buttonRecharge.UseVisualStyleBackColor = false;
+            this.buttonRecharge.Visible = false;
+            this.buttonRecharge.Click += new System.EventHandler(this.buttonRecharge_Click);
             // 
             // Client
             // 
@@ -347,6 +366,7 @@
             this.Resize += new System.EventHandler(this.Client_Resize);
             this.panelDesktop.ResumeLayout(false);
             this.panelDesktop.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.panelTitle.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureMinimize)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureMaximize)).EndInit();
@@ -355,7 +375,6 @@
             this.panelProfile.ResumeLayout(false);
             this.panelProfile.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -381,6 +400,7 @@
         private System.Windows.Forms.Label labelTime;
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.PictureBox pictureBox2;
+        private System.Windows.Forms.Button buttonRecharge;
     }
 }
 

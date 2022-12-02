@@ -34,3 +34,4 @@ C:\Users\Alessandro\Desktop\Scuola\Quinta\TPS\THC\Client\Client\obj\Debug\Client
 C:\Users\Alessandro\Desktop\Scuola\Quinta\TPS\THC\Client\Client\obj\Debug\Client.csproj.CopyComplete
 C:\Users\Alessandro\Desktop\Scuola\Quinta\TPS\THC\Client\Client\obj\Debug\Client.ServerForms.FormBlackjackGame.resources
 C:\Users\aleto\OneDrive\Desktop\Scuola\TPS\THC\Client\Client\obj\Debug\Client.ServerForms.FormBlackjackGame.resources
+C:\Users\Alessandro\Desktop\Scuola\Quinta\TPS\THC\Client\Client\obj\Debug\Client.Forms.FormRecharge.resources

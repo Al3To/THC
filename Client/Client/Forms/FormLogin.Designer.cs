@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormLogin));
             this.panelTitle = new System.Windows.Forms.Panel();
             this.buttonClose = new FontAwesome.Sharp.IconButton();
             this.panel2 = new System.Windows.Forms.Panel();
@@ -41,14 +42,17 @@
             this.buttonLogin = new System.Windows.Forms.Button();
             this.textBoxPassword = new System.Windows.Forms.TextBox();
             this.textBoxUsername = new System.Windows.Forms.TextBox();
+            this.pictureLogo = new System.Windows.Forms.PictureBox();
             this.panelTitle.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureLogo)).BeginInit();
             this.SuspendLayout();
             // 
             // panelTitle
             // 
             this.panelTitle.BackColor = System.Drawing.Color.Black;
+            this.panelTitle.Controls.Add(this.pictureLogo);
             this.panelTitle.Controls.Add(this.buttonClose);
             this.panelTitle.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelTitle.Location = new System.Drawing.Point(0, 0);
@@ -228,6 +232,18 @@
             this.textBoxUsername.Enter += new System.EventHandler(this.textBoxUsername_Enter);
             this.textBoxUsername.Leave += new System.EventHandler(this.textBoxUsername_Leave);
             // 
+            // pictureLogo
+            // 
+            this.pictureLogo.BackColor = System.Drawing.Color.Transparent;
+            this.pictureLogo.Dock = System.Windows.Forms.DockStyle.Left;
+            this.pictureLogo.Image = ((System.Drawing.Image)(resources.GetObject("pictureLogo.Image")));
+            this.pictureLogo.Location = new System.Drawing.Point(0, 0);
+            this.pictureLogo.Name = "pictureLogo";
+            this.pictureLogo.Size = new System.Drawing.Size(126, 61);
+            this.pictureLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureLogo.TabIndex = 20;
+            this.pictureLogo.TabStop = false;
+            // 
             // FormLogin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -243,6 +259,7 @@
             this.panel2.PerformLayout();
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureLogo)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -262,5 +279,6 @@
         private FontAwesome.Sharp.IconButton iconPassword;
         private FontAwesome.Sharp.IconButton iconUsername;
         private System.Windows.Forms.Label labelResult;
+        private System.Windows.Forms.PictureBox pictureLogo;
     }
 }

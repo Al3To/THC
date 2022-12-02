@@ -12,10 +12,18 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Forms;
 using System.Threading;
+using System.Net.Sockets;
+using System.Net;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
+using System.Windows.Markup;
+
 namespace Client
 {
     public partial class Client : Form
     {
+        public static IPAddress ipAddress = IPAddress.Parse("127.0.0.1");
+        IPEndPoint remoteEP = new IPEndPoint(ipAddress, 8888);
+        Socket socket;
         static public bool loggedIn = false;
         private Form currentChildForm;
         User user;
@@ -108,6 +116,7 @@ namespace Client
                 labelBalance.Text = "Credito: " + user.balance.ToString();
                 labelBalance.Visible = true;
                 loggedIn = true;
+                buttonRecharge.Visible = true;
             }
         }
         private void buttonRegister_Click(object sender, EventArgs e)
@@ -230,6 +239,34 @@ namespace Client
 
             labelTime.Text = DateTime.Now.ToString("T");
             labelDate.Text = DateTime.Now.ToString("dddd" + "," + "M" + " MMMM" + "," + "yyyy");
+        }
+
+        private void buttonRecharge_Click(object sender, EventArgs e)
+        {
+            FormRecharge formRecharge = new FormRecharge();
+            DialogResult dr = formRecharge.ShowDialog();
+            if(dr == DialogResult.OK)
+            {
+                string data = null;
+                byte[] bytes = new byte[1024];
+                socket = new Socket(ipAddress.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
+                socket.Connect(remoteEP);
+                byte[] toSend = Encoding.ASCII.GetBytes("recharge;" + user.username +";"+(formRecharge.recharge + user.balance).ToString()+ "/s/");
+                socket.Send(toSend);
+                int bytesRec = socket.Receive(bytes);
+                data += Encoding.ASCII.GetString(bytes, 0, bytesRec);
+                if (data == "rechargeOK/c/")
+                {
+                    user.balance += formRecharge.recharge;
+                    labelBalance.Text = "Credito: €" + user.balance.ToString();
+                    Program.balance = user.balance;
+                    System.Windows.MessageBox.Show("Ricarica effettuata con successo!");
+                }
+                else
+                {
+                    System.Windows.MessageBox.Show("C'è stato un'errore nella tua ricarica, riprova!", "Errore!");
+                }
+            }
         }
     }
     class User

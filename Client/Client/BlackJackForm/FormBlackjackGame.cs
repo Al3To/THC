@@ -14,6 +14,7 @@ using System.Windows.Markup;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using System.Threading;
 using System.Runtime.InteropServices;
+using System.Drawing.Drawing2D;
 
 namespace Client.ServerForms
 {
@@ -43,7 +44,7 @@ namespace Client.ServerForms
             this.DoubleBuffered = true;
             this.playerUsername = playerUsername;
             this.playerBalance = playerBalance;
-            labelBalance.Text = "Saldo: " + playerBalance.ToString();
+            labelBalance.Text = "Saldo: €" + playerBalance.ToString();
         }
 
         private void FormBlackjackGame1_Load(object sender, EventArgs e)
@@ -477,6 +478,8 @@ namespace Client.ServerForms
                 labelOpenedBet.Visible = true;
                 labelTimer.Visible = true;
                 pictureFiche.Enabled = true;
+                labelWin.Visible = true;
+                panelResult.Visible = false;
             }
             labelTimer.Text = split[1];
             if (Convert.ToInt32(split[1]) == 0)
@@ -1022,9 +1025,9 @@ namespace Client.ServerForms
             string[] split = data.Split(';');
             playerBalance += float.Parse(split[1]);
             Program.balance = playerBalance;
-            labelBalance.Text = "Saldo: " + playerBalance.ToString();
-            labelBet.Text = "Puntata: 0";
-            labelLastWin.Text = "Ultima Vincita: " + split[1].ToString();
+            labelBalance.Text = "Saldo: €" + playerBalance.ToString();
+            labelBet.Text = "Puntata: €0";
+            labelLastWin.Text = "Ultima Vincita: €" + split[1].ToString();
             switch (playerSeat)
             {
                 case 1:
@@ -1083,7 +1086,7 @@ namespace Client.ServerForms
             card2_D.ImageLocation = dir;
             playerBalance = Convert.ToInt32(split[3]);
             Program.balance = playerBalance;
-            labelBalance.Text = "Saldo: " + split[3];
+            labelBalance.Text = "Saldo: €" + split[3];
         }
         void MakeChoose(string data)
         {
@@ -1140,7 +1143,7 @@ namespace Client.ServerForms
             {
                 playerBalance = (playerBalance - (bet / 2));
                 Program.balance = playerBalance;
-                labelBalance.Text = "Saldo: " + playerBalance.ToString();
+                labelBalance.Text = "Saldo: €" + playerBalance.ToString();
                 panelInsurance.Visible = false;
                 insurance = true;
             }
@@ -1155,8 +1158,8 @@ namespace Client.ServerForms
                 Program.balance = playerBalance;
                 panelChoose.Visible = false;
                 bet *= 2;
-                labelBet.Text = "Puntata: " + bet.ToString();
-                labelBalance.Text = "Saldo: " + playerBalance.ToString();
+                labelBet.Text = "Puntata: €" + bet.ToString();
+                labelBalance.Text = "Saldo: €" + playerBalance.ToString();
                 chooseToSend = "double/s/";
             }
             else
@@ -1231,8 +1234,8 @@ namespace Client.ServerForms
                 playerBalance -= (bet);
                 Program.balance = playerBalance;
                 bet *= 2;
-                labelBet.Text = "Puntata: " + bet.ToString();
-                labelBalance.Text = "Saldo: " + playerBalance.ToString();
+                labelBet.Text = "Puntata: €" + bet.ToString();
+                labelBalance.Text = "Saldo: €" + playerBalance.ToString();
                 chooseToSend = "split/s/";
             }
             else
@@ -1257,8 +1260,8 @@ namespace Client.ServerForms
                 bet += Convert.ToInt32(tag);
                 betLog.Add(Convert.ToInt32(tag));
                 pictureBack.Enabled = true;
-                labelBalance.Text = "Saldo: " + playerBalance.ToString();
-                labelBet.Text = "Puntata: " + bet.ToString();
+                labelBalance.Text = "Saldo: €" + playerBalance.ToString();
+                labelBet.Text = "Puntata: €" + bet.ToString();
             }
             else
                 MessageBox.Show("Non hai abbastamza credito!");
@@ -1308,30 +1311,43 @@ namespace Client.ServerForms
             string[] split = data.Split(';');
             playerBalance = Convert.ToInt32(split[2]);
             Program.balance = playerBalance;
-            labelLastWin.Text = "Ultima Vincita: " + split[1];
+            labelLastWin.Text = "Ultima Vincita: €" + split[1];
             bet = 0;
-            labelBet.Text = "Puntata: 0";
+            labelBet.Text = "Puntata: €0";
+            labelResult.Text = "HAI VINTO!";
+            labelWin.Text = "€" + split[1];
+            panelResult.Visible = true;
+
         }
         void Draw(string data)
         {
             string[] split = data.Split(';');
             playerBalance = Convert.ToInt32(split[2]);
             Program.balance = playerBalance;
-            labelLastWin.Text = "Ultima Vincita: " + split[1];
+            labelLastWin.Text = "Ultima Vincita: €" + split[1];
             bet = 0;
-            labelBet.Text = "Puntata: 0";
+            labelBet.Text = "Puntata: €0";
+            labelResult.Text = "HAI PAREGGIATO!";
+            labelWin.Text = "€" + split[1];
+            panelResult.Visible = true;
         }
         void Busted()
         {
             bet = 0;
-            labelLastWin.Text = "Ultima Vincita: 0";
-            labelBet.Text = "Puntata: 0";
+            labelLastWin.Text = "Ultima Vincita: €0";
+            labelBet.Text = "Puntata: €0";
+            labelResult.Text = "HAI PERSO!";
+            labelWin.Visible = false;
+            panelResult.Visible = true;
         }
         void Lose()
         {
             bet = 0;
-            labelLastWin.Text = "Ultima Vincita: 0";
-            labelBet.Text = "Puntata: 0";
+            labelLastWin.Text = "Ultima Vincita: €0";
+            labelBet.Text = "Puntata: €0";
+            labelResult.Text = "HAI PERSO!";
+            labelWin.Visible = false;
+            panelResult.Visible = true;
         }
         void GameFinished()
         {
@@ -1475,6 +1491,5 @@ namespace Client.ServerForms
             else
                 FormBorderStyle = FormBorderStyle.None;
         }
-
     }
 }
