@@ -236,9 +236,8 @@ namespace Client
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-
             labelTime.Text = DateTime.Now.ToString("T");
-            labelDate.Text = DateTime.Now.ToString("dddd" + "," + "M" + " MMMM" + "," + "yyyy");
+            labelDate.Text = DateTime.Now.ToString("dddd" + "," + " d" + " MMMM" + "," + "yyyy");
         }
 
         private void buttonRecharge_Click(object sender, EventArgs e)
@@ -261,10 +260,12 @@ namespace Client
                     labelBalance.Text = "Credito: €" + user.balance.ToString();
                     Program.balance = user.balance;
                     System.Windows.MessageBox.Show("Ricarica effettuata con successo!");
+                    socket.Close();
                 }
                 else
                 {
                     System.Windows.MessageBox.Show("C'è stato un'errore nella tua ricarica, riprova!", "Errore!");
+                    socket.Close();
                 }
             }
         }

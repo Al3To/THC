@@ -44,12 +44,12 @@
             this.buttonBJ = new FontAwesome.Sharp.IconButton();
             this.buttonHome = new FontAwesome.Sharp.IconButton();
             this.panelProfile = new System.Windows.Forms.Panel();
+            this.buttonRecharge = new System.Windows.Forms.Button();
             this.labelBalance = new System.Windows.Forms.Label();
             this.labelUsername = new System.Windows.Forms.Label();
             this.buttonLoginProfile = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.buttonRecharge = new System.Windows.Forms.Button();
             this.panelDesktop.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.panelTitle.SuspendLayout();
@@ -95,9 +95,9 @@
             this.labelDate.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(248)))), ((int)(((byte)(3)))));
             this.labelDate.Location = new System.Drawing.Point(197, 253);
             this.labelDate.Name = "labelDate";
-            this.labelDate.Size = new System.Drawing.Size(233, 24);
+            this.labelDate.Size = new System.Drawing.Size(265, 24);
             this.labelDate.TabIndex = 5;
-            this.labelDate.Text = "venerdì,12 dicembre, 2021";
+            this.labelDate.Text = "mercoledì, 20 novembre, 2022";
             // 
             // labelTime
             // 
@@ -279,6 +279,23 @@
             this.panelProfile.Size = new System.Drawing.Size(150, 134);
             this.panelProfile.TabIndex = 0;
             // 
+            // buttonRecharge
+            // 
+            this.buttonRecharge.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(30)))));
+            this.buttonRecharge.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.buttonRecharge.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonRecharge.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonRecharge.ForeColor = System.Drawing.Color.Black;
+            this.buttonRecharge.Location = new System.Drawing.Point(24, 97);
+            this.buttonRecharge.Margin = new System.Windows.Forms.Padding(2);
+            this.buttonRecharge.Name = "buttonRecharge";
+            this.buttonRecharge.Size = new System.Drawing.Size(96, 29);
+            this.buttonRecharge.TabIndex = 8;
+            this.buttonRecharge.Text = "RICARICA";
+            this.buttonRecharge.UseVisualStyleBackColor = false;
+            this.buttonRecharge.Visible = false;
+            this.buttonRecharge.Click += new System.EventHandler(this.buttonRecharge_Click);
+            // 
             // labelBalance
             // 
             this.labelBalance.AutoSize = true;
@@ -335,23 +352,6 @@
             // timer1
             // 
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
-            // 
-            // buttonRecharge
-            // 
-            this.buttonRecharge.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(30)))));
-            this.buttonRecharge.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.buttonRecharge.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonRecharge.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonRecharge.ForeColor = System.Drawing.Color.Black;
-            this.buttonRecharge.Location = new System.Drawing.Point(24, 97);
-            this.buttonRecharge.Margin = new System.Windows.Forms.Padding(2);
-            this.buttonRecharge.Name = "buttonRecharge";
-            this.buttonRecharge.Size = new System.Drawing.Size(96, 29);
-            this.buttonRecharge.TabIndex = 8;
-            this.buttonRecharge.Text = "RICARICA";
-            this.buttonRecharge.UseVisualStyleBackColor = false;
-            this.buttonRecharge.Visible = false;
-            this.buttonRecharge.Click += new System.EventHandler(this.buttonRecharge_Click);
             // 
             // Client
             // 
